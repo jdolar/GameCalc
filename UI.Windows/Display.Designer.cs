@@ -34,11 +34,10 @@ partial class Display
         _hint = new ToolTip(components);
         _games = new ComboBox();
         _upperLayout = new TableLayoutPanel();
-        _game = new Label();
-        _race = new Label();
         _type = new Label();
         _itemPurposes = new ComboBox();
-        _middleLayout = new TableLayoutPanel();
+        _game = new Label();
+        _race = new Label();
         _upCalcResult = new Label();
         _toInput = new TextBox();
         _fromInput = new TextBox();
@@ -51,31 +50,35 @@ partial class Display
         _resToSpend = new Label();
         _tab = new TabControl();
         _tabPageTheCalc = new TabPage();
+        _middleLayout = new TableLayoutPanel();
         _tabPageUpCalc = new TabPage();
         _tabPageSimpleCalc = new TabPage();
         _clearSimpleCalcHistory = new Button();
         _clearSimpleCalc = new Button();
         _simpleCalcResultHistory = new ListBox();
+        _raceLayout = new TableLayoutPanel();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
-        _middleLayout.SuspendLayout();
         _upCalcLayout.SuspendLayout();
         _tab.SuspendLayout();
         _tabPageTheCalc.SuspendLayout();
         _tabPageUpCalc.SuspendLayout();
         _tabPageSimpleCalc.SuspendLayout();
+        _raceLayout.SuspendLayout();
         SuspendLayout();
         // 
         // _races
         // 
-        _races.Location = new Point(58, 37);
+        _races.DropDownStyle = ComboBoxStyle.DropDownList;
+        _races.Location = new Point(374, 8);
         _races.Name = "_races";
-        _races.Size = new Size(220, 23);
+        _races.Size = new Size(149, 23);
         _races.TabIndex = 0;
         // 
         // _itemTypes
         // 
-        _itemTypes.Location = new Point(284, 66);
+        _itemTypes.DropDownStyle = ComboBoxStyle.DropDownList;
+        _itemTypes.Location = new Point(284, 8);
         _itemTypes.Name = "_itemTypes";
         _itemTypes.Size = new Size(221, 23);
         _itemTypes.TabIndex = 0;
@@ -89,9 +92,10 @@ partial class Display
         // 
         // _selectedItems
         // 
-        _selectedItems.Location = new Point(8, 8);
+        _selectedItems.DropDownStyle = ComboBoxStyle.DropDownList;
+        _selectedItems.Location = new Point(58, 37);
         _selectedItems.Name = "_selectedItems";
-        _selectedItems.Size = new Size(221, 23);
+        _selectedItems.Size = new Size(220, 23);
         _selectedItems.TabIndex = 2;
         // 
         // _commandsLayout
@@ -202,11 +206,11 @@ partial class Display
         // 
         // _games
         // 
-        _games.FlatStyle = FlatStyle.Flat;
+        _games.DropDownStyle = ComboBoxStyle.DropDownList;
         _games.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        _games.Location = new Point(58, 8);
+        _games.Location = new Point(60, 8);
         _games.Name = "_games";
-        _games.Size = new Size(220, 25);
+        _games.Size = new Size(151, 25);
         _games.TabIndex = 27;
         // 
         // _upperLayout
@@ -215,13 +219,10 @@ partial class Display
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
-        _upperLayout.Controls.Add(_game, 0, 0);
-        _upperLayout.Controls.Add(_race, 0, 1);
-        _upperLayout.Controls.Add(_type, 0, 2);
-        _upperLayout.Controls.Add(_races, 1, 1);
-        _upperLayout.Controls.Add(_itemPurposes, 1, 2);
-        _upperLayout.Controls.Add(_games, 1, 0);
-        _upperLayout.Controls.Add(_itemTypes, 2, 2);
+        _upperLayout.Controls.Add(_selectedItems, 1, 1);
+        _upperLayout.Controls.Add(_type, 0, 0);
+        _upperLayout.Controls.Add(_itemPurposes, 1, 0);
+        _upperLayout.Controls.Add(_itemTypes, 2, 0);
         _upperLayout.Location = new Point(6, 6);
         _upperLayout.Margin = new Padding(0);
         _upperLayout.Name = "_upperLayout";
@@ -232,6 +233,23 @@ partial class Display
         _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
         _upperLayout.Size = new Size(513, 99);
         _upperLayout.TabIndex = 28;
+        // 
+        // _type
+        // 
+        _type.AutoSize = true;
+        _type.Location = new Point(8, 5);
+        _type.Name = "_type";
+        _type.Size = new Size(31, 15);
+        _type.TabIndex = 14;
+        _type.Text = "Type";
+        // 
+        // _itemPurposes
+        // 
+        _itemPurposes.DropDownStyle = ComboBoxStyle.DropDownList;
+        _itemPurposes.Location = new Point(58, 8);
+        _itemPurposes.Name = "_itemPurposes";
+        _itemPurposes.Size = new Size(220, 23);
+        _itemPurposes.TabIndex = 0;
         // 
         // _game
         // 
@@ -245,42 +263,11 @@ partial class Display
         // _race
         // 
         _race.AutoSize = true;
-        _race.Location = new Point(8, 34);
+        _race.Location = new Point(322, 5);
         _race.Name = "_race";
         _race.Size = new Size(32, 15);
         _race.TabIndex = 13;
         _race.Text = "Race";
-        // 
-        // _type
-        // 
-        _type.AutoSize = true;
-        _type.Location = new Point(8, 63);
-        _type.Name = "_type";
-        _type.Size = new Size(31, 15);
-        _type.TabIndex = 14;
-        _type.Text = "Type";
-        // 
-        // _itemPurposes
-        // 
-        _itemPurposes.Location = new Point(58, 66);
-        _itemPurposes.Name = "_itemPurposes";
-        _itemPurposes.Size = new Size(220, 23);
-        _itemPurposes.TabIndex = 0;
-        // 
-        // _middleLayout
-        // 
-        _middleLayout.ColumnCount = 2;
-        _middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _middleLayout.Controls.Add(_selectedItems, 0, 0);
-        _middleLayout.Location = new Point(55, 108);
-        _middleLayout.Name = "_middleLayout";
-        _middleLayout.Padding = new Padding(5);
-        _middleLayout.RowCount = 1;
-        _middleLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        _middleLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        _middleLayout.Size = new Size(464, 58);
-        _middleLayout.TabIndex = 29;
         // 
         // _upCalcResult
         // 
@@ -385,7 +372,7 @@ partial class Display
         _tab.Controls.Add(_tabPageTheCalc);
         _tab.Controls.Add(_tabPageUpCalc);
         _tab.Controls.Add(_tabPageSimpleCalc);
-        _tab.Location = new Point(12, 12);
+        _tab.Location = new Point(7, 65);
         _tab.Name = "_tab";
         _tab.SelectedIndex = 0;
         _tab.Size = new Size(536, 331);
@@ -403,6 +390,20 @@ partial class Display
         _tabPageTheCalc.TabIndex = 0;
         _tabPageTheCalc.Text = "TheCalc";
         _tabPageTheCalc.UseVisualStyleBackColor = true;
+        // 
+        // _middleLayout
+        // 
+        _middleLayout.ColumnCount = 2;
+        _middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _middleLayout.Location = new Point(55, 108);
+        _middleLayout.Name = "_middleLayout";
+        _middleLayout.Padding = new Padding(5);
+        _middleLayout.RowCount = 1;
+        _middleLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        _middleLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        _middleLayout.Size = new Size(464, 58);
+        _middleLayout.TabIndex = 29;
         // 
         // _tabPageUpCalc
         // 
@@ -463,16 +464,37 @@ partial class Display
         _simpleCalcResultHistory.Size = new Size(239, 259);
         _simpleCalcResultHistory.TabIndex = 13;
         // 
+        // _raceLayout
+        // 
+        _raceLayout.ColumnCount = 5;
+        _raceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+        _raceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+        _raceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        _raceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+        _raceLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+        _raceLayout.Controls.Add(_race, 3, 0);
+        _raceLayout.Controls.Add(_races, 4, 0);
+        _raceLayout.Controls.Add(_games, 1, 0);
+        _raceLayout.Controls.Add(_game, 0, 0);
+        _raceLayout.Location = new Point(7, 6);
+        _raceLayout.Margin = new Padding(0);
+        _raceLayout.Name = "_raceLayout";
+        _raceLayout.Padding = new Padding(5);
+        _raceLayout.RowCount = 1;
+        _raceLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        _raceLayout.Size = new Size(536, 46);
+        _raceLayout.TabIndex = 39;
+        // 
         // Display
         // 
-        ClientSize = new Size(551, 347);
+        ClientSize = new Size(551, 404);
+        Controls.Add(_raceLayout);
         Controls.Add(_tab);
         Name = "Display";
         _commandsLayout.ResumeLayout(false);
         _commandsLayout.PerformLayout();
         _upperLayout.ResumeLayout(false);
         _upperLayout.PerformLayout();
-        _middleLayout.ResumeLayout(false);
         _upCalcLayout.ResumeLayout(false);
         _upCalcLayout.PerformLayout();
         _tab.ResumeLayout(false);
@@ -481,46 +503,49 @@ partial class Display
         _tabPageUpCalc.PerformLayout();
         _tabPageSimpleCalc.ResumeLayout(false);
         _tabPageSimpleCalc.PerformLayout();
+        _raceLayout.ResumeLayout(false);
+        _raceLayout.PerformLayout();
         ResumeLayout(false);
     }
-    private ComboBox _races; 
-    private ComboBox _itemTypes;
-    private ComboBox _selectedItems;
-    private TextBox _userInput;
+    internal TextBox _userInput;
     private TableLayoutPanel _commandsLayout;
-    private Button _sum;
-    private Button _deduct;
-    private Button _multiply;
-    private Button _divide;
-    private TextBox _calcInputLeft;
-    private TextBox _calcInputRight;
-    private Label _simpleCalcResult;
-    private ToolTip _hint;
     private ComboBox _games;
     private TableLayoutPanel _upperLayout;
     private Label _game;
     private Label _race;
     private Label _type;
-    private TableLayoutPanel _middleLayout;
-    private Label _upCalcResult;
-    private TextBox _toInput;
-    private TextBox _fromInput;
-    private Button _calculateDesiredUp;
     private TableLayoutPanel _upCalcLayout;
-    private Label _currentUp;
-    private Label _desiredUp;
-    private Label _resToSpend;
-    private TextBox _resourcesToSpendInput;
     private TabControl _tab;
     private TabPage _tabPageTheCalc;
     private TabPage _tabPageUpCalc;
     private TabPage _tabPageSimpleCalc;
-    private Button _calculateNaqToSpend;
-    private Label _ableToBuyValue;
-    private Label _costToBuyValue;
-    private Label _costToReassignValue;
-    private ListBox _simpleCalcResultHistory;
-    private ComboBox _itemPurposes;
-    private Button _clearSimpleCalcHistory;
-    private Button _clearSimpleCalc;
+    internal Label _ableToBuyValue;
+    internal Label _costToBuyValue;
+    internal Label _costToReassignValue;
+    internal Button _sum;
+    internal Button _multiply;
+    internal Button _divide;
+    internal TextBox _calcInputLeft;
+    internal TextBox _calcInputRight;
+    internal Button _deduct;
+    internal Label _simpleCalcResult;
+    internal ListBox _simpleCalcResultHistory;
+    internal Button _clearSimpleCalcHistory;
+    internal Button _clearSimpleCalc;
+    internal Label _upCalcResult;
+    internal TextBox _toInput;
+    internal TextBox _fromInput;
+    internal Button _calculateDesiredUp;
+    internal TextBox _resourcesToSpendInput;
+    internal Button _calculateNaqToSpend;
+    internal ToolTip _hint;
+    private ComboBox _races;
+    internal Label _currentUp;
+    internal Label _desiredUp;
+    internal Label _resToSpend;
+    private TableLayoutPanel _raceLayout;
+    private TableLayoutPanel _middleLayout;
+    internal ComboBox _itemTypes;
+    internal ComboBox _selectedItems;
+    internal ComboBox _itemPurposes;
 }
