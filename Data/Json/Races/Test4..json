@@ -1,0 +1,104 @@
+{
+  "name": "Eternal Zenith Accord",
+  "type": "NewGrounds",
+  "enabled": true,
+  "units": [
+    {
+      "name": "Photon Shard Array",
+      "costPerUnit": 1800,
+      "strenght": 11,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Graviton Pulse Driver",
+      "costPerUnit": 7200,
+      "strenght": 68,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Stellar Convergence Cannon",
+      "costPerUnit": 26400,
+      "strenght": 260,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Channeled Singularity Beam",
+      "costPerUnit": 48900,
+      "strenght": 320,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Expeditionary War Division",
+      "costPerUnit": 144400,
+      "strenght": 1290,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Celestial Dominion Fleet",
+      "costPerUnit": 555800,
+      "strenght": 5760,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Ascendant Worldbreaker",
+      "costPerUnit": 1250000,
+      "strenght": 18500,
+      "type": "MotherShip",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Harmonic Shield Grid",
+      "costPerUnit": 3400,
+      "strenght": 22,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Quantum Bastion Matrix",
+      "costPerUnit": 12800,
+      "strenght": 155,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Aegis Sovereign Core",
+      "costPerUnit": 46800,
+      "strenght": 610,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Eternal Energy Shields",
+      "costPerUnit": 2250000,
+      "strenght": 7475000,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+
+    {
+      "name": "Zenith Vanguard",
+      "costPerUnit": 3200,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Radiant Honor Guard",
+      "costPerUnit": 16800,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Stellar Architects",
+      "costPerUnit": 5200,
+      "type": "Unit",
+      "purpose": "Other"
+    }
+  ]
+}

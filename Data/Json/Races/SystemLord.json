@@ -1,0 +1,123 @@
+{
+  "name": "System Lord",
+  "Evolution": "Elite",
+  "units": [
+    {
+      "name": "Hand Weapon",
+      "costPerUnit": 3000,
+      "strenght": 10,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Projectile Weapon",
+      "costPerUnit": 5600,
+      "strenght": 20,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Mounted Weapon",
+      "costPerUnit": 6100,
+      "strenght": 30,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Energy Weapon",
+      "costPerUnit": 17100,
+      "strenght": 80,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Channeled Energy Weapon",
+      "costPerUnit": 48900,
+      "strenght": 320,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Armed Military Division",
+      "costPerUnit": 144400,
+      "strenght": 1290,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Armed Military Fleet",
+      "costPerUnit": 555800,
+      "strenght": 5760,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Handheld Shield Device",
+      "costPerUnit": 3600,
+      "strenght": 20,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Externally Powered Shield",
+      "costPerUnit": 9400,
+      "strenght": 40,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Self Deterministic Guard Contingent",
+      "costPerUnit": 19100,
+      "strenght": 80,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Domestic Military Fleet",
+      "costPerUnit": 74100,
+      "strenght": 320,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Quantum Mine Field",
+      "costPerUnit": 208100,
+      "strenght": 1290,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Targeted Spatial Distortions",
+      "costPerUnit": 599200,
+      "strenght": 5750,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Raiders",
+      "costPerUnit": 2000,
+      "costPerUnitReassign": 3000,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Super Soldier",
+      "costPerUnit": 89000,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Guards",
+      "costPerUnit": 2000,
+      "costPerUnitReassign": 3000,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Super Guards",
+      "costPerUnit": 89000,
+      "type": "Unit",
+      "purpose": "Defence"
+    }
+  ]
+}

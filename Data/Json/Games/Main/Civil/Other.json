@@ -1,0 +1,12 @@
+[
+    {
+      "Name": "MineSlave",
+      "CostPerUnit": 1500,
+      "CostPerUnitReassign": 2250
+    },
+    {
+      "Name": "Lifers",
+      "CostPerUnit": 22500,
+      "Evolution": "Ascended"
+    }
+]

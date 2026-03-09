@@ -1,0 +1,142 @@
+{
+  "Name": "Tollan",
+  "Units": [
+    {
+      "Name": "Hand Weapon",
+      "CostPerUnit": 3000,
+      "Strenght": 10,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Projectile Weapon",
+      "CostPerUnit": 5600,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Mounted Weapon",
+      "CostPerUnit": 6100,
+      "Strenght": 30,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Energy Weapon",
+      "CostPerUnit": 17100,
+      "Strenght": 80,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Channeled Energy Cannon",
+      "CostPerUnit": 48900,
+      "Strenght": 320,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Armed Military Division",
+      "CostPerUnit": 144400,
+      "Strenght": 1290,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Armed Military Fleet",
+      "CostPerUnit": 555800,
+      "Strenght": 5760,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Handheld Shield Device",
+      "CostPerUnit": 3600,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Externally Powered Shield",
+      "CostPerUnit": 9400,
+      "Strenght": 40,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Guard Division",
+      "CostPerUnit": 19100,
+      "Strenght": 80,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Domestic Military Fleet",
+      "CostPerUnit": 74100,
+      "Strenght": 320,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Planetary Defence Grid",
+      "CostPerUnit": 208100,
+      "Strenght": 1290,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Targeted Black Holes",
+      "CostPerUnit": 599200,
+      "Strenght": 5750,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Away Team",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Super Soldier",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Home Guard",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Super Guards",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Miners (Lifers)",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Covert Ops",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "CounterIntelligence Agents",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    }
+  ]
+}

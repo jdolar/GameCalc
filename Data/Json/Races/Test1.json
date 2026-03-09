@@ -1,0 +1,89 @@
+{
+  "name": "Crimson Nova Syndicate",
+  "type": "Ascended",
+  "currency": {
+    "name": "DarkMatterUnits",
+    "symbol": "DMU"
+  },
+  "enabled": true,
+  "units": [
+    {
+      "name": "Inferno Railgun",
+      "costPerUnit": 1400,
+      "strenght": 8,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Solar Flare Launcher",
+      "costPerUnit": 6200,
+      "strenght": 55,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Supernova Warhead",
+      "costPerUnit": 22800,
+      "strenght": 240,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Channeled Plasma Obliterator",
+      "costPerUnit": 48900,
+      "strenght": 320,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Armed Dominion Division",
+      "costPerUnit": 144400,
+      "strenght": 1290,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Armed Dominion Fleet",
+      "costPerUnit": 555800,
+      "strenght": 5760,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Dreadstar Flagship",
+      "costPerUnit": 88000,
+      "strenght": 1100,
+      "type": "MotherShip",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Thermal Deflection Grid",
+      "costPerUnit": 3100,
+      "strenght": 18,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Magnetic Fortress Array",
+      "costPerUnit": 11200,
+      "strenght": 130,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Eclipse Guardian Core",
+      "costPerUnit": 40200,
+      "strenght": 520,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Energy Shields",
+      "costPerUnit": 2250000,
+      "strenght": 7475000,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    }
+  ]
+}

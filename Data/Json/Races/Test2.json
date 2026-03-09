@@ -1,0 +1,75 @@
+{
+  "name": "Obsidian Hive Collective",
+  "type": "Ascended",
+  "currency": {
+    "name": "DarkMatterUnits",
+    "symbol": "DMU"
+  },
+  "enabled": true,
+  "units": [
+    {
+      "name": "Spine Spitter",
+      "costPerUnit": 1100,
+      "strenght": 5,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Bio-Plasma Devourer",
+      "costPerUnit": 17200,
+      "strenght": 165,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Channeled Bio-Energy Cannon",
+      "costPerUnit": 48900,
+      "strenght": 320,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Hive War Division",
+      "costPerUnit": 144400,
+      "strenght": 1290,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Brood Conquest Fleet",
+      "costPerUnit": 555800,
+      "strenght": 5760,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Carapace Reinforcer",
+      "costPerUnit": 2100,
+      "strenght": 10,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Regenerative Spore Field",
+      "costPerUnit": 9200,
+      "strenght": 105,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Broodmother Sentinel",
+      "costPerUnit": 33800,
+      "strenght": 430,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Hive Overmind Shield Nexus",
+      "costPerUnit": 2250000,
+      "strenght": 7475000,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    }
+  ]
+}

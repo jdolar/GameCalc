@@ -1,0 +1,16 @@
+{
+  "name": "[Basic-Overrides Unit]",
+  "Enabled": false,
+  "Evolution": "Basic",
+  "units": [
+    {
+      "Name": "Jaffa Raiders",
+      "CostPerUnit": 7979797,
+      "CostPerUnitReassign": 999,
+      "Evolution": "Basic",
+      "Type": "Unit",
+      "Purpose": "Attack",
+      "Slot": 1
+    }
+  ]
+}

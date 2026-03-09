@@ -1,0 +1,20 @@
+﻿[
+  {
+    "Name": "Main",
+    "Url": "https://main.gatewa.rs/",
+    "Description": "GateWa.rs: Main",
+    "Type": "Main"
+  },
+  {
+    "Name": "Ascended",
+    "Url": "https://asc.gatewa.rs/",
+    "Description": "GateWa.rs: Ascended",
+    "Type": "Ascended"
+  },
+  {
+    "Name": "New Grounds",
+    "Url": "https://ng.gatewa.rs",
+    "Description": "GateWars: New Grounds",
+    "Type": "NewGrounds"
+  }
+]

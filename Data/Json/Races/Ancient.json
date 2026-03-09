@@ -1,0 +1,140 @@
+{
+  "Name": "The Ancients",
+  "Units": [
+    {
+      "Name": "Hand Weapon",
+      "CostPerUnit": 3000,
+      "Strenght": 10,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Projectile Weapon",
+      "CostPerUnit": 5600,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Mounted Weapon",
+      "CostPerUnit": 6100,
+      "Strenght": 30,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Energy Weapon",
+      "CostPerUnit": 17100,
+      "Strenght": 80,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Channeled Energy Cannon",
+      "CostPerUnit": 48900,
+      "Strenght": 320,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Equipped Military Division",
+      "CostPerUnit": 144400,
+      "Strenght": 1290,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Equipped Military Fleet",
+      "CostPerUnit": 555800,
+      "Strenght": 5760,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Handheld Shield Device",
+      "CostPerUnit": 3600,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Externally Powered Shield",
+      "CostPerUnit": 9400,
+      "Strenght": 40,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Self Deterministic Clone Contingent",
+      "CostPerUnit": 19100,
+      "Strenght": 80,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Domestic Clone Fleet",
+      "CostPerUnit": 74100,
+      "Strenght": 320,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Quantum Mine Field",
+      "CostPerUnit": 208100,
+      "Strenght": 1290,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Targeted Spacial Distortions",
+      "CostPerUnit": 599200,
+      "Strenght": 5750,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Questers",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Super Questers",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Defenders",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Super Defenders",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Mining Drone (Lifers)",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Covert Agents",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Anti-Intelligence Drone",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    }
+  ]
+}

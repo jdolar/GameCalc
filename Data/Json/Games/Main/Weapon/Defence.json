@@ -1,0 +1,86 @@
+[
+  {
+    "Name": "Handheld Shield Device",
+    "CostPerUnit": 1800,
+    "Strenght": 10,
+    "Evolution": "Basic",
+    "Slot": 1
+  },
+  {
+    "Name": "Externally Powered Force Shield",
+    "CostPerUnit": 3200,
+    "Strenght": 20,
+    "Evolution": "Basic",
+    "Slot": 2
+  },
+  {
+    "Name": "Mind-Controlled Slave Contingent",
+    "CostPerUnit": 5100,
+    "Strenght": 40,
+    "Evolution": "Basic",
+    "Slot": 3
+  },
+  {
+    "Name": "Personal Teleporter",
+    "CostPerUnit": 16400,
+    "Strenght": 160,
+    "Evolution": "Basic",
+    "Slot": 4
+  },
+  {
+    "Name": "Sarcophagus",
+    "CostPerUnit": 52400,
+    "Strenght": 640,
+    "Evolution": "Basic",
+    "Slot": 5
+  },
+  {
+    "Name": "Invisibility Technology",
+    "CostPerUnit": 167800,
+    "Strenght": 2560,
+    "Evolution": "Basic",
+    "Slot": 6
+  },
+  {
+    "Name": "Handheld Shield Device",
+    "CostPerUnit": 3600,
+    "Strenght": 20,
+    "Evolution": "Ascended",
+    "Slot": 1
+  },
+  {
+    "Name": "Externally Powered Shield",
+    "CostPerUnit": 9400,
+    "Strenght": 40,
+    "Evolution": "Ascended",
+    "Slot": 2
+  },
+  {
+    "Name": "Self Deterministic Guard Contingent",
+    "CostPerUnit": 19100,
+    "Strenght": 80,
+    "Evolution": "Ascended",
+    "Slot": 3
+  },
+  {
+    "Name": "Domestic Military Fleet",
+    "CostPerUnit": 74100,
+    "Strenght": 320,
+    "Evolution": "Ascended",
+    "Slot": 4
+  },
+  {
+    "Name": "Quantum Mine Field",
+    "CostPerUnit": 208100,
+    "Strenght": 1290,
+    "Evolution": "Ascended",
+    "Slot": 5
+  },
+  {
+    "Name": "Targeted Spacial Distortions",
+    "CostPerUnit": 599200,
+    "Strenght": 5750,
+    "Evolution": "Ascended",
+    "Slot": 6
+  }
+]

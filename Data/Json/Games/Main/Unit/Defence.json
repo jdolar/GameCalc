@@ -1,0 +1,28 @@
+[
+  {
+    "Name": "Jaffa Guards",
+    "CostPerUnit": 2000,
+    "CostPerUnitReassign": 3000,
+    "Evolution": "Basic",
+    "Slot": 1
+  },
+  {
+    "Name": "Super Soldier Guards",
+    "CostPerUnit": 89000,
+    "Evolution": "Basic",
+    "Slot": 2
+  },
+  {
+    "Name": "Guards",
+    "CostPerUnit": 2000,
+    "CostPerUnitReassign": 3000,
+    "Evolution": "Ascended",
+    "Slot": 1
+  },
+  {
+    "Name": "Super Guards",
+    "CostPerUnit": 89000,
+    "Evolution": "Ascended",
+    "Slot": 2
+  }
+]

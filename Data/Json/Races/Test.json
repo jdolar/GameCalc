@@ -1,0 +1,101 @@
+{
+  "name": "Auroran Dominion",
+  "enabled": true,
+  "units": [
+    {
+      "name": "Plasma Needle Rifle",
+      "costPerUnit": 1200,
+      "strenght": 6,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Ion Burst Cannon",
+      "costPerUnit": 5400,
+      "strenght": 42,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Orbital Pulse Array",
+      "costPerUnit": 18500,
+      "strenght": 180,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Starfall Siege Emitter",
+      "costPerUnit": 76000,
+      "strenght": 920,
+      "type": "MotherShip",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Phase Barrier Projector",
+      "costPerUnit": 2400,
+      "strenght": 12,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Adaptive Shield Matrix",
+      "costPerUnit": 9800,
+      "strenght": 110,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Void Cloaking Field",
+      "costPerUnit": 35200,
+      "strenght": 460,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+
+    {
+      "name": "Auroran Vanguard",
+      "costPerUnit": 2600,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Elite Vanguard Squad",
+      "costPerUnit": 12800,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Auroran Sentinels",
+      "costPerUnit": 2300,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Shieldbearer Phalanx",
+      "costPerUnit": 15200,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+
+    {
+      "name": "Resource Drones",
+      "costPerUnit": 900,
+      "type": "Unit",
+      "purpose": "Other"
+    },
+    {
+      "name": "Deep Cover Operatives",
+      "costPerUnit": 4200,
+      "type": "Unit",
+      "purpose": "Other"
+    },
+    {
+      "name": "Chrono-Assassin",
+      "costPerUnit": 9800,
+      "type": "Unit",
+      "purpose": "Other"
+    }
+  ]
+}

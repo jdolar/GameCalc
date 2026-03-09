@@ -1,0 +1,64 @@
+{
+  "name": "Celestial Mechanica Order",
+  "type": "NewGrounds",
+  "enabled": true,
+  "units": [
+    {
+      "name": "Arc Lightning Repeater",
+      "costPerUnit": 1300,
+      "strenght": 7,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Singularity Lance",
+      "costPerUnit": 20100,
+      "strenght": 210,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Channeled Quantum Beam",
+      "costPerUnit": 48900,
+      "strenght": 320,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Mechanized War Division",
+      "costPerUnit": 144400,
+      "strenght": 1290,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Astral Armada Fleet",
+      "costPerUnit": 555800,
+      "strenght": 5760,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Kinetic Barrier Dome",
+      "costPerUnit": 2700,
+      "strenght": 14,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Guardian Prime Nexus",
+      "costPerUnit": 36500,
+      "strenght": 470,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Celestial Energy Shields",
+      "costPerUnit": 2250000,
+      "strenght": 7475000,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    }
+  ]
+}

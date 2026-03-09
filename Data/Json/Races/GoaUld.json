@@ -1,0 +1,181 @@
+{
+  "name": "Goa'uld",
+  "units": [
+    {
+      "name": "Hand Device Weapon",
+      "costPerUnit": 1000,
+      "strenght": 5,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Zat",
+      "costPerUnit": 1800,
+      "strenght": 10,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Staff Weapon",
+      "costPerUnit": 3200,
+      "strenght": 20,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Portable Energy Cannon",
+      "costPerUnit": 5100,
+      "strenght": 40,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Shock Grenade",
+      "costPerUnit": 16400,
+      "strenght": 160,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Full Jaffa Division",
+      "costPerUnit": 52400,
+      "strenght": 640,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Targeted Gate Weapon",
+      "costPerUnit": 167800,
+      "strenght": 2560,
+      "type": "Weapon",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Handheld Shield Device",
+      "costPerUnit": 1800,
+      "strenght": 10,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Externally Powered Force Shield",
+      "costPerUnit": 3200,
+      "strenght": 20,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Mind-Controlled Slave Contingent",
+      "costPerUnit": 5100,
+      "strenght": 40,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Personal Teleporter",
+      "costPerUnit": 16400,
+      "strenght": 160,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Sarcophagus",
+      "costPerUnit": 52400,
+      "strenght": 640,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Invisibility Technology",
+      "costPerUnit": 167800,
+      "strenght": 2560,
+      "type": "Weapon",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Energy Volley",
+      "costPerUnit": 2100800,
+      "type": "MotherShip",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Energy Shields",
+      "costPerUnit": 2250000,
+      "type": "MotherShip",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Enhanced Death Glider Squadron",
+      "costPerUnit": 22227600,
+      "strenght": 115600,
+      "type": "MotherShip",
+      "purpose": "Other"
+    },
+    {
+      "name": "Jaffa Raiders",
+      "costPerUnit": 2000,
+      "costPerUnitReassign": 3000,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Super Soldier Raiders",
+      "costPerUnit": 89000,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+
+    {
+      "name": "Jaffa Guards",
+      "costPerUnit": 2000,
+      "costPerReasignUnit": 3000,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Super Soldier Guards",
+      "costPerUnit": 89000,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+    {
+      "name": "MineSlave",
+      "costPerUnit": 1500,
+      "costPerUnitReassign": 2250,
+      "type": "Unit",
+      "purpose": "Other"
+    },
+    {
+      "name": "Undercover Agents",
+      "costPerUnit": 3500,
+      "costPerUnitReassign": 5250,
+      "type": "Unit",
+      "purpose": "Other"
+    },
+    {
+      "name": "Assassin",
+      "costPerUnit": 5500,
+      "costPerUnitReassign": 8250,
+      "type": "Unit",
+      "purpose": "Other"
+    },
+    {
+      "name": "Attacking Mercenaries",
+      "costPerUnit": 3000,
+      "type": "Unit",
+      "purpose": "Attack"
+    },
+    {
+      "name": "Defending Mercenaries",
+      "costPerUnit": 3000,
+      "type": "Unit",
+      "purpose": "Defence"
+    },
+    {
+      "name": "Untrained Mercenaries",
+      "costPerUnit": 1500,
+      "type": "Unit",
+      "purpose": "Other"
+    }
+  ]
+}

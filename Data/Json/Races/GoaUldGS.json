@@ -1,0 +1,142 @@
+{
+  "Name": "Goa'uld",
+  "Units": [
+    {
+      "Name": "Hand Device Weapon",
+      "CostPerUnit": 1000,
+      "Strenght": 5,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Zat",
+      "CostPerUnit": 1800,
+      "Strenght": 10,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Staff Weapon",
+      "CostPerUnit": 3200,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Portable Energy Cannon",
+      "CostPerUnit": 5100,
+      "Strenght": 40,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Shock Grenade",
+      "CostPerUnit": 16400,
+      "Strenght": 160,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Full Jaffa Division",
+      "CostPerUnit": 52400,
+      "Strenght": 640,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Targeted Gate Weapon",
+      "CostPerUnit": 167800,
+      "Strenght": 2560,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Handheld Shield Device",
+      "CostPerUnit": 1800,
+      "Strenght": 10,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Externally Powered Force Shield",
+      "CostPerUnit": 3200,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "MindControlled Slave Contingent",
+      "CostPerUnit": 5100,
+      "Strenght": 40,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Personal Teleporter",
+      "CostPerUnit": 16400,
+      "Strenght": 160,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Sarcophagus",
+      "CostPerUnit": 52400,
+      "Strenght": 640,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Invisibility Technology",
+      "CostPerUnit": 167800,
+      "Strenght": 2560,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Jaffa Raiders",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Super Soldier Raiders",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Jaffa Guards",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Super Soldier Guards",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "MineSlave",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Undercover Agents",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Assassin",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    }
+  ]
+}

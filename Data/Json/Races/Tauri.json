@@ -1,0 +1,142 @@
+{
+  "Name": "Tauri",
+  "Units": [
+    {
+      "Name": "Revolver",
+      "CostPerUnit": 900,
+      "Strenght": 5,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "P90 Machine Gun",
+      "CostPerUnit": 1620,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Grenade",
+      "CostPerUnit": 2880,
+      "Strenght": 35,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "RPG Rocket Propelled Grenade",
+      "CostPerUnit": 4590,
+      "Strenght": 50,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Plastic Explosives",
+      "CostPerUnit": 14760,
+      "Strenght": 180,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Mini Nuke",
+      "CostPerUnit": 47160,
+      "Strenght": 675,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "X302 Craft",
+      "CostPerUnit": 151020,
+      "Strenght": 2750,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Flack Jacket",
+      "CostPerUnit": 1800,
+      "Strenght": 10,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Full Body Shield",
+      "CostPerUnit": 3200,
+      "Strenght": 15,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Machine Gun Turret",
+      "CostPerUnit": 5100,
+      "Strenght": 30,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Personelle Tank",
+      "CostPerUnit": 16400,
+      "Strenght": 125,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Satellite Laser",
+      "CostPerUnit": 52400,
+      "Strenght": 500,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Ion Cannon",
+      "CostPerUnit": 167800,
+      "Strenght": 2000,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Offensive Away Team",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Offensive NID Team",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Home Base Guard",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Defensive NID Team",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Miners",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Undercover Agents",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "CounterIntelligence Agents",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    }
+  ]
+}

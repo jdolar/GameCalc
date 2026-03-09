@@ -1,0 +1,100 @@
+[
+  {
+    "Name": "Hand Device Weapon",
+    "CostPerUnit": 1000,
+    "Strenght": 5,
+    "Evolution": "Basic",
+    "Slot": 1
+  },
+  {
+    "Name": "Zat",
+    "CostPerUnit": 1800,
+    "Strenght": 10,
+    "Evolution": "Basic",
+    "Slot": 2
+  },
+  {
+    "Name": "Staff Weapon",
+    "CostPerUnit": 3200,
+    "Strenght": 20,
+    "Evolution": "Basic",
+    "Slot": 3
+  },
+  {
+    "Name": "Portable Energy Cannon",
+    "CostPerUnit": 5100,
+    "Strenght": 40,
+    "Evolution": "Basic",
+    "Slot": 4
+  },
+  {
+    "Name": "Shock Grenade",
+    "CostPerUnit": 16400,
+    "Strenght": 160,
+    "Evolution": "Basic",
+    "Slot": 5
+  },
+  {
+    "Name": "Full Jaffa Division",
+    "CostPerUnit": 52400,
+    "Strenght": 640,
+    "Evolution": "Basic",
+    "Slot": 6
+  },
+  {
+    "Name": "Targeted Gate Weapon",
+    "CostPerUnit": 167800,
+    "Strenght": 2560,
+    "Evolution": "Basic",
+    "Slot": 7
+  },
+  {
+    "Name": "Hand Weapon",
+    "CostPerUnit": 3000,
+    "Strenght": 10,
+    "Evolution": "Ascended",
+    "Slot": 1
+  },
+  {
+    "Name": "Projectile Weapon",
+    "CostPerUnit": 5600,
+    "Strenght": 20,
+    "Evolution": "Ascended",
+    "Slot": 2
+  },
+  {
+    "Name": "Mounted Weapon",
+    "CostPerUnit": 6100,
+    "Strenght": 30,
+    "Evolution": "Ascended",
+    "Slot": 3
+  },
+  {
+    "Name": "Energy Weapon",
+    "CostPerUnit": 17100,
+    "Strenght": 80,
+    "Evolution": "Ascended",
+    "Slot": 4
+  },
+  {
+    "Name": "Channeled Energy Cannon",
+    "CostPerUnit": 48900,
+    "Strenght": 320,
+    "Evolution": "Ascended",
+    "Slot": 5
+  },
+  {
+    "Name": "Armed Military Division",
+    "CostPerUnit": 144400,
+    "Strenght": 1290,
+    "Evolution": "Ascended",
+    "Slot": 6
+  },
+  {
+    "Name": "Armed Military Fleet",
+    "CostPerUnit": 555800,
+    "Strenght": 5760,
+    "Evolution": "Ascended",
+    "Slot": 7
+  }
+]

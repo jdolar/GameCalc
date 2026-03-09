@@ -1,0 +1,160 @@
+{
+  "Name": "Daimon",
+  "Units": [
+    {
+      "Name": "Hand Weapon",
+      "CostPerUnit": 3000,
+      "Strenght": 10,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Projectile Weapon",
+      "CostPerUnit": 5600,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Mounted Weapon",
+      "CostPerUnit": 6100,
+      "Strenght": 30,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Energy Weapon",
+      "CostPerUnit": 17100,
+      "Strenght": 80,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Channeled Energy Cannon",
+      "CostPerUnit": 48900,
+      "Strenght": 320,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Arcane Magiks",
+      "CostPerUnit": 144400,
+      "Strenght": 1290,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "The Dark Force",
+      "CostPerUnit": 555800,
+      "Strenght": 5760,
+      "Type": "Weapon",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Handheld Shield Device",
+      "CostPerUnit": 3600,
+      "Strenght": 20,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Externally Powered Shield",
+      "CostPerUnit": 9400,
+      "Strenght": 40,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Guard Division",
+      "CostPerUnit": 19100,
+      "Strenght": 80,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Dark Military Fleet",
+      "CostPerUnit": 74100,
+      "Strenght": 320,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Planetary Energy Barrier",
+      "CostPerUnit": 208100,
+      "Strenght": 1290,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "AntiParticle Force Wave Generators",
+      "CostPerUnit": 599200,
+      "Strenght": 5750,
+      "Type": "Weapon",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Assault Shadows",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Genetic Clone Warriors",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+    {
+      "Name": "Attacking Mercenaries",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Attack"
+    },
+
+    {
+      "Name": "Defence Shades",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Mutated Guards",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+    {
+      "Name": "Defending Mercenaries",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Defence"
+    },
+
+    {
+      "Name": "Untouched",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Miners (Lifers)",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "Wisps",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    },
+    {
+      "Name": "CounterIntelligence Agents",
+      "CostPerUnit": 0,
+      "Type": "Unit",
+      "Purpose": "Other"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[
+    {
+      "Name": "Undercover Agents",
+      "CostPerUnit": 3500,
+      "CostPerUnitReassign": 5250
+    },
+    {
+      "Name": "Assassin",
+      "CostPerUnit": 5500,
+      "CostPerUnitReassign": 8250
+    }
+]
