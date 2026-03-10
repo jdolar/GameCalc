@@ -5,7 +5,7 @@ using Data.Enums.Unit;
 using Data.Models;
 using UI.Windows.Helpers;
 
-namespace UI.Windows.Calculators;
+namespace UI.Windows.Controllers.Calculators;
 internal sealed class TheCalc
 {
     private readonly Display _form;
@@ -37,7 +37,7 @@ internal sealed class TheCalc
         {
             if (imageRecognition.HasValue && imageRecognition == false) return;
 
-            if (s is not System.Windows.Forms.TextBox txtBox)
+            if (s is not TextBox txtBox)
                 return;
 
             if (e.Control && e.KeyCode == Keys.V)

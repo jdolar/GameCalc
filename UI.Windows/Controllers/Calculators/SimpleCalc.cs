@@ -1,16 +1,13 @@
-﻿namespace UI.Windows.Calculators;
-using Calculator;
+﻿using Calculator;
 using Data.Commands;
-using UI.Windows;
 using UI.Windows.Helpers;
-
+namespace UI.Windows.Controllers.Calculators;
 internal sealed class SimpleCalc
 {
     private readonly Display _form;
     public SimpleCalc(Display form)
     {
         _form = form;
-
         _form._simpleCalcResult.Text = string.Empty;
         _form._calcInputLeft.Text = string.Empty;
         _form._calcInputRight.Text = string.Empty;

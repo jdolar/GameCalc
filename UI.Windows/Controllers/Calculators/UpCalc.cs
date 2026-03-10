@@ -2,7 +2,7 @@
 using Data;
 using UI.Windows.Helpers;
 
-namespace UI.Windows.Calculators;
+namespace UI.Windows.Controllers.Calculators;
 
 internal sealed class UpCalc
 {
