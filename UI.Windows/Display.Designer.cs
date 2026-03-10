@@ -50,7 +50,6 @@ partial class Display
         _resToSpend = new Label();
         _tab = new TabControl();
         _tabPageTheCalc = new TabPage();
-        _middleLayout = new TableLayoutPanel();
         _tabPageUpCalc = new TabPage();
         _tabPageSimpleCalc = new TabPage();
         _clearSimpleCalcHistory = new Button();
@@ -93,7 +92,7 @@ partial class Display
         // _selectedItems
         // 
         _selectedItems.DropDownStyle = ComboBoxStyle.DropDownList;
-        _selectedItems.Location = new Point(58, 37);
+        _selectedItems.Location = new Point(58, 38);
         _selectedItems.Name = "_selectedItems";
         _selectedItems.Size = new Size(220, 23);
         _selectedItems.TabIndex = 2;
@@ -106,7 +105,7 @@ partial class Display
         _commandsLayout.Controls.Add(_costToBuyValue, 0, 1);
         _commandsLayout.Controls.Add(_userInput, 0, 3);
         _commandsLayout.Controls.Add(_costToReassignValue, 0, 2);
-        _commandsLayout.Location = new Point(6, 175);
+        _commandsLayout.Location = new Point(6, 79);
         _commandsLayout.Name = "_commandsLayout";
         _commandsLayout.Padding = new Padding(5);
         _commandsLayout.RowCount = 4;
@@ -146,7 +145,7 @@ partial class Display
         // 
         // _sum
         // 
-        _sum.Location = new Point(110, 73);
+        _sum.Location = new Point(107, 53);
         _sum.Name = "_sum";
         _sum.Size = new Size(41, 23);
         _sum.TabIndex = 4;
@@ -155,7 +154,7 @@ partial class Display
         // 
         // _deduct
         // 
-        _deduct.Location = new Point(157, 73);
+        _deduct.Location = new Point(154, 53);
         _deduct.Name = "_deduct";
         _deduct.Size = new Size(41, 23);
         _deduct.TabIndex = 5;
@@ -164,7 +163,7 @@ partial class Display
         // 
         // _multiply
         // 
-        _multiply.Location = new Point(63, 73);
+        _multiply.Location = new Point(60, 53);
         _multiply.Name = "_multiply";
         _multiply.Size = new Size(41, 23);
         _multiply.TabIndex = 6;
@@ -173,7 +172,7 @@ partial class Display
         // 
         // _divide
         // 
-        _divide.Location = new Point(16, 73);
+        _divide.Location = new Point(13, 53);
         _divide.Name = "_divide";
         _divide.Size = new Size(41, 23);
         _divide.TabIndex = 7;
@@ -182,14 +181,14 @@ partial class Display
         // 
         // _calcInputLeft
         // 
-        _calcInputLeft.Location = new Point(16, 102);
+        _calcInputLeft.Location = new Point(13, 82);
         _calcInputLeft.Name = "_calcInputLeft";
         _calcInputLeft.Size = new Size(182, 23);
         _calcInputLeft.TabIndex = 8;
         // 
         // _calcInputRight
         // 
-        _calcInputRight.Location = new Point(16, 131);
+        _calcInputRight.Location = new Point(13, 111);
         _calcInputRight.Name = "_calcInputRight";
         _calcInputRight.Size = new Size(182, 23);
         _calcInputRight.TabIndex = 9;
@@ -198,7 +197,7 @@ partial class Display
         // 
         _simpleCalcResult.AutoSize = true;
         _simpleCalcResult.Font = new Font("Segoe UI", 20F);
-        _simpleCalcResult.Location = new Point(124, 20);
+        _simpleCalcResult.Location = new Point(13, 13);
         _simpleCalcResult.Name = "_simpleCalcResult";
         _simpleCalcResult.Size = new Size(138, 37);
         _simpleCalcResult.TabIndex = 12;
@@ -227,11 +226,11 @@ partial class Display
         _upperLayout.Margin = new Padding(0);
         _upperLayout.Name = "_upperLayout";
         _upperLayout.Padding = new Padding(5);
-        _upperLayout.RowCount = 3;
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-        _upperLayout.Size = new Size(513, 99);
+        _upperLayout.RowCount = 2;
+        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        _upperLayout.Size = new Size(513, 70);
         _upperLayout.TabIndex = 28;
         // 
         // _type
@@ -375,35 +374,20 @@ partial class Display
         _tab.Location = new Point(7, 65);
         _tab.Name = "_tab";
         _tab.SelectedIndex = 0;
-        _tab.Size = new Size(536, 331);
+        _tab.Size = new Size(536, 238);
         _tab.TabIndex = 38;
         // 
         // _tabPageTheCalc
         // 
         _tabPageTheCalc.Controls.Add(_commandsLayout);
-        _tabPageTheCalc.Controls.Add(_middleLayout);
         _tabPageTheCalc.Controls.Add(_upperLayout);
         _tabPageTheCalc.Location = new Point(4, 24);
         _tabPageTheCalc.Name = "_tabPageTheCalc";
         _tabPageTheCalc.Padding = new Padding(3);
-        _tabPageTheCalc.Size = new Size(528, 303);
+        _tabPageTheCalc.Size = new Size(528, 210);
         _tabPageTheCalc.TabIndex = 0;
         _tabPageTheCalc.Text = "TheCalc";
         _tabPageTheCalc.UseVisualStyleBackColor = true;
-        // 
-        // _middleLayout
-        // 
-        _middleLayout.ColumnCount = 2;
-        _middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _middleLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _middleLayout.Location = new Point(55, 108);
-        _middleLayout.Name = "_middleLayout";
-        _middleLayout.Padding = new Padding(5);
-        _middleLayout.RowCount = 1;
-        _middleLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        _middleLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        _middleLayout.Size = new Size(464, 58);
-        _middleLayout.TabIndex = 29;
         // 
         // _tabPageUpCalc
         // 
@@ -412,7 +396,7 @@ partial class Display
         _tabPageUpCalc.Location = new Point(4, 24);
         _tabPageUpCalc.Name = "_tabPageUpCalc";
         _tabPageUpCalc.Padding = new Padding(3);
-        _tabPageUpCalc.Size = new Size(528, 303);
+        _tabPageUpCalc.Size = new Size(528, 210);
         _tabPageUpCalc.TabIndex = 1;
         _tabPageUpCalc.Text = "UPCalc";
         _tabPageUpCalc.UseVisualStyleBackColor = true;
@@ -432,14 +416,14 @@ partial class Display
         _tabPageSimpleCalc.Location = new Point(4, 24);
         _tabPageSimpleCalc.Name = "_tabPageSimpleCalc";
         _tabPageSimpleCalc.Padding = new Padding(3);
-        _tabPageSimpleCalc.Size = new Size(528, 303);
+        _tabPageSimpleCalc.Size = new Size(528, 210);
         _tabPageSimpleCalc.TabIndex = 2;
         _tabPageSimpleCalc.Text = "SimpleCalc";
         _tabPageSimpleCalc.UseVisualStyleBackColor = true;
         // 
         // _clearSimpleCalcHistory
         // 
-        _clearSimpleCalcHistory.Location = new Point(488, 2);
+        _clearSimpleCalcHistory.Location = new Point(240, 13);
         _clearSimpleCalcHistory.Name = "_clearSimpleCalcHistory";
         _clearSimpleCalcHistory.Size = new Size(19, 23);
         _clearSimpleCalcHistory.TabIndex = 15;
@@ -449,7 +433,7 @@ partial class Display
         // _clearSimpleCalc
         // 
         _clearSimpleCalc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        _clearSimpleCalc.Location = new Point(221, 73);
+        _clearSimpleCalc.Location = new Point(218, 53);
         _clearSimpleCalc.Name = "_clearSimpleCalc";
         _clearSimpleCalc.Size = new Size(41, 52);
         _clearSimpleCalc.TabIndex = 14;
@@ -459,9 +443,9 @@ partial class Display
         // _simpleCalcResultHistory
         // 
         _simpleCalcResultHistory.FormattingEnabled = true;
-        _simpleCalcResultHistory.Location = new Point(268, 31);
+        _simpleCalcResultHistory.Location = new Point(265, 6);
         _simpleCalcResultHistory.Name = "_simpleCalcResultHistory";
-        _simpleCalcResultHistory.Size = new Size(239, 259);
+        _simpleCalcResultHistory.Size = new Size(254, 199);
         _simpleCalcResultHistory.TabIndex = 13;
         // 
         // _raceLayout
@@ -487,7 +471,7 @@ partial class Display
         // 
         // Display
         // 
-        ClientSize = new Size(551, 404);
+        ClientSize = new Size(551, 309);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
         Name = "Display";
@@ -544,7 +528,6 @@ partial class Display
     internal Label _desiredUp;
     internal Label _resToSpend;
     internal TableLayoutPanel _raceLayout;
-    internal TableLayoutPanel _middleLayout;
     internal ComboBox _itemTypes;
     internal ComboBox _selectedItems;
     internal ComboBox _itemPurposes;

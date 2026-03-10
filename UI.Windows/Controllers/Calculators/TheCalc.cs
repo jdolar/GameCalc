@@ -4,8 +4,8 @@ using Data.Commands;
 using Data.Enums.Unit;
 using Data.Models;
 using UI.Windows.Helpers;
-
 namespace UI.Windows.Controllers.Calculators;
+
 internal sealed class TheCalc
 {
     private readonly Display _form;
@@ -28,10 +28,7 @@ internal sealed class TheCalc
             if (s is not TextBox txtBox)
                 return;
 
-            UIData.CleanTextBoxText(
-                    txtBox,
-                    [Clean.Text],
-                    DisplayResults);
+            UIData.CleanTextBoxText(txtBox, [Clean.Text], DisplayResults);
         };
         _form._userInput.KeyDown += (s, e) =>
         {
@@ -44,10 +41,7 @@ internal sealed class TheCalc
             {
                 if (Clipboard.ContainsImage())
                 {
-                    UIData.CleanTextBoxImage(
-                    txtBox,
-                    [Clean.Image]);
-
+                    UIData.CleanTextBoxImage(txtBox, [Clean.Image]);
                     e.Handled = true;
                 }
             }
@@ -71,9 +65,9 @@ internal sealed class TheCalc
         (string costToBuy, string ableToBuy, string costToReassign, string input)
         = Calc.CalculateAbleToBuyAndCostToBuy(_form._userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
 
-        _form._costToBuyValue.Text = string.IsNullOrEmpty(costToBuy) ? string.Empty : Hints.GetCostToBuyHint(input, _form._selectedRace.Currency.Name, costToBuy, "buy", unit);
-        _form._ableToBuyValue.Text = string.IsNullOrEmpty(ableToBuy) ? string.Empty : Hints.GetAbleToBuyHint(input, _form._selectedRace.Currency.Name, ableToBuy, unit); ;
-        _form._costToReassignValue.Text = string.IsNullOrEmpty(costToReassign) ? string.Empty : Hints.GetCostToBuyHint(input, _form._selectedRace.Currency.Name, costToReassign, "sell", unit); ;
+        _form._costToBuyValue.Text = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Hints.GetCostToBuyHint(input, _form._selectedRace.Currency.Name, costToBuy, "buy", unit);
+        _form._ableToBuyValue.Text = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Hints.GetAbleToBuyHint(input, _form._selectedRace.Currency.Name, ableToBuy, unit);
+        _form._costToReassignValue.Text = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Hints.GetCostToBuyHint(input, _form._selectedRace.Currency.Name, costToReassign, "sell", unit);
 
         _form._hint.SetToolTip(_form._selectedItems, Hints.GetUnit(unit));
         _form._hint.SetToolTip(_form._itemTypes, Hints.GetUnits([.. _form._selectedRace.Units.Where(x => x.Type == (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!)]));

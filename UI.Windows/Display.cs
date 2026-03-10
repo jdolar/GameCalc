@@ -19,7 +19,7 @@ public partial class Display : Form
         InitializeComponent();
 
         _frame = new Frame(this);
-        _theCalc = new TheCalc(this);
+        _theCalc = new TheCalc(this, false);
         _simpleCalc = new SimpleCalc(this);
         _upCalc = new UpCalc(this);
         _frame.UpdateSelectedGame();

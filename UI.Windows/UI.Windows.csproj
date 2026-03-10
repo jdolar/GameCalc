@@ -6,21 +6,14 @@
     <Nullable>enable</Nullable>
 	<UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	<AssemblyName>GateWars Calc</AssemblyName>
-	<AssemblyVersion>0.1</AssemblyVersion>
-	<Version>0.1</Version>
-	<FileVersion>0.1</FileVersion>
-	<AssemblyInformationalVersion>0.1</AssemblyInformationalVersion>
+	<AssemblyName>GameCalc</AssemblyName>
+	<AssemblyVersion>0.2</AssemblyVersion>
 	<Authors>jdolar</Authors>
 	<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Calculator\Calculator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="UI\" />
   </ItemGroup>
 
 </Project>

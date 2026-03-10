@@ -2,6 +2,7 @@
 using Data.Enums.Unit;
 using Data.Models;
 using UI.Windows.Helpers;
+using UI.Windows.Properties;
 namespace UI.Windows.Controllers;
 internal sealed class Frame
 {
@@ -13,7 +14,7 @@ internal sealed class Frame
         UIData.SetGamesComboBox(_form._games, _form._enabledGames);
         UIData.SetRacesComboBox(_form._races, _form._selectedGame.Races);
 
-        _form.Text = $"{AppInfo.Name} v{AppInfo.Version}";
+        _form.Text = $"{AppInfo.Name} v{AppInfo.Version} [{AppInfo.InfoVersion}]";
         _form._tabPageTheCalc.Text = Constants.GUI.Labels.TheCalc;
         _form._tabPageUpCalc.Text = Constants.GUI.Labels.UpCalc;
         _form._tabPageSimpleCalc.Text = Constants.GUI.Labels.SimpleCalc;
