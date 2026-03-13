@@ -27,7 +27,7 @@ internal sealed class UpCalc
 
                 if (results != _form._upCalcResult.Text)
                 {
-                    string hint = Hints.UpCalcDesiredUpResults(formatedLeftInput, formattedRightInput, results, multiplier, _form._selectedRace.Currency.Name);
+                    string hint = Hints.DesiredUp(formatedLeftInput, formattedRightInput, results, multiplier, _form._selectedRace.Currency.Name);
 
                     _form._upCalcResult.Text = hint;
                     _form._hint.SetToolTip(_form._upCalcResult, hint);
@@ -40,7 +40,7 @@ internal sealed class UpCalc
 
             if (results != _form._upCalcResult.Text)
             {
-                string hint = Hints.UpCalcResurcesToSpendResults(formatedLeftInput, formattedRightInput, results, multiplier, _form._selectedRace.Currency.Name);
+                string hint = Hints.ResurcesToSpend(formatedLeftInput, formattedRightInput, results, multiplier, _form._selectedRace.Currency.Name);
 
                 _form._upCalcResult.Text = hint;
                 _form._hint.SetToolTip(_form._upCalcResult, hint);

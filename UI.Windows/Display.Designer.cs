@@ -34,7 +34,6 @@ partial class Display
         _hint = new ToolTip(components);
         _games = new ComboBox();
         _upperLayout = new TableLayoutPanel();
-        _type = new Label();
         _itemPurposes = new ComboBox();
         _game = new Label();
         _race = new Label();
@@ -77,7 +76,7 @@ partial class Display
         // _itemTypes
         // 
         _itemTypes.DropDownStyle = ComboBoxStyle.DropDownList;
-        _itemTypes.Location = new Point(284, 8);
+        _itemTypes.Location = new Point(8, 8);
         _itemTypes.Name = "_itemTypes";
         _itemTypes.Size = new Size(221, 23);
         _itemTypes.TabIndex = 0;
@@ -92,9 +91,9 @@ partial class Display
         // _selectedItems
         // 
         _selectedItems.DropDownStyle = ComboBoxStyle.DropDownList;
-        _selectedItems.Location = new Point(58, 38);
+        _selectedItems.Location = new Point(14, 48);
         _selectedItems.Name = "_selectedItems";
-        _selectedItems.Size = new Size(220, 23);
+        _selectedItems.Size = new Size(505, 23);
         _selectedItems.TabIndex = 2;
         // 
         // _commandsLayout
@@ -214,38 +213,26 @@ partial class Display
         // 
         // _upperLayout
         // 
-        _upperLayout.ColumnCount = 3;
-        _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-        _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
-        _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
-        _upperLayout.Controls.Add(_selectedItems, 1, 1);
-        _upperLayout.Controls.Add(_type, 0, 0);
+        _upperLayout.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        _upperLayout.ColumnCount = 2;
+        _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _upperLayout.Controls.Add(_itemTypes, 0, 0);
         _upperLayout.Controls.Add(_itemPurposes, 1, 0);
-        _upperLayout.Controls.Add(_itemTypes, 2, 0);
         _upperLayout.Location = new Point(6, 6);
         _upperLayout.Margin = new Padding(0);
         _upperLayout.Name = "_upperLayout";
         _upperLayout.Padding = new Padding(5);
-        _upperLayout.RowCount = 2;
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        _upperLayout.RowCount = 1;
+        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
         _upperLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        _upperLayout.Size = new Size(513, 70);
+        _upperLayout.Size = new Size(513, 39);
         _upperLayout.TabIndex = 28;
-        // 
-        // _type
-        // 
-        _type.AutoSize = true;
-        _type.Location = new Point(8, 5);
-        _type.Name = "_type";
-        _type.Size = new Size(31, 15);
-        _type.TabIndex = 14;
-        _type.Text = "Type";
         // 
         // _itemPurposes
         // 
         _itemPurposes.DropDownStyle = ComboBoxStyle.DropDownList;
-        _itemPurposes.Location = new Point(58, 8);
+        _itemPurposes.Location = new Point(259, 8);
         _itemPurposes.Name = "_itemPurposes";
         _itemPurposes.Size = new Size(220, 23);
         _itemPurposes.TabIndex = 0;
@@ -381,6 +368,7 @@ partial class Display
         // 
         _tabPageTheCalc.Controls.Add(_commandsLayout);
         _tabPageTheCalc.Controls.Add(_upperLayout);
+        _tabPageTheCalc.Controls.Add(_selectedItems);
         _tabPageTheCalc.Location = new Point(4, 24);
         _tabPageTheCalc.Name = "_tabPageTheCalc";
         _tabPageTheCalc.Padding = new Padding(3);
@@ -471,14 +459,13 @@ partial class Display
         // 
         // Display
         // 
-        ClientSize = new Size(551, 309);
+        ClientSize = new Size(551, 313);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
         Name = "Display";
         _commandsLayout.ResumeLayout(false);
         _commandsLayout.PerformLayout();
         _upperLayout.ResumeLayout(false);
-        _upperLayout.PerformLayout();
         _upCalcLayout.ResumeLayout(false);
         _upCalcLayout.PerformLayout();
         _tab.ResumeLayout(false);
@@ -497,7 +484,6 @@ partial class Display
     internal TableLayoutPanel _upperLayout;
     internal Label _game;
     internal Label _race;
-    internal Label _type;
     internal TableLayoutPanel _upCalcLayout;
     internal TabControl _tab;
     internal TabPage _tabPageTheCalc;

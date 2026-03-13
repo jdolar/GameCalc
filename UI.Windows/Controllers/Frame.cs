@@ -22,7 +22,10 @@ internal sealed class Frame
         _form._games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
         _form._races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
 
-        _form._hint.ConfigureTooltip();
+        _form._hint.InitialDelay = 0;
+        _form._hint.ReshowDelay = 0;
+        _form._hint.AutoPopDelay = 8000;
+        _form._hint.ShowAlways = true;
     }
     public void UpdateSelectedGame()
     {
@@ -31,8 +34,9 @@ internal sealed class Frame
             _form._selectedGame = (Game)_form._games.SelectedItem;
 
             UIData.SetRacesComboBox(_form._races, _form._selectedGame.Races);
-            _form._hint.SetToolTip(_form._games, Hints.GetGame(_form._selectedGame));
             UpdateSelectedRace();
+
+            _form._hint.SetToolTip(_form._games, Hints.Game(_form._selectedGame));
         }
     }
     private void UpdateSelectedRace()
@@ -40,7 +44,7 @@ internal sealed class Frame
         if (_form._races.SelectedItem != null)
         {
             _form._selectedRace = (Race)_form._races.SelectedItem;
-            _form._hint.SetToolTip(_form._races, Hints.GetRace(_form._selectedRace));
+            _form._hint.SetToolTip(_form._races, Hints.Race(_form._selectedRace));
 
             UIData.UpdateLabel(_form._resToSpend, $"{_form._selectedRace.Currency.Name} {Constants.GUI.Labels.ResourcesToSpend}");
             UIData.UpdateTextBox(_form._selectedItems, _form._selectedRace.Units, (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!, (Purpose)_form._itemPurposes.SelectedItem!);

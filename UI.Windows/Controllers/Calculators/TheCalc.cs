@@ -65,13 +65,13 @@ internal sealed class TheCalc
         (string costToBuy, string ableToBuy, string costToReassign, string input)
         = Calc.CalculateAbleToBuyAndCostToBuy(_form._userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
 
-        _form._costToBuyValue.Text = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Hints.GetCostToBuyHint(input, _form._selectedRace.Currency.Name, costToBuy, "buy", unit);
-        _form._ableToBuyValue.Text = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Hints.GetAbleToBuyHint(input, _form._selectedRace.Currency.Name, ableToBuy, unit);
-        _form._costToReassignValue.Text = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Hints.GetCostToBuyHint(input, _form._selectedRace.Currency.Name, costToReassign, "sell", unit);
+        _form._costToBuyValue.Text = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Hints.CostToBuyOrSell(input, _form._selectedRace.Currency.Name, costToBuy, "buy", unit);
+        _form._ableToBuyValue.Text = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Hints.AbleToBuy(input, _form._selectedRace.Currency.Name, ableToBuy, unit);
+        _form._costToReassignValue.Text = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Hints.CostToBuyOrSell(input, _form._selectedRace.Currency.Name, costToReassign, "untrain", unit);
 
-        _form._hint.SetToolTip(_form._selectedItems, Hints.GetUnit(unit));
-        _form._hint.SetToolTip(_form._itemTypes, Hints.GetUnits([.. _form._selectedRace.Units.Where(x => x.Type == (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!)]));
-        _form._hint.SetToolTip(_form._itemPurposes, Hints.GetUnits([.. _form._selectedRace.Units.Where(x => (x.Type == (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!) && (x.Purpose == (Data.Enums.Unit.Purpose)_form._itemPurposes.SelectedItem!))]));
+        _form._hint.SetToolTip(_form._selectedItems, Hints.Unit(unit));
+        _form._hint.SetToolTip(_form._itemTypes, Hints.Units([.. _form._selectedRace.Units.Where(x => x.Type == (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!)]));
+        _form._hint.SetToolTip(_form._itemPurposes, Hints.Units([.. _form._selectedRace.Units.Where(x => (x.Type == (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!) && (x.Purpose == (Data.Enums.Unit.Purpose)_form._itemPurposes.SelectedItem!))]));
     }
 
     private void UpdateSelectedItem()
@@ -80,7 +80,6 @@ internal sealed class TheCalc
             return;
 
         UIData.UpdateTextBox(_form._selectedItems, _form._selectedRace.Units, (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem, (Purpose)_form._itemPurposes.SelectedItem);
-
         DisplayResults();
     }
 }

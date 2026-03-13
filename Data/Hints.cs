@@ -1,113 +1,50 @@
 ﻿using Data.Models;
 using System.Text;
 namespace Data;
-
 public static class Hints
 {
     private const string _delimeter = ": ";
-    public static string GetAbleToBuyHint(string inputAmount, string currency, string resultAmount, Unit unit)
-    {
-        StringBuilder builder = new(256);
-
-        builder.Append("You can buy ")
-          .Append(resultAmount)
-          .Append(' ')
-          .Append(unit.Name)
-          .Append("(s) for ")
-          .Append(inputAmount)
-          .Append(' ')
-          .Append(currency)
-          .Append('.');
-
-        return builder.ToString();
-    }
-    public static string GetCostToBuyHint(string inputAmount, string currency, string resultAmount, string operation, Unit unit)
-    {
-        StringBuilder builder = new(256);
-
-        builder.Append("It would cost ")
-          .Append(resultAmount)
-          .Append(' ')
-          .Append(currency)
-          .Append(' ')
-          .Append(operation)
-          .Append(' ')
-          .Append(inputAmount)
-          .Append(' ')
-          .Append(unit.Name)
-          .Append("(s).");
-
-        return builder.ToString();
-    }
-    public static string GetUnit(Unit unit)
+    private const string _buletin = "        * ";
+    private const string _line = "-----";
+    private const string _space = "           ";
+    public static string Unit(Unit unit)
     {
         StringBuilder builder = new(128);
 
-        builder.Append(Constants.GUI.Labels.CostPerUnit).Append(_delimeter).Append(unit.CostPerUnit).AppendLine();
+        builder.Append(Constants.GUI.Hints.CostPerUnit).Append(_delimeter).Append(unit.CostPerUnit).AppendLine();
 
         if (unit.CostPerUnitReassign is int reassign)
-            builder.Append(Constants.GUI.Labels.CostPerUnitReassign).Append(_delimeter).Append(reassign).AppendLine();
+            builder.Append(Constants.GUI.Hints.CostPerUnitReassign).Append(_delimeter).Append(reassign).AppendLine();
 
         if (unit.Strenght is int strength)
-            builder.Append(Constants.GUI.Labels.Strenght).Append(_delimeter).Append(strength).AppendLine();
+            builder.Append(Constants.GUI.Hints.Strenght).Append(_delimeter).Append(strength).AppendLine();
 
-        builder.Append(Constants.GUI.Labels.Type).Append(_delimeter).Append(unit.Type).AppendLine();
-        builder.Append(Constants.GUI.Labels.Purpose).Append(_delimeter).Append(unit.Purpose);
+        builder.Append(Constants.GUI.Hints.Type).Append(_delimeter).Append(unit.Type).AppendLine();
+        builder.Append(Constants.GUI.Hints.Purpose).Append(_delimeter).Append(unit.Purpose).AppendLine();
+
+        if (unit.Slot is int slot)
+            builder.Append(Constants.GUI.Hints.Slot).Append(_delimeter).Append(slot).AppendLine();
 
         return builder.ToString();
     }
-    public static string GetRace(Race? race)
+    public static string Race(Race? race)
     {
         if (race == null || race.Units.Count == 0)
-            return "Race not available.";
+            return string.Format(Constants.GUI.Labels.NotAvailable, "Race");
 
         StringBuilder builder = new();
         builder.Append(race.Name).AppendLine();
         builder.Append(nameof(race.Type)).Append(_delimeter).Append(race.Type).AppendLine();
         builder.Append(nameof(race.Evolution)).Append(_delimeter).Append(race.Evolution).AppendLine();
         builder.Append(nameof(race.Currency)).Append(_delimeter).Append(race.Currency.Name).AppendLine();
-        builder.AppendLine(GetUnits(race.Units));
+        builder.AppendLine(Units(race.Units));
 
         return builder.ToString();
     }
-    public static string UpCalcDesiredUpResults(string fromInput, string toInput, string result, string multiplier, string currency)
-    {
-        StringBuilder builder = new();
-
-        builder.Append("From ");
-        builder.Append(fromInput);
-        builder.Append(" unit production to reach ");
-        builder.Append(toInput);
-        builder.Append(" you will need...");
-        builder.AppendLine();
-        builder.Append("        * ").Append(result).Append(' ').Append(currency);
-        builder.AppendLine();
-        builder.Append("        * Multipliert to enter is ").Append(multiplier);
-
-        return builder.ToString();
-    }
-    public static string UpCalcResurcesToSpendResults(string fromInput, string totalCostInput, string result, string multiplier, string currency)
-    {//From 1,000,002 unit production with 1,041,663,749,995,000 Naquadah you can upgrade to...
-        StringBuilder builder = new();
-
-        builder.Append("From ");
-        builder.Append(fromInput);
-        builder.Append(" unit production with ");
-        builder.Append(totalCostInput);
-        builder.Append(' ');
-        builder.Append(currency);
-        builder.Append(" you can upgrade to...");
-        builder.AppendLine();
-        builder.Append("        * ").Append(result).Append(" unit production.");
-        builder.AppendLine();
-        builder.Append("        * Multipliert to enter is ").Append(multiplier);
-
-        return builder.ToString();
-    }
-    public static string GetUnits(List<Unit> units)
+    public static string Units(List<Unit> units)
     {
         if (units == null || units.Count == 0)
-            return "No units available.";
+            return string.Format(Constants.GUI.Labels.NotAvailable, "Units");
 
         var groups = units.GroupBy(u => u.Type).OrderByDescending(g => g.Key);
 
@@ -115,30 +52,28 @@ public static class Hints
         foreach (var group in groups)
         {
             var sortedUnits = group.GroupBy(u => u.Purpose).OrderByDescending(g => g.Key);
-            builder.AppendLine($"----- {group.Key.ToString()}(s) -----");
+            builder.Append(_line).Append(' ').Append(group.Key.ToString()).Append(' ').Append("(s)").AppendLine();
             foreach (var sortedUnit in sortedUnits)
             {
-                builder.AppendLine($"           {sortedUnit.Key} {group.Key.ToString()}(s)");
+                builder.Append(_space).Append(sortedUnit.Key).Append(' ').Append(group.Key.ToString()).Append("(s)").AppendLine();
                 foreach (var unit in sortedUnit)
                 {
-                    builder.Append("                    ").Append(unit.ToLabel()).AppendLine();
+                    builder.Append(_space).Append(_space).Append(unit.ToLabel()).AppendLine();
                 }
             }
         }
 
         return builder.ToString();
     }
-    public static string GetGame(Game? game)
+    public static string Game(Game? game)
     {
         if (game is null)
-            return "No game available.";
+            return string.Format(Constants.GUI.Labels.NotAvailable, "Game");
 
         StringBuilder builder = new();
 
-        builder.Append(nameof(game.Name)).Append(_delimeter).Append(game.Name)
-               .AppendLine()
-               .Append(nameof(game.Type)).Append(_delimeter).Append(game.Type)
-               .AppendLine()
+        builder.Append(nameof(game.Name)).Append(_delimeter).Append(game.Name).AppendLine()
+               .Append(nameof(game.Type)).Append(_delimeter).Append(game.Type).AppendLine()
                .Append(nameof(game.Url)).Append(_delimeter).Append(game.Url);
 
         if (!string.IsNullOrEmpty(game.Description))
@@ -146,4 +81,34 @@ public static class Hints
 
         return builder.ToString();
     }
+    
+    #region UP Calc
+    public static string DesiredUp(string fromInput, string toInput, string result, string multiplier, string currency)
+    {
+        StringBuilder builder = new();
+
+        builder.Append(string.Format(Constants.GUI.Hints.DesiredUpPreText, fromInput, toInput)).AppendLine();
+        builder.Append(_buletin).Append(result).Append(' ').Append(currency).AppendLine();
+        builder.Append(_buletin).Append(string.Format(Constants.GUI.Hints.MultiplierToEnter, multiplier));
+
+        return builder.ToString();
+    }
+    public static string ResurcesToSpend(string fromInput, string totalCostInput, string result, string multiplier, string currency)
+    {
+        StringBuilder builder = new();
+
+        builder.Append(string.Format(Constants.GUI.Hints.ResourcesToSpendPreText, fromInput, totalCostInput, currency)).AppendLine();
+        builder.Append(_buletin).Append(result).Append(' ').Append(Constants.GUI.Labels.Up).Append('.').AppendLine();
+        builder.Append(_buletin).Append(string.Format(Constants.GUI.Hints.MultiplierToEnter, multiplier));
+
+        return builder.ToString();
+    }
+    #endregion
+    
+    #region The Calc
+    public static string AbleToBuy(string inputAmount, string currency, string resultAmount, Unit unit)
+       => string.Format(Constants.GUI.Hints.YouCanBuy, resultAmount, unit.Name, inputAmount, currency);
+    public static string CostToBuyOrSell(string inputAmount, string currency, string resultAmount, string operation, Unit unit)
+        => string.Format(Constants.GUI.Hints.ItWouldCost, resultAmount, currency, operation, inputAmount, unit.Name);
+    #endregion
 }
