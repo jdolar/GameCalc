@@ -4,49 +4,49 @@
     {
       "Name": "Revolver",
       "CostPerUnit": 900,
-      "Strenght": 5,
+      "Strength": 5,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "P90 Machine Gun",
       "CostPerUnit": 1620,
-      "Strenght": 20,
+      "Strength": 20,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "Grenade",
       "CostPerUnit": 2880,
-      "Strenght": 35,
+      "Strength": 35,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "RPG Rocket Propelled Grenade",
       "CostPerUnit": 4590,
-      "Strenght": 50,
+      "Strength": 50,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "Plastic Explosives",
       "CostPerUnit": 14760,
-      "Strenght": 180,
+      "Strength": 180,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "Mini Nuke",
       "CostPerUnit": 47160,
-      "Strenght": 675,
+      "Strength": 675,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "X302 Craft",
       "CostPerUnit": 151020,
-      "Strenght": 2750,
+      "Strength": 2750,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
@@ -54,42 +54,42 @@
     {
       "Name": "Flack Jacket",
       "CostPerUnit": 1800,
-      "Strenght": 10,
+      "Strength": 10,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Full Body Shield",
       "CostPerUnit": 3200,
-      "Strenght": 15,
+      "Strength": 15,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Machine Gun Turret",
       "CostPerUnit": 5100,
-      "Strenght": 30,
+      "Strength": 30,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Personelle Tank",
       "CostPerUnit": 16400,
-      "Strenght": 125,
+      "Strength": 125,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Satellite Laser",
       "CostPerUnit": 52400,
-      "Strenght": 500,
+      "Strength": 500,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Ion Cannon",
       "CostPerUnit": 167800,
-      "Strenght": 2000,
+      "Strength": 2000,
       "Type": "Weapon",
       "Purpose": "Defence"
     },

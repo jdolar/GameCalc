@@ -1,31 +1,42 @@
 ﻿using Data.Models;
 using System.Text;
 namespace Data;
+
 public static class Hints
 {
     private const string _delimiter = ": ";
     private const string _bulletin = "        * ";
     private const string _line = "-----";
     private const string _space = "           ";
-    public static string Unit(Unit unit)
+    public static string Unit(Unit unit, string _space = "  ")
     {
-        StringBuilder builder = new(128);
+        if (unit == null)
+            return "";
 
-        builder.Append(Constants.GUI.Hints.CostPerUnit).Append(_delimiter).Append(unit.CostPerUnit).AppendLine();
+        var fields = new (string Label, string Value)[]
+        {
+            (nameof(unit.Name), unit.Name ?? string.Empty),
+            (nameof(unit.CostPerUnit), unit.CostPerUnit.ToString()),
+            (nameof(unit.CostPerUnitReassign), unit.CostPerUnitReassign?.ToString() ?? string.Empty),
+            (nameof(unit.Strength), unit.Strength?.ToString() ?? string.Empty),
+            (nameof(unit.Type), unit.Type.ToString()),
+            (nameof(unit.Purpose), unit.Purpose.ToString()),
+            (nameof(unit.Evolution), unit.Evolution.ToString()),
+            (nameof(unit.Slot), unit.Slot?.ToString() ?? string.Empty)
+        }
+        .Where(f => !string.IsNullOrEmpty(f.Value))
+        .ToArray();
 
-        if (unit.CostPerUnitReassign is int reassign)
-            builder.Append(Constants.GUI.Hints.CostPerUnitReassign).Append(_delimiter).Append(reassign).AppendLine();
+        int labelWidth = fields.Max(f => f.Label.Length);
+        int valueWidth = fields.Max(f => f.Value.Length);
 
-        if (unit.Strenght is int strength)
-            builder.Append(Constants.GUI.Hints.Strenght).Append(_delimiter).Append(strength).AppendLine();
+        StringBuilder sb = new();
+        foreach (var field in fields)
+        {
+            sb.AppendLine(_space + field.Label.PadRight(labelWidth + 2) + field.Value.PadLeft(valueWidth));
+        }
 
-        builder.Append(Constants.GUI.Hints.Type).Append(_delimiter).Append(unit.Type).AppendLine();
-        builder.Append(Constants.GUI.Hints.Purpose).Append(_delimiter).Append(unit.Purpose).AppendLine();
-
-        if (unit.Slot is int slot)
-            builder.Append(Constants.GUI.Hints.Slot).Append(_delimiter).Append(slot).AppendLine();
-
-        return builder.ToString();
+        return sb.ToString();
     }
     public static string Race(Race? race)
     {
@@ -59,73 +70,12 @@ public static class Hints
             var sortedUnits = group.GroupBy(u => u.Purpose)
                                    .OrderByDescending(g => g.Key);
 
-            builder.Append(_line)
-                   .Append(' ')
-                   .Append(group.Key)
-                   .Append(" (s)")
-                   .AppendLine();
+            builder.Append(_line).Append(' ').Append(group.Key).Append("(s)").AppendLine();
 
             foreach (var purposeGroup in sortedUnits)
             {
-                builder.Append(_space)
-                       .Append(purposeGroup.Key)
-                       .Append(' ')
-                       .Append(group.Key)
-                       .Append("(s)")
-                       .AppendLine();
-
-                foreach (var unit in purposeGroup)
-                {
-                    string name = unit.Name ?? "";
-                    string price = $"{unit.CostPerUnit}/unit";
-
-                    builder.Append(_space)
-                           .Append(_space)
-                           .Append(name.PadRight(maxNameLength + 4))
-                           .Append(price.PadLeft(maxPriceLength))
-                           .AppendLine();
-                }
-            }
-        }
-
-        return builder.ToString();
-    }
-    public static string Units_old(List<Unit> units)
-    {
-        if (units == null || units.Count == 0)
-            return string.Format(Constants.GUI.Labels.NotAvailable, "Units");
-
-        var groups = units.GroupBy(u => u.Type).OrderByDescending(g => g.Key);
-
-        StringBuilder builder = new();
-        
-        foreach (var group in groups)
-        {
-            //int maxNameLength = group.Max(u => u.Name?.Length ?? 0);
-            int maxNameLength = group.Max(u => u.Name?.Length ?? 0);
-            int maxPriceLength = group.Max(u => $"{u.CostPerUnit}/unit".Length);
-            var sortedUnits = group.GroupBy(u => u.Purpose).OrderByDescending(g => g.Key);
-            builder.Append(_line).Append(' ').Append(group.Key.ToString()).Append(' ').Append("(s)").AppendLine();
-            foreach (var sortedUnit in sortedUnits)
-            {
-                builder.Append(_space).Append(sortedUnit.Key).Append(' ').Append(group.Key.ToString()).Append("(s)").AppendLine();
-                             
-                foreach (var unit in sortedUnit)
-                {
-                  //  builder.Append(_space).Append(_space).Append(unit.ToLabel()).AppendLine();
-                }
-                
-                //int maxNameLength = sortedUnit.Max(u => u.Name?.Length ?? 0);
-
-                var lines = sortedUnit.Select(u =>
-                {
-                    string name = u.Name ?? "";
-                    string price = $"{u.CostPerUnit}/unit";
-
-                    return name.PadRight(maxNameLength + 4) + price.PadLeft(maxPriceLength);
-                });
-
-                builder.Append(_space).Append(_space).Append(string.Join(Environment.NewLine, lines)).AppendLine();
+                builder.Append(_space).Append(purposeGroup.Key).Append(' ').Append(group.Key).Append("(s)").AppendLine();
+                builder.Append(UnitNameAndCost(purposeGroup.ToList(), maxNameLength, maxPriceLength));
             }
         }
 
@@ -147,7 +97,7 @@ public static class Hints
 
         return builder.ToString();
     }
-    
+
     #region UP Calc
     public static string DesiredUp(string fromInput, string toInput, string result, string multiplier, string currency)
     {
@@ -170,11 +120,33 @@ public static class Hints
         return builder.ToString();
     }
     #endregion
-    
+
     #region The Calc
     public static string AbleToBuy(string inputAmount, string currency, string resultAmount, Unit unit)
        => string.Format(Constants.GUI.Hints.YouCanBuy, resultAmount, unit.Name, inputAmount, currency);
     public static string CostToBuyOrSell(string inputAmount, string currency, string resultAmount, string operation, Unit unit)
         => string.Format(Constants.GUI.Hints.ItWouldCost, resultAmount, currency, operation, inputAmount, unit.Name);
+    #endregion
+    
+    #region Private Helpers
+    private static string UnitNameAndCost(List<Unit> units, int maxNameLength, int maxPriceLength)
+    {
+        StringBuilder builder = new();
+
+        foreach (Unit unit in units)
+        {
+            string name = unit.Name ?? "";
+            string price = $"{unit.CostPerUnit}/unit";
+
+            builder.Append(_space)
+                   .Append(_space)
+                   .Append(name.PadRight(maxNameLength + 4))
+                   .Append(price.PadLeft(maxPriceLength))
+                   .AppendLine();
+        }
+
+        return builder.ToString();
+    }
+
     #endregion
 }

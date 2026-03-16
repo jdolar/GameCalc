@@ -1,22 +1,16 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
 using Data.Models;
 using Data.Enums.Race;
 using Data.Enums.Unit;
 namespace Data;
 public static class DataBuilder
 {
-    internal static readonly JsonSerializerOptions options = new()
-    {
-        PropertyNameCaseInsensitive = true,
-        Converters = { new JsonStringEnumConverter() }
-    };
     public static List<Game> GetGames(string fileName)
     {
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", fileName);
         string json = File.ReadAllText(path);
 
-        return JsonSerializer.Deserialize<List<Game>>(json, options) ?? [];
+        return JsonSerializer.Deserialize<List<Game>>(json, Constants.Json.SerializerOptions) ?? [];
     }
     public static List<Unit> GetDataSource(List<Unit> units, Enums.Unit.Type type, Purpose purpose)
     {
@@ -48,7 +42,7 @@ public static class DataBuilder
                     if (race.Units == null || race.Units.Count == 0)
                         race.Units = filteredBase;
                     else
-                        race.Units = race.Units.MergeWith(filteredBase);
+                        race.Units = race.Units.MergeWith(filteredBase, race.Evolution);
 
                     game.Races.Add(race);
                 }
@@ -77,7 +71,7 @@ public static class DataBuilder
             if (Enum.TryParse<Purpose>(itemTypeFromFile, ignoreCase: true, out Purpose itemPurpose))
             {
                 string json = File.ReadAllText(file);
-                List<Unit> units = JsonSerializer.Deserialize<List<Unit>>(json, options) ?? [];
+                List<Unit> units = JsonSerializer.Deserialize<List<Unit>>(json, Constants.Json.SerializerOptions) ?? [];
 
                 foreach (Unit unit in units)
                 {
@@ -120,7 +114,7 @@ public static class DataBuilder
         foreach (var file in files)
         {
             string json = File.ReadAllText(file);
-            Race race = JsonSerializer.Deserialize<Race>(json, options) ?? new Race();
+            Race race = JsonSerializer.Deserialize<Race>(json, Constants.Json.SerializerOptions) ?? new Race();
 
             if (race.Enabled)
                 races.Add(race);

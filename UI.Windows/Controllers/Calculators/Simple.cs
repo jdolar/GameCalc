@@ -1,9 +1,7 @@
 ﻿using Calculator;
-using Data;
 using Data.Commands;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers.Calculators;
-
 internal sealed class Simple
 {
     public Simple(Label result, TextBox inputLeft, TextBox inputRight, ListBox history,

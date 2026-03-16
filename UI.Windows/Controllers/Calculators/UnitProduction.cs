@@ -2,6 +2,7 @@
 using Data;
 using Data.Models;
 using UI.Windows.Helpers;
+using Label = System.Windows.Forms.Label;
 namespace UI.Windows.Controllers.Calculators;
 internal sealed class UnitProduction
 {
@@ -51,6 +52,8 @@ internal sealed class UnitProduction
 
         upResult.Click += (s, e) => UIData.CopyToClipboard(upResult.Text);
         currentUp.Click += (s, e) => UIData.CopyToClipboard(currentUp.Text);
+
+        UpdateSelectedRace(resToSpendText);
     }
     private void UpdateSelectedRace(Label label)
     {

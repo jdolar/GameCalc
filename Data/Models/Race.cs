@@ -1,5 +1,4 @@
-﻿using Data.Enums.Game;
-using Data.Enums.Race;
+﻿using Data.Enums.Race;
 namespace Data.Models;
 public sealed class Race
 {

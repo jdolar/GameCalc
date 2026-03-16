@@ -8,14 +8,12 @@ internal sealed class Frame
     public Race SelectedRace { get; set; }
 
     private readonly ComboBox _games, _races;
-    private readonly Label _resToSpend;
     private readonly ToolTip _hints;
    
-    public Frame(ComboBox races, ComboBox games,  ToolTip hints, Label resToSpend)
+    public Frame(ComboBox races, ComboBox games,  ToolTip hints)
     {
         List<Game> enabledGames = UIData.GetGames();
         _hints = hints;
-        _resToSpend = resToSpend;
 
         _games = games;
         UIData.SetGamesComboBox(_games, enabledGames);
@@ -70,7 +68,7 @@ internal sealed class Frame
             _hints.SetToolTip(_games, Hints.Game(SelectedGame));
 
             UIData.SetRacesComboBox(_races, SelectedGame.Races);
-            UpdateSelectedRace();        
+            UpdateSelectedRace();
         }
     }
     private void UpdateSelectedRace()
@@ -79,8 +77,6 @@ internal sealed class Frame
         {
             SelectedRace = (Race)_races.SelectedItem;
             _hints.SetToolTip(_races, Hints.Race(SelectedRace));
-
-            UIData.UpdateLabel(_resToSpend, $"{SelectedRace.Currency.Name} {Constants.GUI.Labels.ResourcesToSpend}");
         }
     }
 }

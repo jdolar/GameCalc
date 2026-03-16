@@ -4,49 +4,49 @@
     {
       "Name": "cell attack unit",
       "CostPerUnit": 1000,
-      "Strenght": 10,
+      "Strength": 10,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "probe attack unit",
       "CostPerUnit": 1800,
-      "Strenght": 20,
+      "Strength": 20,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "spider attack force",
       "CostPerUnit": 3200,
-      "Strenght": 30,
+      "Strength": 30,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "ecosystem attack force",
       "CostPerUnit": 5100,
-      "Strenght": 60,
+      "Strength": 60,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "AI Interfacors",
       "CostPerUnit": 16400,
-      "Strenght": 160,
+      "Strength": 160,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "Advanced Resource Consumption",
       "CostPerUnit": 52400,
-      "Strenght": 640,
+      "Strength": 640,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
     {
       "Name": "Instant Material Acquisition",
       "CostPerUnit": 167800,
-      "Strenght": 2560,
+      "Strength": 2560,
       "Type": "Weapon",
       "Purpose": "Attack"
     },
@@ -54,42 +54,42 @@
     {
       "Name": "Bio Targeting Swarm",
       "CostPerUnit": 1800,
-      "Strenght": 10,
+      "Strength": 10,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Explosive Nanite Spore",
       "CostPerUnit": 3200,
-      "Strenght": 20,
+      "Strength": 20,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Defensive Reality Matrix",
       "CostPerUnit": 5100,
-      "Strenght": 60,
+      "Strength": 60,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Technology Interruptor Beam",
       "CostPerUnit": 16400,
-      "Strenght": 160,
+      "Strength": 160,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Imposed Reality Matrix",
       "CostPerUnit": 52400,
-      "Strenght": 640,
+      "Strength": 640,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
     {
       "Name": "Repli-Bomb",
       "CostPerUnit": 167800,
-      "Strenght": 2560,
+      "Strength": 2560,
       "Type": "Weapon",
       "Purpose": "Defence"
     },
