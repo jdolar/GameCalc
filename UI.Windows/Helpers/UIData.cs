@@ -34,11 +34,17 @@ internal static class UIData
         string[] jsonFiles = Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", "Games"));
         return DataBuilder.GetGamesData(DataBuilder.GetGames("Games.json"), jsonFiles);
     }
-    internal static void UpdateLabel(Label inputLabel, string upgradeText)
+    internal static void UpdateLabel(Label input, string upgradeText)
     {
-        if (inputLabel == null) return;
+        if (input == null || input.Text == upgradeText) return;
 
-        inputLabel.Text = upgradeText;
+        input.Text = upgradeText;
+    }
+    internal static void UpdateTextBox(TextBox input, string upgradeText)
+    {
+        if (input == null || input.Text == upgradeText) return;
+
+        input.Text = upgradeText;
     }
     internal static void SetRacesComboBox(ComboBox input, List<Race> races)
     {
@@ -52,9 +58,9 @@ internal static class UIData
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
         //  input.SelectedIndex = 0;
     }
-    internal static void UpdateTextBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpuse)
+    internal static void UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
     {
-        List<Unit> filteredUnits = DataBuilder.GetDataSource(units, type, purpuse);
+        List<Unit> filteredUnits = DataBuilder.GetDataSource(units, type, purpose);
         if (filteredUnits.Count == 0)
         {
             input.DataSource = null;

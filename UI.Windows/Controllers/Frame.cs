@@ -1,53 +1,86 @@
 ﻿using Data;
-using Data.Enums.Unit;
 using Data.Models;
 using UI.Windows.Helpers;
-using UI.Windows.Properties;
 namespace UI.Windows.Controllers;
 internal sealed class Frame
 {
-    private readonly Display _form;
-    public Frame(Display form)
+    public Game SelectedGame { get; set; }
+    public Race SelectedRace { get; set; }
+
+    private readonly ComboBox _games, _races;
+    private readonly Label _resToSpend;
+    private readonly ToolTip _hints;
+   
+    public Frame(ComboBox races, ComboBox games,  ToolTip hints, Label resToSpend)
     {
-        _form = form;
+        List<Game> enabledGames = UIData.GetGames();
+        _hints = hints;
+        _resToSpend = resToSpend;
 
-        UIData.SetGamesComboBox(_form._games, _form._enabledGames);
-        UIData.SetRacesComboBox(_form._races, _form._selectedGame.Races);
+        _games = games;
+        UIData.SetGamesComboBox(_games, enabledGames);
+        SelectedGame = (Game)_games.SelectedItem!;
+        _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
 
-        _form.Text = $"{AppInfo.Name} v{AppInfo.Version} [{AppInfo.InfoVersion}]";
-        _form._tabPageTheCalc.Text = Constants.GUI.Labels.TheCalc;
-        _form._tabPageUpCalc.Text = Constants.GUI.Labels.UpCalc;
-        _form._tabPageSimpleCalc.Text = Constants.GUI.Labels.SimpleCalc;
+        _races = races;
+        UIData.SetRacesComboBox(_races, SelectedGame.Races);
+        SelectedRace = (Race)_races.SelectedItem!;
+        _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
 
-        _form._games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
-        _form._races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
+        hints.InitialDelay = 0;
+        hints.ReshowDelay = 0;
+        hints.AutoPopDelay = 8000;
+        hints.ShowAlways = true;
+        hints.OwnerDraw = true;
 
-        _form._hint.InitialDelay = 0;
-        _form._hint.ReshowDelay = 0;
-        _form._hint.AutoPopDelay = 8000;
-        _form._hint.ShowAlways = true;
+        hints.Popup += (s, e) =>
+        {
+            using Font font = new("Consolas", 9);
+
+            Size size = TextRenderer.MeasureText(
+                hints.GetToolTip(e.AssociatedControl),
+                font);
+
+            e.ToolTipSize = size;
+        };
+
+        hints.Draw += (s, e) =>
+        {
+            using Font font = new("Consolas", 9);
+            e.DrawBackground();
+            e.DrawBorder();
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                e.ToolTipText,
+                font,
+                e.Bounds,
+                Color.Black,
+                TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
+        };
+
+        UpdateSelectedGame();
+        
     }
     public void UpdateSelectedGame()
     {
-        if (_form._games.SelectedItem != null)
+        if (_games.SelectedItem != null)
         {
-            _form._selectedGame = (Game)_form._games.SelectedItem;
+            SelectedGame = (Game)_games.SelectedItem;
+            _hints.SetToolTip(_games, Hints.Game(SelectedGame));
 
-            UIData.SetRacesComboBox(_form._races, _form._selectedGame.Races);
-            UpdateSelectedRace();
-
-            _form._hint.SetToolTip(_form._games, Hints.Game(_form._selectedGame));
+            UIData.SetRacesComboBox(_races, SelectedGame.Races);
+            UpdateSelectedRace();        
         }
     }
     private void UpdateSelectedRace()
     {
-        if (_form._races.SelectedItem != null)
+        if (_races.SelectedItem != null && SelectedRace != null)
         {
-            _form._selectedRace = (Race)_form._races.SelectedItem;
-            _form._hint.SetToolTip(_form._races, Hints.Race(_form._selectedRace));
+            SelectedRace = (Race)_races.SelectedItem;
+            _hints.SetToolTip(_races, Hints.Race(SelectedRace));
 
-            UIData.UpdateLabel(_form._resToSpend, $"{_form._selectedRace.Currency.Name} {Constants.GUI.Labels.ResourcesToSpend}");
-            UIData.UpdateTextBox(_form._selectedItems, _form._selectedRace.Units, (Data.Enums.Unit.Type)_form._itemTypes.SelectedItem!, (Purpose)_form._itemPurposes.SelectedItem!);
+            UIData.UpdateLabel(_resToSpend, $"{SelectedRace.Currency.Name} {Constants.GUI.Labels.ResourcesToSpend}");
         }
     }
 }

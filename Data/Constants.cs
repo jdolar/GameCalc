@@ -33,9 +33,9 @@ public static class Constants
         public static class Labels
         {
             //Tabs
-            public const string TheCalc = "GetGot";
-            public const string UpCalc = UP;
-            public const string SimpleCalc = "Calc";
+            public const string getGot = "GetGot";
+            public const string UnitProduction = UP;
+            public const string Simple = "Calc";
 
             public const string UP = "Unit Production";
             public const string Up = "unit production";

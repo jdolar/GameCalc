@@ -17,51 +17,51 @@ partial class Display
     {
         components = new System.ComponentModel.Container();
         _races = new ComboBox();
-        _itemTypes = new ComboBox();
-        _userInput = new TextBox();
-        _selectedItems = new ComboBox();
+        _getGotItemTypes = new ComboBox();
+        _getGotUserInput = new TextBox();
+        _getGotSelectedItems = new ComboBox();
         _commandsLayout = new TableLayoutPanel();
-        _ableToBuyValue = new Label();
-        _costToBuyValue = new Label();
-        _costToReassignValue = new Label();
-        _sum = new Button();
-        _deduct = new Button();
-        _multiply = new Button();
-        _divide = new Button();
-        _calcInputLeft = new TextBox();
-        _calcInputRight = new TextBox();
-        _simpleCalcResult = new Label();
-        _hint = new ToolTip(components);
+        _getGotAbleToBuy = new Label();
+        _getGotCostToBuy = new Label();
+        _getGotCostToReassign = new Label();
+        _simpleSum = new Button();
+        _simpleDeduct = new Button();
+        _simpleMultiply = new Button();
+        _simpleDivide = new Button();
+        _simpleLeftInput = new TextBox();
+        _simpleRightInput = new TextBox();
+        _simpleResult = new Label();
+        _toolTips = new ToolTip(components);
         _games = new ComboBox();
         _upperLayout = new TableLayoutPanel();
-        _itemPurposes = new ComboBox();
+        _getGotItemPurposes = new ComboBox();
         _game = new Label();
         _race = new Label();
-        _upCalcResult = new Label();
-        _toInput = new TextBox();
-        _fromInput = new TextBox();
-        _calculateDesiredUp = new Button();
-        _upCalcLayout = new TableLayoutPanel();
-        _calculateNaqToSpend = new Button();
-        _resourcesToSpendInput = new TextBox();
-        _currentUp = new Label();
-        _desiredUp = new Label();
-        _resToSpend = new Label();
+        _unitProductionResult = new Label();
+        _unitProductionToInput = new TextBox();
+        _unitProductionFromInput = new TextBox();
+        _unitProductionCalculateDesiredUp = new Button();
+        _unitProductionLayout = new TableLayoutPanel();
+        _unitProductionCalculateNaqToSpend = new Button();
+        _unitProductionResourcesToSpendInput = new TextBox();
+        _unitProductionCurrentUp = new Label();
+        _unitProductionDesiredUp = new Label();
+        _unitProductionResToSpend = new Label();
         _tab = new TabControl();
-        _tabPageTheCalc = new TabPage();
-        _tabPageUpCalc = new TabPage();
-        _tabPageSimpleCalc = new TabPage();
-        _clearSimpleCalcHistory = new Button();
-        _clearSimpleCalc = new Button();
-        _simpleCalcResultHistory = new ListBox();
+        _tabPageGetGot = new TabPage();
+        _tabPageUp = new TabPage();
+        _tabPageSimple = new TabPage();
+        _simpleClearHistory = new Button();
+        _simpleClear = new Button();
+        _simpleHistory = new ListBox();
         _raceLayout = new TableLayoutPanel();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
-        _upCalcLayout.SuspendLayout();
+        _unitProductionLayout.SuspendLayout();
         _tab.SuspendLayout();
-        _tabPageTheCalc.SuspendLayout();
-        _tabPageUpCalc.SuspendLayout();
-        _tabPageSimpleCalc.SuspendLayout();
+        _tabPageGetGot.SuspendLayout();
+        _tabPageUp.SuspendLayout();
+        _tabPageSimple.SuspendLayout();
         _raceLayout.SuspendLayout();
         SuspendLayout();
         // 
@@ -73,37 +73,38 @@ partial class Display
         _races.Size = new Size(149, 23);
         _races.TabIndex = 0;
         // 
-        // _itemTypes
+        // _getGotItemTypes
         // 
-        _itemTypes.DropDownStyle = ComboBoxStyle.DropDownList;
-        _itemTypes.Location = new Point(8, 8);
-        _itemTypes.Name = "_itemTypes";
-        _itemTypes.Size = new Size(221, 23);
-        _itemTypes.TabIndex = 0;
+        _getGotItemTypes.DropDownStyle = ComboBoxStyle.DropDownList;
+        _getGotItemTypes.Location = new Point(25, 8);
+        _getGotItemTypes.Margin = new Padding(20, 3, 0, 0);
+        _getGotItemTypes.Name = "_getGotItemTypes";
+        _getGotItemTypes.Size = new Size(221, 23);
+        _getGotItemTypes.TabIndex = 0;
         // 
-        // _userInput
+        // _getGotUserInput
         // 
-        _userInput.Location = new Point(8, 86);
-        _userInput.Name = "_userInput";
-        _userInput.Size = new Size(497, 23);
-        _userInput.TabIndex = 1;
+        _getGotUserInput.Location = new Point(8, 86);
+        _getGotUserInput.Name = "_getGotUserInput";
+        _getGotUserInput.Size = new Size(497, 23);
+        _getGotUserInput.TabIndex = 1;
         // 
-        // _selectedItems
+        // _getGotSelectedItems
         // 
-        _selectedItems.DropDownStyle = ComboBoxStyle.DropDownList;
-        _selectedItems.Location = new Point(14, 48);
-        _selectedItems.Name = "_selectedItems";
-        _selectedItems.Size = new Size(505, 23);
-        _selectedItems.TabIndex = 2;
+        _getGotSelectedItems.DropDownStyle = ComboBoxStyle.DropDownList;
+        _getGotSelectedItems.Location = new Point(31, 48);
+        _getGotSelectedItems.Name = "_getGotSelectedItems";
+        _getGotSelectedItems.Size = new Size(471, 23);
+        _getGotSelectedItems.TabIndex = 2;
         // 
         // _commandsLayout
         // 
         _commandsLayout.ColumnCount = 1;
         _commandsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-        _commandsLayout.Controls.Add(_ableToBuyValue, 0, 0);
-        _commandsLayout.Controls.Add(_costToBuyValue, 0, 1);
-        _commandsLayout.Controls.Add(_userInput, 0, 3);
-        _commandsLayout.Controls.Add(_costToReassignValue, 0, 2);
+        _commandsLayout.Controls.Add(_getGotAbleToBuy, 0, 0);
+        _commandsLayout.Controls.Add(_getGotCostToBuy, 0, 1);
+        _commandsLayout.Controls.Add(_getGotUserInput, 0, 3);
+        _commandsLayout.Controls.Add(_getGotCostToReassign, 0, 2);
         _commandsLayout.Location = new Point(6, 79);
         _commandsLayout.Name = "_commandsLayout";
         _commandsLayout.Padding = new Padding(5);
@@ -115,92 +116,92 @@ partial class Display
         _commandsLayout.Size = new Size(513, 116);
         _commandsLayout.TabIndex = 3;
         // 
-        // _ableToBuyValue
+        // _getGotAbleToBuy
         // 
-        _ableToBuyValue.AutoSize = true;
-        _ableToBuyValue.Location = new Point(8, 5);
-        _ableToBuyValue.Name = "_ableToBuyValue";
-        _ableToBuyValue.Size = new Size(91, 15);
-        _ableToBuyValue.TabIndex = 10;
-        _ableToBuyValue.Text = "AbleToBuyValue";
+        _getGotAbleToBuy.AutoSize = true;
+        _getGotAbleToBuy.Location = new Point(8, 5);
+        _getGotAbleToBuy.Name = "_getGotAbleToBuy";
+        _getGotAbleToBuy.Size = new Size(91, 15);
+        _getGotAbleToBuy.TabIndex = 10;
+        _getGotAbleToBuy.Text = "AbleToBuyValue";
         // 
-        // _costToBuyValue
+        // _getGotCostToBuy
         // 
-        _costToBuyValue.AutoSize = true;
-        _costToBuyValue.Location = new Point(8, 31);
-        _costToBuyValue.Name = "_costToBuyValue";
-        _costToBuyValue.Size = new Size(91, 15);
-        _costToBuyValue.TabIndex = 13;
-        _costToBuyValue.Text = "CostToBuyValue";
+        _getGotCostToBuy.AutoSize = true;
+        _getGotCostToBuy.Location = new Point(8, 31);
+        _getGotCostToBuy.Name = "_getGotCostToBuy";
+        _getGotCostToBuy.Size = new Size(91, 15);
+        _getGotCostToBuy.TabIndex = 13;
+        _getGotCostToBuy.Text = "CostToBuyValue";
         // 
-        // _costToReassignValue
+        // _getGotCostToReassign
         // 
-        _costToReassignValue.AutoSize = true;
-        _costToReassignValue.Location = new Point(8, 57);
-        _costToReassignValue.Name = "_costToReassignValue";
-        _costToReassignValue.Size = new Size(117, 15);
-        _costToReassignValue.TabIndex = 14;
-        _costToReassignValue.Text = "CostToReassignValue";
+        _getGotCostToReassign.AutoSize = true;
+        _getGotCostToReassign.Location = new Point(8, 57);
+        _getGotCostToReassign.Name = "_getGotCostToReassign";
+        _getGotCostToReassign.Size = new Size(117, 15);
+        _getGotCostToReassign.TabIndex = 14;
+        _getGotCostToReassign.Text = "CostToReassignValue";
         // 
-        // _sum
+        // _simpleSum
         // 
-        _sum.Location = new Point(107, 53);
-        _sum.Name = "_sum";
-        _sum.Size = new Size(41, 23);
-        _sum.TabIndex = 4;
-        _sum.Text = "+";
-        _sum.UseVisualStyleBackColor = true;
+        _simpleSum.Location = new Point(107, 53);
+        _simpleSum.Name = "_simpleSum";
+        _simpleSum.Size = new Size(41, 23);
+        _simpleSum.TabIndex = 4;
+        _simpleSum.Text = "+";
+        _simpleSum.UseVisualStyleBackColor = true;
         // 
-        // _deduct
+        // _simpleDeduct
         // 
-        _deduct.Location = new Point(154, 53);
-        _deduct.Name = "_deduct";
-        _deduct.Size = new Size(41, 23);
-        _deduct.TabIndex = 5;
-        _deduct.Text = "-";
-        _deduct.UseVisualStyleBackColor = true;
+        _simpleDeduct.Location = new Point(154, 53);
+        _simpleDeduct.Name = "_simpleDeduct";
+        _simpleDeduct.Size = new Size(41, 23);
+        _simpleDeduct.TabIndex = 5;
+        _simpleDeduct.Text = "-";
+        _simpleDeduct.UseVisualStyleBackColor = true;
         // 
-        // _multiply
+        // _simpleMultiply
         // 
-        _multiply.Location = new Point(60, 53);
-        _multiply.Name = "_multiply";
-        _multiply.Size = new Size(41, 23);
-        _multiply.TabIndex = 6;
-        _multiply.Text = "x";
-        _multiply.UseVisualStyleBackColor = true;
+        _simpleMultiply.Location = new Point(60, 53);
+        _simpleMultiply.Name = "_simpleMultiply";
+        _simpleMultiply.Size = new Size(41, 23);
+        _simpleMultiply.TabIndex = 6;
+        _simpleMultiply.Text = "x";
+        _simpleMultiply.UseVisualStyleBackColor = true;
         // 
-        // _divide
+        // _simpleDivide
         // 
-        _divide.Location = new Point(13, 53);
-        _divide.Name = "_divide";
-        _divide.Size = new Size(41, 23);
-        _divide.TabIndex = 7;
-        _divide.Text = "/";
-        _divide.UseVisualStyleBackColor = true;
+        _simpleDivide.Location = new Point(13, 53);
+        _simpleDivide.Name = "_simpleDivide";
+        _simpleDivide.Size = new Size(41, 23);
+        _simpleDivide.TabIndex = 7;
+        _simpleDivide.Text = "/";
+        _simpleDivide.UseVisualStyleBackColor = true;
         // 
-        // _calcInputLeft
+        // _simpleLeftInput
         // 
-        _calcInputLeft.Location = new Point(13, 82);
-        _calcInputLeft.Name = "_calcInputLeft";
-        _calcInputLeft.Size = new Size(182, 23);
-        _calcInputLeft.TabIndex = 8;
+        _simpleLeftInput.Location = new Point(13, 82);
+        _simpleLeftInput.Name = "_simpleLeftInput";
+        _simpleLeftInput.Size = new Size(182, 23);
+        _simpleLeftInput.TabIndex = 8;
         // 
-        // _calcInputRight
+        // _simpleRightInput
         // 
-        _calcInputRight.Location = new Point(13, 111);
-        _calcInputRight.Name = "_calcInputRight";
-        _calcInputRight.Size = new Size(182, 23);
-        _calcInputRight.TabIndex = 9;
+        _simpleRightInput.Location = new Point(13, 111);
+        _simpleRightInput.Name = "_simpleRightInput";
+        _simpleRightInput.Size = new Size(182, 23);
+        _simpleRightInput.TabIndex = 9;
         // 
-        // _simpleCalcResult
+        // _simpleResult
         // 
-        _simpleCalcResult.AutoSize = true;
-        _simpleCalcResult.Font = new Font("Segoe UI", 20F);
-        _simpleCalcResult.Location = new Point(13, 13);
-        _simpleCalcResult.Name = "_simpleCalcResult";
-        _simpleCalcResult.Size = new Size(138, 37);
-        _simpleCalcResult.TabIndex = 12;
-        _simpleCalcResult.Text = "CalcResult";
+        _simpleResult.AutoSize = true;
+        _simpleResult.Font = new Font("Segoe UI", 20F);
+        _simpleResult.Location = new Point(13, 13);
+        _simpleResult.Name = "_simpleResult";
+        _simpleResult.Size = new Size(169, 37);
+        _simpleResult.TabIndex = 12;
+        _simpleResult.Text = "SimpleResult";
         // 
         // _games
         // 
@@ -217,8 +218,8 @@ partial class Display
         _upperLayout.ColumnCount = 2;
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _upperLayout.Controls.Add(_itemTypes, 0, 0);
-        _upperLayout.Controls.Add(_itemPurposes, 1, 0);
+        _upperLayout.Controls.Add(_getGotItemTypes, 0, 0);
+        _upperLayout.Controls.Add(_getGotItemPurposes, 1, 0);
         _upperLayout.Location = new Point(6, 6);
         _upperLayout.Margin = new Padding(0);
         _upperLayout.Name = "_upperLayout";
@@ -229,13 +230,14 @@ partial class Display
         _upperLayout.Size = new Size(513, 39);
         _upperLayout.TabIndex = 28;
         // 
-        // _itemPurposes
+        // _getGotItemPurposes
         // 
-        _itemPurposes.DropDownStyle = ComboBoxStyle.DropDownList;
-        _itemPurposes.Location = new Point(259, 8);
-        _itemPurposes.Name = "_itemPurposes";
-        _itemPurposes.Size = new Size(220, 23);
-        _itemPurposes.TabIndex = 0;
+        _getGotItemPurposes.DropDownStyle = ComboBoxStyle.DropDownList;
+        _getGotItemPurposes.Location = new Point(276, 8);
+        _getGotItemPurposes.Margin = new Padding(20, 3, 0, 0);
+        _getGotItemPurposes.Name = "_getGotItemPurposes";
+        _getGotItemPurposes.Size = new Size(220, 23);
+        _getGotItemPurposes.TabIndex = 0;
         // 
         // _game
         // 
@@ -255,186 +257,186 @@ partial class Display
         _race.TabIndex = 13;
         _race.Text = "Race";
         // 
-        // _upCalcResult
+        // _unitProductionResult
         // 
-        _upCalcResult.AutoSize = true;
-        _upCalcResult.Location = new Point(3, 108);
-        _upCalcResult.Name = "_upCalcResult";
-        _upCalcResult.Size = new Size(135, 15);
-        _upCalcResult.TabIndex = 36;
-        _upCalcResult.Text = "FromValueToValueResult";
+        _unitProductionResult.AutoSize = true;
+        _unitProductionResult.Location = new Point(3, 108);
+        _unitProductionResult.Name = "_unitProductionResult";
+        _unitProductionResult.Size = new Size(135, 15);
+        _unitProductionResult.TabIndex = 36;
+        _unitProductionResult.Text = "FromValueToValueResult";
         // 
-        // _toInput
+        // _unitProductionToInput
         // 
-        _toInput.Location = new Point(156, 35);
-        _toInput.Name = "_toInput";
-        _toInput.Size = new Size(194, 23);
-        _toInput.TabIndex = 35;
+        _unitProductionToInput.Location = new Point(156, 35);
+        _unitProductionToInput.Name = "_unitProductionToInput";
+        _unitProductionToInput.Size = new Size(194, 23);
+        _unitProductionToInput.TabIndex = 35;
         // 
-        // _fromInput
+        // _unitProductionFromInput
         // 
-        _fromInput.Location = new Point(156, 3);
-        _fromInput.Name = "_fromInput";
-        _fromInput.Size = new Size(194, 23);
-        _fromInput.TabIndex = 34;
+        _unitProductionFromInput.Location = new Point(156, 3);
+        _unitProductionFromInput.Name = "_unitProductionFromInput";
+        _unitProductionFromInput.Size = new Size(194, 23);
+        _unitProductionFromInput.TabIndex = 34;
         // 
-        // _calculateDesiredUp
+        // _unitProductionCalculateDesiredUp
         // 
-        _calculateDesiredUp.Location = new Point(412, 35);
-        _calculateDesiredUp.Name = "_calculateDesiredUp";
-        _calculateDesiredUp.Size = new Size(75, 23);
-        _calculateDesiredUp.TabIndex = 30;
-        _calculateDesiredUp.Text = "Calculate";
-        _calculateDesiredUp.UseVisualStyleBackColor = true;
+        _unitProductionCalculateDesiredUp.Location = new Point(412, 35);
+        _unitProductionCalculateDesiredUp.Name = "_unitProductionCalculateDesiredUp";
+        _unitProductionCalculateDesiredUp.Size = new Size(75, 23);
+        _unitProductionCalculateDesiredUp.TabIndex = 30;
+        _unitProductionCalculateDesiredUp.Text = "Calculate";
+        _unitProductionCalculateDesiredUp.UseVisualStyleBackColor = true;
         // 
-        // _upCalcLayout
+        // _unitProductionLayout
         // 
-        _upCalcLayout.ColumnCount = 3;
-        _upCalcLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-        _upCalcLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _upCalcLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-        _upCalcLayout.Controls.Add(_calculateNaqToSpend, 2, 2);
-        _upCalcLayout.Controls.Add(_resourcesToSpendInput, 1, 2);
-        _upCalcLayout.Controls.Add(_currentUp, 0, 0);
-        _upCalcLayout.Controls.Add(_desiredUp, 0, 1);
-        _upCalcLayout.Controls.Add(_calculateDesiredUp, 2, 1);
-        _upCalcLayout.Controls.Add(_toInput, 1, 1);
-        _upCalcLayout.Controls.Add(_resToSpend, 0, 2);
-        _upCalcLayout.Controls.Add(_fromInput, 1, 0);
-        _upCalcLayout.Location = new Point(3, 6);
-        _upCalcLayout.Name = "_upCalcLayout";
-        _upCalcLayout.RowCount = 3;
-        _upCalcLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0043869F));
-        _upCalcLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0043869F));
-        _upCalcLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.9912224F));
-        _upCalcLayout.Size = new Size(513, 99);
-        _upCalcLayout.TabIndex = 37;
+        _unitProductionLayout.ColumnCount = 3;
+        _unitProductionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+        _unitProductionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _unitProductionLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+        _unitProductionLayout.Controls.Add(_unitProductionCalculateNaqToSpend, 2, 2);
+        _unitProductionLayout.Controls.Add(_unitProductionResourcesToSpendInput, 1, 2);
+        _unitProductionLayout.Controls.Add(_unitProductionCurrentUp, 0, 0);
+        _unitProductionLayout.Controls.Add(_unitProductionDesiredUp, 0, 1);
+        _unitProductionLayout.Controls.Add(_unitProductionCalculateDesiredUp, 2, 1);
+        _unitProductionLayout.Controls.Add(_unitProductionToInput, 1, 1);
+        _unitProductionLayout.Controls.Add(_unitProductionResToSpend, 0, 2);
+        _unitProductionLayout.Controls.Add(_unitProductionFromInput, 1, 0);
+        _unitProductionLayout.Location = new Point(3, 6);
+        _unitProductionLayout.Name = "_unitProductionLayout";
+        _unitProductionLayout.RowCount = 3;
+        _unitProductionLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0043869F));
+        _unitProductionLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.0043869F));
+        _unitProductionLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.9912224F));
+        _unitProductionLayout.Size = new Size(513, 99);
+        _unitProductionLayout.TabIndex = 37;
         // 
-        // _calculateNaqToSpend
+        // _unitProductionCalculateNaqToSpend
         // 
-        _calculateNaqToSpend.Location = new Point(412, 67);
-        _calculateNaqToSpend.Name = "_calculateNaqToSpend";
-        _calculateNaqToSpend.Size = new Size(75, 23);
-        _calculateNaqToSpend.TabIndex = 38;
-        _calculateNaqToSpend.Text = "Calculate";
-        _calculateNaqToSpend.UseVisualStyleBackColor = true;
+        _unitProductionCalculateNaqToSpend.Location = new Point(412, 67);
+        _unitProductionCalculateNaqToSpend.Name = "_unitProductionCalculateNaqToSpend";
+        _unitProductionCalculateNaqToSpend.Size = new Size(75, 23);
+        _unitProductionCalculateNaqToSpend.TabIndex = 38;
+        _unitProductionCalculateNaqToSpend.Text = "Calculate";
+        _unitProductionCalculateNaqToSpend.UseVisualStyleBackColor = true;
         // 
-        // _resourcesToSpendInput
+        // _unitProductionResourcesToSpendInput
         // 
-        _resourcesToSpendInput.Location = new Point(156, 67);
-        _resourcesToSpendInput.Name = "_resourcesToSpendInput";
-        _resourcesToSpendInput.Size = new Size(194, 23);
-        _resourcesToSpendInput.TabIndex = 36;
+        _unitProductionResourcesToSpendInput.Location = new Point(156, 67);
+        _unitProductionResourcesToSpendInput.Name = "_unitProductionResourcesToSpendInput";
+        _unitProductionResourcesToSpendInput.Size = new Size(194, 23);
+        _unitProductionResourcesToSpendInput.TabIndex = 36;
         // 
-        // _currentUp
+        // _unitProductionCurrentUp
         // 
-        _currentUp.AutoSize = true;
-        _currentUp.Location = new Point(3, 0);
-        _currentUp.Name = "_currentUp";
-        _currentUp.Size = new Size(128, 15);
-        _currentUp.TabIndex = 10;
-        _currentUp.Text = "CurrentUnitProduction";
+        _unitProductionCurrentUp.AutoSize = true;
+        _unitProductionCurrentUp.Location = new Point(3, 0);
+        _unitProductionCurrentUp.Name = "_unitProductionCurrentUp";
+        _unitProductionCurrentUp.Size = new Size(128, 15);
+        _unitProductionCurrentUp.TabIndex = 10;
+        _unitProductionCurrentUp.Text = "CurrentUnitProduction";
         // 
-        // _desiredUp
+        // _unitProductionDesiredUp
         // 
-        _desiredUp.AutoSize = true;
-        _desiredUp.Location = new Point(3, 32);
-        _desiredUp.Name = "_desiredUp";
-        _desiredUp.Size = new Size(127, 15);
-        _desiredUp.TabIndex = 13;
-        _desiredUp.Text = "DesiredUnitProduction";
+        _unitProductionDesiredUp.AutoSize = true;
+        _unitProductionDesiredUp.Location = new Point(3, 32);
+        _unitProductionDesiredUp.Name = "_unitProductionDesiredUp";
+        _unitProductionDesiredUp.Size = new Size(127, 15);
+        _unitProductionDesiredUp.TabIndex = 13;
+        _unitProductionDesiredUp.Text = "DesiredUnitProduction";
         // 
-        // _resToSpend
+        // _unitProductionResToSpend
         // 
-        _resToSpend.AutoSize = true;
-        _resToSpend.Location = new Point(3, 64);
-        _resToSpend.Name = "_resToSpend";
-        _resToSpend.Size = new Size(136, 15);
-        _resToSpend.TabIndex = 14;
-        _resToSpend.Text = "ResourcesToSpendOnUP";
+        _unitProductionResToSpend.AutoSize = true;
+        _unitProductionResToSpend.Location = new Point(3, 64);
+        _unitProductionResToSpend.Name = "_unitProductionResToSpend";
+        _unitProductionResToSpend.Size = new Size(136, 15);
+        _unitProductionResToSpend.TabIndex = 14;
+        _unitProductionResToSpend.Text = "ResourcesToSpendOnUP";
         // 
         // _tab
         // 
-        _tab.Controls.Add(_tabPageTheCalc);
-        _tab.Controls.Add(_tabPageUpCalc);
-        _tab.Controls.Add(_tabPageSimpleCalc);
+        _tab.Controls.Add(_tabPageGetGot);
+        _tab.Controls.Add(_tabPageUp);
+        _tab.Controls.Add(_tabPageSimple);
         _tab.Location = new Point(7, 65);
         _tab.Name = "_tab";
         _tab.SelectedIndex = 0;
         _tab.Size = new Size(536, 238);
         _tab.TabIndex = 38;
         // 
-        // _tabPageTheCalc
+        // _tabPageGetGot
         // 
-        _tabPageTheCalc.Controls.Add(_commandsLayout);
-        _tabPageTheCalc.Controls.Add(_upperLayout);
-        _tabPageTheCalc.Controls.Add(_selectedItems);
-        _tabPageTheCalc.Location = new Point(4, 24);
-        _tabPageTheCalc.Name = "_tabPageTheCalc";
-        _tabPageTheCalc.Padding = new Padding(3);
-        _tabPageTheCalc.Size = new Size(528, 210);
-        _tabPageTheCalc.TabIndex = 0;
-        _tabPageTheCalc.Text = "TheCalc";
-        _tabPageTheCalc.UseVisualStyleBackColor = true;
+        _tabPageGetGot.Controls.Add(_commandsLayout);
+        _tabPageGetGot.Controls.Add(_upperLayout);
+        _tabPageGetGot.Controls.Add(_getGotSelectedItems);
+        _tabPageGetGot.Location = new Point(4, 24);
+        _tabPageGetGot.Name = "_tabPageGetGot";
+        _tabPageGetGot.Padding = new Padding(3);
+        _tabPageGetGot.Size = new Size(528, 210);
+        _tabPageGetGot.TabIndex = 0;
+        _tabPageGetGot.Text = "getGot";
+        _tabPageGetGot.UseVisualStyleBackColor = true;
         // 
-        // _tabPageUpCalc
+        // _tabPageUp
         // 
-        _tabPageUpCalc.Controls.Add(_upCalcLayout);
-        _tabPageUpCalc.Controls.Add(_upCalcResult);
-        _tabPageUpCalc.Location = new Point(4, 24);
-        _tabPageUpCalc.Name = "_tabPageUpCalc";
-        _tabPageUpCalc.Padding = new Padding(3);
-        _tabPageUpCalc.Size = new Size(528, 210);
-        _tabPageUpCalc.TabIndex = 1;
-        _tabPageUpCalc.Text = "UPCalc";
-        _tabPageUpCalc.UseVisualStyleBackColor = true;
+        _tabPageUp.Controls.Add(_unitProductionLayout);
+        _tabPageUp.Controls.Add(_unitProductionResult);
+        _tabPageUp.Location = new Point(4, 24);
+        _tabPageUp.Name = "_tabPageUp";
+        _tabPageUp.Padding = new Padding(3);
+        _tabPageUp.Size = new Size(528, 210);
+        _tabPageUp.TabIndex = 1;
+        _tabPageUp.Text = "UnitProduction";
+        _tabPageUp.UseVisualStyleBackColor = true;
         // 
-        // _tabPageSimpleCalc
+        // _tabPageSimple
         // 
-        _tabPageSimpleCalc.Controls.Add(_clearSimpleCalcHistory);
-        _tabPageSimpleCalc.Controls.Add(_clearSimpleCalc);
-        _tabPageSimpleCalc.Controls.Add(_simpleCalcResultHistory);
-        _tabPageSimpleCalc.Controls.Add(_calcInputLeft);
-        _tabPageSimpleCalc.Controls.Add(_sum);
-        _tabPageSimpleCalc.Controls.Add(_deduct);
-        _tabPageSimpleCalc.Controls.Add(_multiply);
-        _tabPageSimpleCalc.Controls.Add(_divide);
-        _tabPageSimpleCalc.Controls.Add(_simpleCalcResult);
-        _tabPageSimpleCalc.Controls.Add(_calcInputRight);
-        _tabPageSimpleCalc.Location = new Point(4, 24);
-        _tabPageSimpleCalc.Name = "_tabPageSimpleCalc";
-        _tabPageSimpleCalc.Padding = new Padding(3);
-        _tabPageSimpleCalc.Size = new Size(528, 210);
-        _tabPageSimpleCalc.TabIndex = 2;
-        _tabPageSimpleCalc.Text = "SimpleCalc";
-        _tabPageSimpleCalc.UseVisualStyleBackColor = true;
+        _tabPageSimple.Controls.Add(_simpleClearHistory);
+        _tabPageSimple.Controls.Add(_simpleClear);
+        _tabPageSimple.Controls.Add(_simpleHistory);
+        _tabPageSimple.Controls.Add(_simpleLeftInput);
+        _tabPageSimple.Controls.Add(_simpleSum);
+        _tabPageSimple.Controls.Add(_simpleDeduct);
+        _tabPageSimple.Controls.Add(_simpleMultiply);
+        _tabPageSimple.Controls.Add(_simpleDivide);
+        _tabPageSimple.Controls.Add(_simpleResult);
+        _tabPageSimple.Controls.Add(_simpleRightInput);
+        _tabPageSimple.Location = new Point(4, 24);
+        _tabPageSimple.Name = "_tabPageSimple";
+        _tabPageSimple.Padding = new Padding(3);
+        _tabPageSimple.Size = new Size(528, 210);
+        _tabPageSimple.TabIndex = 2;
+        _tabPageSimple.Text = "Simple";
+        _tabPageSimple.UseVisualStyleBackColor = true;
         // 
-        // _clearSimpleCalcHistory
+        // _simpleClearHistory
         // 
-        _clearSimpleCalcHistory.Location = new Point(240, 13);
-        _clearSimpleCalcHistory.Name = "_clearSimpleCalcHistory";
-        _clearSimpleCalcHistory.Size = new Size(19, 23);
-        _clearSimpleCalcHistory.TabIndex = 15;
-        _clearSimpleCalcHistory.Text = "C";
-        _clearSimpleCalcHistory.UseVisualStyleBackColor = true;
+        _simpleClearHistory.Location = new Point(240, 13);
+        _simpleClearHistory.Name = "_simpleClearHistory";
+        _simpleClearHistory.Size = new Size(19, 23);
+        _simpleClearHistory.TabIndex = 15;
+        _simpleClearHistory.Text = "C";
+        _simpleClearHistory.UseVisualStyleBackColor = true;
         // 
-        // _clearSimpleCalc
+        // _simpleClear
         // 
-        _clearSimpleCalc.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        _clearSimpleCalc.Location = new Point(218, 53);
-        _clearSimpleCalc.Name = "_clearSimpleCalc";
-        _clearSimpleCalc.Size = new Size(41, 52);
-        _clearSimpleCalc.TabIndex = 14;
-        _clearSimpleCalc.Text = "C";
-        _clearSimpleCalc.UseVisualStyleBackColor = true;
+        _simpleClear.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        _simpleClear.Location = new Point(218, 53);
+        _simpleClear.Name = "_simpleClear";
+        _simpleClear.Size = new Size(41, 52);
+        _simpleClear.TabIndex = 14;
+        _simpleClear.Text = "C";
+        _simpleClear.UseVisualStyleBackColor = true;
         // 
-        // _simpleCalcResultHistory
+        // _simpleHistory
         // 
-        _simpleCalcResultHistory.FormattingEnabled = true;
-        _simpleCalcResultHistory.Location = new Point(265, 6);
-        _simpleCalcResultHistory.Name = "_simpleCalcResultHistory";
-        _simpleCalcResultHistory.Size = new Size(254, 199);
-        _simpleCalcResultHistory.TabIndex = 13;
+        _simpleHistory.FormattingEnabled = true;
+        _simpleHistory.Location = new Point(265, 6);
+        _simpleHistory.Name = "_simpleHistory";
+        _simpleHistory.Size = new Size(254, 199);
+        _simpleHistory.TabIndex = 13;
         // 
         // _raceLayout
         // 
@@ -466,55 +468,55 @@ partial class Display
         _commandsLayout.ResumeLayout(false);
         _commandsLayout.PerformLayout();
         _upperLayout.ResumeLayout(false);
-        _upCalcLayout.ResumeLayout(false);
-        _upCalcLayout.PerformLayout();
+        _unitProductionLayout.ResumeLayout(false);
+        _unitProductionLayout.PerformLayout();
         _tab.ResumeLayout(false);
-        _tabPageTheCalc.ResumeLayout(false);
-        _tabPageUpCalc.ResumeLayout(false);
-        _tabPageUpCalc.PerformLayout();
-        _tabPageSimpleCalc.ResumeLayout(false);
-        _tabPageSimpleCalc.PerformLayout();
+        _tabPageGetGot.ResumeLayout(false);
+        _tabPageUp.ResumeLayout(false);
+        _tabPageUp.PerformLayout();
+        _tabPageSimple.ResumeLayout(false);
+        _tabPageSimple.PerformLayout();
         _raceLayout.ResumeLayout(false);
         _raceLayout.PerformLayout();
         ResumeLayout(false);
     }
-    internal TextBox _userInput;
+    internal TextBox _getGotUserInput;
     internal TableLayoutPanel _commandsLayout;
     internal ComboBox _games;
     internal TableLayoutPanel _upperLayout;
     internal Label _game;
     internal Label _race;
-    internal TableLayoutPanel _upCalcLayout;
+    internal TableLayoutPanel _unitProductionLayout;
     internal TabControl _tab;
-    internal TabPage _tabPageTheCalc;
-    internal TabPage _tabPageUpCalc;
-    internal TabPage _tabPageSimpleCalc;
-    internal Label _ableToBuyValue;
-    internal Label _costToBuyValue;
-    internal Label _costToReassignValue;
-    internal Button _sum;
-    internal Button _multiply;
-    internal Button _divide;
-    internal TextBox _calcInputLeft;
-    internal TextBox _calcInputRight;
-    internal Button _deduct;
-    internal Label _simpleCalcResult;
-    internal ListBox _simpleCalcResultHistory;
-    internal Button _clearSimpleCalcHistory;
-    internal Button _clearSimpleCalc;
-    internal Label _upCalcResult;
-    internal TextBox _toInput;
-    internal TextBox _fromInput;
-    internal Button _calculateDesiredUp;
-    internal TextBox _resourcesToSpendInput;
-    internal Button _calculateNaqToSpend;
-    internal ToolTip _hint;
+    internal TabPage _tabPageGetGot;
+    internal TabPage _tabPageUp;
+    internal TabPage _tabPageSimple;
+    internal Label _getGotAbleToBuy;
+    internal Label _getGotCostToBuy;
+    internal Label _getGotCostToReassign;
+    internal Button _simpleSum;
+    internal Button _simpleMultiply;
+    internal Button _simpleDivide;
+    internal TextBox _simpleLeftInput;
+    internal TextBox _simpleRightInput;
+    internal Button _simpleDeduct;
+    internal Label _simpleResult;
+    internal ListBox _simpleHistory;
+    internal Button _simpleClearHistory;
+    internal Button _simpleClear;
+    internal Label _unitProductionResult;
+    internal TextBox _unitProductionToInput;
+    internal TextBox _unitProductionFromInput;
+    internal Button _unitProductionCalculateDesiredUp;
+    internal TextBox _unitProductionResourcesToSpendInput;
+    internal Button _unitProductionCalculateNaqToSpend;
+    internal ToolTip _toolTips;
     internal ComboBox _races;
-    internal Label _currentUp;
-    internal Label _desiredUp;
-    internal Label _resToSpend;
+    internal Label _unitProductionCurrentUp;
+    internal Label _unitProductionDesiredUp;
+    internal Label _unitProductionResToSpend;
     internal TableLayoutPanel _raceLayout;
-    internal ComboBox _itemTypes;
-    internal ComboBox _selectedItems;
-    internal ComboBox _itemPurposes;
+    internal ComboBox _getGotItemTypes;
+    internal ComboBox _getGotSelectedItems;
+    internal ComboBox _getGotItemPurposes;
 }
