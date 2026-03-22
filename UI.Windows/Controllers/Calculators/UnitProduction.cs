@@ -10,16 +10,18 @@ internal sealed class UnitProduction
     private Race _selectedRace = new();
     public UnitProduction(Label currentUp, Label desiredUp, Label resToSpendText, Label upResult,
                   TextBox fromInput, TextBox toInput, TextBox resToSpend, Button calculateDesiredUp,
-                  Button calculateNaqToSpend, ToolTip hints, ComboBox races)
+                  Button calculateNaqToSpend, ToolTip hints, ComboBox races, TabPage tabPage)
     {
-        UIData.UpdateLabel(currentUp, Constants.GUI.Labels.CurrentUp);
-        UIData.UpdateLabel(desiredUp, Constants.GUI.Labels.DesiredUp);
-        UIData.UpdateLabel(resToSpendText, Constants.GUI.Labels.ResourcesToSpend);
-        UIData.UpdateLabel(upResult, string.Empty);
+        UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.UnitProduction);
 
-        UIData.UpdateTextBox(fromInput, string.Empty);
-        UIData.UpdateTextBox(toInput, string.Empty);
-        UIData.UpdateTextBox(resToSpend, string.Empty);
+        UIController.UpdateLabel(currentUp, Constants.GUI.Labels.CurrentUp);
+        UIController.UpdateLabel(desiredUp, Constants.GUI.Labels.DesiredUp);
+        UIController.UpdateLabel(resToSpendText, Constants.GUI.Labels.ResourcesToSpend);
+        UIController.UpdateLabel(upResult, string.Empty);
+
+        UIController.UpdateTextBox(fromInput, string.Empty);
+        UIController.UpdateTextBox(toInput, string.Empty);
+        UIController.UpdateTextBox(resToSpend, string.Empty);
 
         _races = races;
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace(resToSpendText);
@@ -31,8 +33,8 @@ internal sealed class UnitProduction
 
             if (results != upResult.Text)
             {
-                string hint = Hints.DesiredUp(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
-                UIData.UpdateLabel(upResult, hint);
+                string hint = Data.Hints.DesiredUp(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
+                UIController.UpdateLabel(upResult, hint);
                 hints.SetToolTip(upResult, hint);
             }
         };
@@ -44,14 +46,14 @@ internal sealed class UnitProduction
 
             if (results != upResult.Text)
             {
-                string hint = Hints.ResourcesToSpend(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
-                UIData.UpdateLabel(upResult, hint);
+                string hint = Data.Hints.ResourcesToSpend(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
+                UIController.UpdateLabel(upResult, hint);
                 hints.SetToolTip(upResult, hint);
             }
         };
 
-        upResult.Click += (s, e) => UIData.CopyToClipboard(upResult.Text);
-        currentUp.Click += (s, e) => UIData.CopyToClipboard(currentUp.Text);
+        upResult.Click += (s, e) => UIController.CopyToClipboard(upResult.Text);
+        currentUp.Click += (s, e) => UIController.CopyToClipboard(currentUp.Text);
 
         UpdateSelectedRace(resToSpendText);
     }
@@ -60,7 +62,7 @@ internal sealed class UnitProduction
         if (_races.SelectedItem != null && _selectedRace != null)
         {
             _selectedRace = (Race)_races.SelectedItem;
-            UIData.UpdateLabel(label, $"{_selectedRace.Currency.Name} {Constants.GUI.Labels.ResourcesToSpend}");
+            UIController.UpdateLabel(label, $"{_selectedRace.Currency.Name} {Constants.GUI.Labels.ResourcesToSpend}");
         }
     }
 }

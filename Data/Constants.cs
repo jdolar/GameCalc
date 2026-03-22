@@ -1,8 +1,22 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 namespace Data;
+
 public static class Constants
 {
+    public static class Users
+    {
+        public const string GameId = nameof(GameId);
+        public const string RaceId = nameof(RaceId);
+        public const string Id = nameof(Id);
+        public const string Ascension = nameof(Ascension);
+        public const string Covert = nameof(Covert);
+        public const string AntiCovert = nameof(AntiCovert);
+        public const string UnitProduction = nameof(UnitProduction);     
+        public const string MsWeapons = nameof(MsWeapons);
+        public const string MsShields = nameof(MsShields);
+        public const string MsFleets = nameof(MsFleets);
+    }
     public static class Files
     {
         public const string TessDataLocation = "C:\\Program Files\\Tesseract-OCR\\tessdata";
@@ -17,7 +31,9 @@ public static class Constants
         };
     }
     public static class GUI
-    {
+    {/*
+
+      */
         public static class ComboBox
         {
             public const string DisplayName = "Name";
@@ -39,13 +55,13 @@ public static class Constants
         public static class Labels
         {
             //Tabs
-            public const string getGot = "GetGot";
+            public const string GetGot = "GetGot";
             public const string UnitProduction = UP;
             public const string Simple = "Calculator";
 
             public const string UP = "Unit Production";
             public const string Up = "unit production";
-            
+
             //UP Calc
             public const string CurrentUp = "Current " + UP;
             public const string DesiredUp = "Desired " + UP;

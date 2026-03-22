@@ -1,5 +1,4 @@
-﻿using Data;
-using Data.Models;
+﻿using Data.Models;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers;
 internal sealed class Frame
@@ -10,18 +9,18 @@ internal sealed class Frame
     private readonly ComboBox _games, _races;
     private readonly ToolTip _hints;
    
-    public Frame(ComboBox races, ComboBox games,  ToolTip hints)
+    public Frame(ComboBox races, ComboBox games, ToolTip hints)
     {
-        List<Game> enabledGames = UIData.GetGames();
+        List<Game> enabledGames = UIController.GetGames();
         _hints = hints;
 
         _games = games;
-        UIData.SetGamesComboBox(_games, enabledGames);
+        UIController.SetGamesComboBox(_games, enabledGames);
         SelectedGame = (Game)_games.SelectedItem!;
         _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
 
         _races = races;
-        UIData.SetRacesComboBox(_races, SelectedGame.Races);
+        UIController.SetRacesComboBox(_races, SelectedGame.Races);
         SelectedRace = (Race)_races.SelectedItem!;
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
 
@@ -65,9 +64,9 @@ internal sealed class Frame
         if (_games.SelectedItem != null)
         {
             SelectedGame = (Game)_games.SelectedItem;
-            _hints.SetToolTip(_games, Hints.Game(SelectedGame));
+            _hints.SetToolTip(_games, Data.Hints.Game(SelectedGame));
 
-            UIData.SetRacesComboBox(_races, SelectedGame.Races);
+            UIController.SetRacesComboBox(_races, SelectedGame.Races);
             UpdateSelectedRace();
         }
     }
@@ -76,7 +75,7 @@ internal sealed class Frame
         if (_races.SelectedItem != null && SelectedRace != null)
         {
             SelectedRace = (Race)_races.SelectedItem;
-            _hints.SetToolTip(_races, Hints.Race(SelectedRace));
+            _hints.SetToolTip(_races, Data.Hints.Race(SelectedRace));
         }
     }
 }

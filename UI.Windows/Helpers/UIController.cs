@@ -3,7 +3,7 @@ using Data.Commands;
 using Data.Enums.Unit;
 using Data.Models;
 namespace UI.Windows.Helpers;
-internal static class UIData
+internal static class UIController
 {
     internal static readonly Data.Enums.Unit.Type[] _itemTypes = Enum.GetValues<Data.Enums.Unit.Type>();
     internal static readonly Purpose[] _itemPurposes = Enum.GetValues<Purpose>();
@@ -40,6 +40,12 @@ internal static class UIData
 
         input.Text = upgradeText;
     }
+    internal static void UpdateLayoutTabPage(TabPage input, string upgradeText)
+    {
+        if (input == null || input.Text == upgradeText) return;
+
+        input.Text = upgradeText;
+    }
     internal static void UpdateTextBox(TextBox input, string upgradeText)
     {
         if (input == null || input.Text == upgradeText) return;
@@ -50,26 +56,30 @@ internal static class UIData
     {
         input.DataSource = races;
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
-        //  input.SelectedIndex = 0;
     }
     internal static void SetGamesComboBox(ComboBox input, List<Game> games)
     {
         input.DataSource = games;
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
-        //  input.SelectedIndex = 0;
     }
-    internal static void UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
+    internal static bool UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
     {
         List<Unit> filteredUnits = DataBuilder.GetDataSource(units, type, purpose);
+        
         if (filteredUnits.Count == 0)
         {
             input.DataSource = null;
-            return;
+            input.Items.Add(string.Format(Constants.GUI.Labels.NotAvailable, $"{purpose} {type}"));
+            input.SelectedIndex = 0;
+            return true;
+        }
+        else if (filteredUnits.Count > 0)
+        {
+            input.DataSource = filteredUnits;
+            input.DisplayMember = Constants.GUI.ComboBox.DisplayName;         
         }
 
-        input.DataSource = filteredUnits;
-        input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
-        // input.SelectedIndex = 0;
+        return false;// returns if it was emptied (for other controls to know)
     }
     internal static void CleanTextBoxText(TextBox txtBox, IEnumerable<Func<string, string>> cleaners, Action? onChanged = null)
     {

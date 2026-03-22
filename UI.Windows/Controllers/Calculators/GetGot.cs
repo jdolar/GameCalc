@@ -5,6 +5,7 @@ using Data.Enums.Unit;
 using Data.Models;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers.Calculators;
+
 internal sealed class GetGot
 {
     private readonly ComboBox _itemTypes, _itemPurposes, _selectedItems, _races;
@@ -14,7 +15,7 @@ internal sealed class GetGot
     private Race _selectedRace = new();
 
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
-                   Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, bool? imageRecognition = null)
+                   Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
     {
         _itemTypes = itemTypes;
         _itemPurposes = itemPurposes;
@@ -26,25 +27,37 @@ internal sealed class GetGot
         _hint = hint;
         _races = races;
 
-        UIData.SetItemTypesComboBox(_itemTypes);
-        UIData.SetItemPurposeComboBox(_itemPurposes);
+        UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.GetGot);
 
-        _ableToBuy.Click += (s, e) => UIData.CopyToClipboard(_ableToBuy.Text);
-        _costToReassign.Click += (s, e) => UIData.CopyToClipboard(_costToReassign.Text);
-        _costToBuy.Click += (s, e) => UIData.CopyToClipboard(_costToBuy.Text);
+        UIController.SetItemTypesComboBox(_itemTypes);
+        UIController.SetItemPurposeComboBox(_itemPurposes);
+
+        _ableToBuy.Click += (s, e) => UIController.CopyToClipboard(_ableToBuy.Text);
+        _costToReassign.Click += (s, e) => UIController.CopyToClipboard(_costToReassign.Text);
+        _costToBuy.Click += (s, e) => UIController.CopyToClipboard(_costToBuy.Text);
 
         _itemTypes.SelectedIndexChanged += (s, e) => UpdateSelectedItem();
+        _itemTypes.MouseDown += (s, e) => { /* do nothing */ };
+        _itemTypes.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
+
         _itemPurposes.SelectedIndexChanged += (s, e) => UpdateSelectedItem();
+        _itemPurposes.MouseDown += (s, e) => { /* do nothing */ };
+        _itemPurposes.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
+
         _selectedItems.SelectedIndexChanged += (s, e) => DisplayResults();
+        _selectedItems.MouseDown += (s, e) => { /* do nothing */; };
+        _selectedItems.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
 
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
+        _races.MouseDown += (s, e) => { /* do nothing */ };
+        _races.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
 
         _userInput.TextChanged += (s, e) =>
         {
             if (s is not TextBox txtBox)
                 return;
 
-            UIData.CleanTextBoxText(txtBox, [Clean.Text], DisplayResults);
+            UIController.CleanTextBoxText(txtBox, [Clean.Text], DisplayResults);
         };
 
         _userInput.KeyDown += (s, e) =>
@@ -58,20 +71,18 @@ internal sealed class GetGot
             {
                 if (Clipboard.ContainsImage())
                 {
-                    UIData.CleanTextBoxImage(txtBox, [Clean.Image]);
+                    UIController.CleanTextBoxImage(txtBox, [Clean.Image]);
                     e.Handled = true;
                 }
             }
         };
 
-        UIData.UpdateLabel(_ableToBuy, string.Empty);
-        UIData.UpdateLabel(_costToBuy, string.Empty);
-        UIData.UpdateLabel(_costToReassign, string.Empty);
-
-        UIData.UpdateTextBox(_userInput, string.Empty);
+        UIController.UpdateLabel(_ableToBuy, string.Empty);
+        UIController.UpdateLabel(_costToBuy, string.Empty);
+        UIController.UpdateLabel(_costToReassign, string.Empty);
+        UIController.UpdateTextBox(_userInput, string.Empty);
 
         UpdateSelectedRace();
-        UpdateSelectedItem();
     }
 
     private void DisplayResults()
@@ -82,14 +93,14 @@ internal sealed class GetGot
         (string costToBuy, string ableToBuy, string costToReassign, string input)
         = Calc.CalculateAbleToBuyAndCostToBuy(_userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
 
-        string costToBuyLabel = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToBuy, "buy", unit);
-        UIData.UpdateLabel(_costToBuy, costToBuyLabel);
+        string costToBuyLabel = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Data.Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToBuy, "buy", unit);
+        UIController.UpdateLabel(_costToBuy, costToBuyLabel);
 
-        string ableToBuyLabel = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Hints.AbleToBuy(input, _selectedRace.Currency.Name, ableToBuy, unit);
-        UIData.UpdateLabel(_ableToBuy, ableToBuyLabel);
+        string ableToBuyLabel = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Data.Hints.AbleToBuy(input, _selectedRace.Currency.Name, ableToBuy, unit);
+        UIController.UpdateLabel(_ableToBuy, ableToBuyLabel);
 
-        string costToReassignLabel = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToReassign, "reassign", unit); ;
-        UIData.UpdateLabel(_costToReassign, costToReassignLabel);
+        string costToReassignLabel = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Data.Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToReassign, "reassign", unit); ;
+        UIController.UpdateLabel(_costToReassign, costToReassignLabel);
 
         _hint.SetToolTip(_selectedItems, Hints.Unit(unit));
         _hint.SetToolTip(_itemTypes, Hints.Units([.. _selectedRace.Units.Where(x => x.Type == (Data.Enums.Unit.Type)_itemTypes.SelectedItem!)]));
@@ -101,8 +112,11 @@ internal sealed class GetGot
         if (_itemTypes.SelectedItem == null || _itemPurposes.SelectedItem == null || _selectedRace == null)
             return;
 
-        UIData.UpdateComboBox(_selectedItems, _selectedRace.Units, (Data.Enums.Unit.Type)_itemTypes.SelectedItem, (Purpose)_itemPurposes.SelectedItem);
-        DisplayResults();
+        bool wasEmptied = UIController.UpdateComboBox(_selectedItems, _selectedRace.Units, (Data.Enums.Unit.Type)_itemTypes.SelectedItem, (Purpose)_itemPurposes.SelectedItem);
+        if (wasEmptied)     
+            _hint.SetToolTip(_selectedItems, string.Empty);
+        else
+            DisplayResults();
     }
     private void UpdateSelectedRace()
     {

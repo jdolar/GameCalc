@@ -76,25 +76,25 @@ partial class Display
         // _getGotItemTypes
         // 
         _getGotItemTypes.DropDownStyle = ComboBoxStyle.DropDownList;
-        _getGotItemTypes.Location = new Point(25, 8);
+        _getGotItemTypes.Location = new Point(272, 45);
         _getGotItemTypes.Margin = new Padding(20, 3, 0, 0);
         _getGotItemTypes.Name = "_getGotItemTypes";
-        _getGotItemTypes.Size = new Size(221, 23);
+        _getGotItemTypes.Size = new Size(220, 23);
         _getGotItemTypes.TabIndex = 0;
         // 
         // _getGotUserInput
         // 
-        _getGotUserInput.Location = new Point(8, 86);
+        _getGotUserInput.Location = new Point(20, 88);
         _getGotUserInput.Name = "_getGotUserInput";
-        _getGotUserInput.Size = new Size(497, 23);
+        _getGotUserInput.Size = new Size(484, 23);
         _getGotUserInput.TabIndex = 1;
         // 
         // _getGotSelectedItems
         // 
         _getGotSelectedItems.DropDownStyle = ComboBoxStyle.DropDownList;
-        _getGotSelectedItems.Location = new Point(31, 48);
+        _getGotSelectedItems.Location = new Point(8, 45);
         _getGotSelectedItems.Name = "_getGotSelectedItems";
-        _getGotSelectedItems.Size = new Size(471, 23);
+        _getGotSelectedItems.Size = new Size(220, 23);
         _getGotSelectedItems.TabIndex = 2;
         // 
         // _commandsLayout
@@ -103,17 +103,16 @@ partial class Display
         _commandsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
         _commandsLayout.Controls.Add(_getGotAbleToBuy, 0, 0);
         _commandsLayout.Controls.Add(_getGotCostToBuy, 0, 1);
-        _commandsLayout.Controls.Add(_getGotUserInput, 0, 3);
         _commandsLayout.Controls.Add(_getGotCostToReassign, 0, 2);
-        _commandsLayout.Location = new Point(6, 79);
+        _commandsLayout.Location = new Point(20, 117);
         _commandsLayout.Name = "_commandsLayout";
         _commandsLayout.Padding = new Padding(5);
-        _commandsLayout.RowCount = 4;
-        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
-        _commandsLayout.Size = new Size(513, 116);
+        _commandsLayout.RowCount = 3;
+        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+        _commandsLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        _commandsLayout.Size = new Size(484, 104);
         _commandsLayout.TabIndex = 3;
         // 
         // _getGotAbleToBuy
@@ -128,7 +127,7 @@ partial class Display
         // _getGotCostToBuy
         // 
         _getGotCostToBuy.AutoSize = true;
-        _getGotCostToBuy.Location = new Point(8, 31);
+        _getGotCostToBuy.Location = new Point(8, 36);
         _getGotCostToBuy.Name = "_getGotCostToBuy";
         _getGotCostToBuy.Size = new Size(91, 15);
         _getGotCostToBuy.TabIndex = 13;
@@ -137,7 +136,7 @@ partial class Display
         // _getGotCostToReassign
         // 
         _getGotCostToReassign.AutoSize = true;
-        _getGotCostToReassign.Location = new Point(8, 57);
+        _getGotCostToReassign.Location = new Point(8, 67);
         _getGotCostToReassign.Name = "_getGotCostToReassign";
         _getGotCostToReassign.Size = new Size(117, 15);
         _getGotCostToReassign.TabIndex = 14;
@@ -218,22 +217,23 @@ partial class Display
         _upperLayout.ColumnCount = 2;
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _upperLayout.Controls.Add(_getGotItemTypes, 0, 0);
+        _upperLayout.Controls.Add(_getGotSelectedItems, 0, 1);
         _upperLayout.Controls.Add(_getGotItemPurposes, 1, 0);
-        _upperLayout.Location = new Point(6, 6);
+        _upperLayout.Controls.Add(_getGotItemTypes, 1, 1);
+        _upperLayout.Location = new Point(12, 6);
         _upperLayout.Margin = new Padding(0);
         _upperLayout.Name = "_upperLayout";
-        _upperLayout.Padding = new Padding(5);
-        _upperLayout.RowCount = 1;
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-        _upperLayout.Size = new Size(513, 39);
+        _upperLayout.Padding = new Padding(5, 10, 5, 5);
+        _upperLayout.RowCount = 2;
+        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        _upperLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+        _upperLayout.Size = new Size(505, 79);
         _upperLayout.TabIndex = 28;
         // 
         // _getGotItemPurposes
         // 
         _getGotItemPurposes.DropDownStyle = ComboBoxStyle.DropDownList;
-        _getGotItemPurposes.Location = new Point(276, 8);
+        _getGotItemPurposes.Location = new Point(272, 13);
         _getGotItemPurposes.Margin = new Padding(20, 3, 0, 0);
         _getGotItemPurposes.Name = "_getGotItemPurposes";
         _getGotItemPurposes.Size = new Size(220, 23);
@@ -363,18 +363,18 @@ partial class Display
         _tab.Location = new Point(7, 65);
         _tab.Name = "_tab";
         _tab.SelectedIndex = 0;
-        _tab.Size = new Size(536, 238);
+        _tab.Size = new Size(536, 257);
         _tab.TabIndex = 38;
         // 
         // _tabPageGetGot
         // 
         _tabPageGetGot.Controls.Add(_commandsLayout);
         _tabPageGetGot.Controls.Add(_upperLayout);
-        _tabPageGetGot.Controls.Add(_getGotSelectedItems);
+        _tabPageGetGot.Controls.Add(_getGotUserInput);
         _tabPageGetGot.Location = new Point(4, 24);
         _tabPageGetGot.Name = "_tabPageGetGot";
         _tabPageGetGot.Padding = new Padding(3);
-        _tabPageGetGot.Size = new Size(528, 210);
+        _tabPageGetGot.Size = new Size(528, 229);
         _tabPageGetGot.TabIndex = 0;
         _tabPageGetGot.Text = "getGot";
         _tabPageGetGot.UseVisualStyleBackColor = true;
@@ -386,7 +386,7 @@ partial class Display
         _tabPageUp.Location = new Point(4, 24);
         _tabPageUp.Name = "_tabPageUp";
         _tabPageUp.Padding = new Padding(3);
-        _tabPageUp.Size = new Size(528, 210);
+        _tabPageUp.Size = new Size(528, 229);
         _tabPageUp.TabIndex = 1;
         _tabPageUp.Text = "UnitProduction";
         _tabPageUp.UseVisualStyleBackColor = true;
@@ -406,7 +406,7 @@ partial class Display
         _tabPageSimple.Location = new Point(4, 24);
         _tabPageSimple.Name = "_tabPageSimple";
         _tabPageSimple.Padding = new Padding(3);
-        _tabPageSimple.Size = new Size(528, 210);
+        _tabPageSimple.Size = new Size(528, 229);
         _tabPageSimple.TabIndex = 2;
         _tabPageSimple.Text = "Simple";
         _tabPageSimple.UseVisualStyleBackColor = true;
@@ -461,7 +461,7 @@ partial class Display
         // 
         // Display
         // 
-        ClientSize = new Size(551, 313);
+        ClientSize = new Size(551, 329);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
         Name = "Display";
@@ -472,6 +472,7 @@ partial class Display
         _unitProductionLayout.PerformLayout();
         _tab.ResumeLayout(false);
         _tabPageGetGot.ResumeLayout(false);
+        _tabPageGetGot.PerformLayout();
         _tabPageUp.ResumeLayout(false);
         _tabPageUp.PerformLayout();
         _tabPageSimple.ResumeLayout(false);
