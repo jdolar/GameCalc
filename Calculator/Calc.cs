@@ -10,7 +10,7 @@ public static class Calc
     #endregion
     
     #region PUBLIC BL Operations
-    public static (string, string, string, string) CalulatePossibleUpUpgrade(string fromInput, string totalCost) => CalculateTuple(CalulatePossibleUpUpgradeCost, fromInput, totalCost, true);
+    public static (string, string, string, string) CalculatePossibleUpUpgrade(string fromInput, string totalCost) => CalculateTuple(CalculatePossibleUpUpgradeCost, fromInput, totalCost, true);
     public static (string, string, string, string) CalculateDesiredUp(string fromInput, string toInput) => CalculateTuple(CalculateDesiredUpCost, fromInput, toInput, true);
     public static (string, string, string, string) CalculateAbleToBuyAndCostToBuy(string userInput, long costPerUnit, long? costPerUnitReassign, bool? format = null)
     {
@@ -22,7 +22,7 @@ public static class Calc
         return (costToBuy, ableToBuy, costToReassign, Data.Commands.Convert.ToLabel(input));
     }
     #endregion
-    
+
     #region PRIVATE Methods
     private static string Calculate(Func<long, long, long> action, string? left, string? right, bool? format = null)
     {
@@ -50,9 +50,9 @@ public static class Calc
 
         long leftValue = Data.Commands.Convert.ToNumber(Clean.Text(left));
         long rightValue = Data.Commands.Convert.ToNumber(Clean.Text(right));
-        var (results, multiplyer) = action(leftValue, rightValue);
+        (long results, long multiplier) = action(leftValue, rightValue);
 
-        return (FormatResult(results, format), FormatResult(multiplyer, format), FormatResult(leftValue, format), FormatResult(rightValue, format));
+        return (FormatResult(results, format), FormatResult(multiplier, format), FormatResult(leftValue, format), FormatResult(rightValue, format));
     }
     private static string FormatResult(long result, bool? format = null)
     {
@@ -78,7 +78,7 @@ public static class Calc
 
         return (totalCost, multiplier);
     }
-    private static (long, long) CalulatePossibleUpUpgradeCost(long fromInput, long totalCost)
+    private static (long, long) CalculatePossibleUpUpgradeCost(long fromInput, long totalCost)
     {
         if (totalCost <= 0)
             return (fromInput, 0);

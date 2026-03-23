@@ -10,12 +10,12 @@ internal sealed class GetGot
 {
     private readonly ComboBox _itemTypes, _itemPurposes, _selectedItems, _races;
     private readonly TextBox _userInput;
-    private readonly Label _ableToBuy, _costToBuy, _costToReassign;
+    private readonly Label _ableToBuy, _costToBuy, _costToReassign, _user;
     private readonly ToolTip _hint;
     private Race _selectedRace = new();
 
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
-                   Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
+                   Label ableToBuy, Label costToReassign, Label costToBuy, Label user, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
     {
         _itemTypes = itemTypes;
         _itemPurposes = itemPurposes;
@@ -24,6 +24,7 @@ internal sealed class GetGot
         _ableToBuy = ableToBuy;
         _costToBuy = costToBuy;
         _costToReassign = costToReassign;
+        _user = user;
         _hint = hint;
         _races = races;
 
@@ -37,20 +38,9 @@ internal sealed class GetGot
         _costToBuy.Click += (s, e) => UIController.CopyToClipboard(_costToBuy.Text);
 
         _itemTypes.SelectedIndexChanged += (s, e) => UpdateSelectedItem();
-        _itemTypes.MouseDown += (s, e) => { /* do nothing */ };
-        _itemTypes.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
-
         _itemPurposes.SelectedIndexChanged += (s, e) => UpdateSelectedItem();
-        _itemPurposes.MouseDown += (s, e) => { /* do nothing */ };
-        _itemPurposes.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
-
         _selectedItems.SelectedIndexChanged += (s, e) => DisplayResults();
-        _selectedItems.MouseDown += (s, e) => { /* do nothing */; };
-        _selectedItems.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
-
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
-        _races.MouseDown += (s, e) => { /* do nothing */ };
-        _races.KeyDown += (s, e) => { e.SuppressKeyPress = true; };
 
         _userInput.TextChanged += (s, e) =>
         {
@@ -76,6 +66,10 @@ internal sealed class GetGot
                 }
             }
         };
+ 
+        var localUser = Users.Get();
+        UIController.UpdateLabel(_user, localUser.Name);
+        _hint.SetToolTip(_user, Hints.User(localUser));
 
         UIController.UpdateLabel(_ableToBuy, string.Empty);
         UIController.UpdateLabel(_costToBuy, string.Empty);

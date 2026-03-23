@@ -6,6 +6,7 @@ public static class Constants
 {
     public static class Users
     {
+        public const string AccountCreated = nameof(AccountCreated);
         public const string GameId = nameof(GameId);
         public const string RaceId = nameof(RaceId);
         public const string Id = nameof(Id);
@@ -16,6 +17,7 @@ public static class Constants
         public const string MsWeapons = nameof(MsWeapons);
         public const string MsShields = nameof(MsShields);
         public const string MsFleets = nameof(MsFleets);
+        public const string RecruitmentId = nameof(RecruitmentId);
     }
     public static class Files
     {

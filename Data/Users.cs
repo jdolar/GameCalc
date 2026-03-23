@@ -19,6 +19,7 @@ public static class Users
         user.Properties.Add(Constants.Users.MsWeapons, default);
         user.Properties.Add(Constants.Users.MsShields, default);
         user.Properties.Add(Constants.Users.MsFleets, default);
+        user.Properties.Add(Constants.Users.RecruitmentId, default);
 
         if (Directory.Exists(path))
             File.Delete(path);
@@ -28,13 +29,12 @@ public static class Users
     }
     public static User Get()
     {
-        string? name = WindowsIdentity.GetCurrent().User.Value ?? null;
-        if (name == null)
-            return new User();
+        string name = WindowsIdentity.GetCurrent().Name;
+        string username = name.Substring(name.LastIndexOf('\\') + 1);
 
-        string path = Path.Combine(Directory.GetCurrentDirectory(), $"{name}.json");
+        string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
         if (!File.Exists(path))
-            Create(name, path);
+            Create(username, path);
 
         string json = File.ReadAllText(path);
         return JsonSerializer.Deserialize<User>(json) ?? new User();

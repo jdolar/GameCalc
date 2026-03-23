@@ -42,7 +42,7 @@ internal sealed class UnitProduction
         calculateNaqToSpend.Click += (s, e) =>
         {
             (string results, string multiplier, string formattedLeftInput, string formattedRightInput)
-                = Calc.CalulatePossibleUpUpgrade(fromInput.Text, resToSpend.Text);
+                = Calc.CalculatePossibleUpUpgrade(fromInput.Text, resToSpend.Text);
 
             if (results != upResult.Text)
             {

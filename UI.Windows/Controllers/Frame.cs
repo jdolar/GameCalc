@@ -8,7 +8,6 @@ internal sealed class Frame
 
     private readonly ComboBox _games, _races;
     private readonly ToolTip _hints;
-   
     public Frame(ComboBox races, ComboBox games, ToolTip hints)
     {
         List<Game> enabledGames = UIController.GetGames();

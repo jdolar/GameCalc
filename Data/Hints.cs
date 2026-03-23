@@ -8,6 +8,61 @@ public static class Hints
     private const string _bulletin = "        * ";
     private const string _line = "-----";
     private const string _space = "           ";
+    public static string User(User user, string _space = "  ")
+    {
+        if (user == null)
+            return "";
+
+        var keys = new[]
+        {
+            Constants.Users.Id,
+            Constants.Users.RecruitmentId,
+            Constants.Users.GameId,
+            Constants.Users.RaceId,
+            Constants.Users.Ascension,
+            Constants.Users.UnitProduction,
+            Constants.Users.Covert,
+            Constants.Users.AntiCovert,
+            Constants.Users.MsWeapons,
+            Constants.Users.MsShields,
+            Constants.Users.MsFleets,
+            Constants.Users.AccountCreated
+        };
+
+        var fields = keys
+           .Select(k =>
+           {
+               if (k == Constants.Users.AccountCreated &&
+                   user.Properties.TryGetValue(Constants.Users.RecruitmentId, out int ts))
+               {
+                   var date = DateTimeOffset
+                       .FromUnixTimeSeconds(ts)
+                       .LocalDateTime;
+
+                   return (Label: k, Value: date.ToString("yyyy-MM-dd HH:mm"));
+               }
+
+               return (
+                   Label: k,
+                   Value: user.Properties.TryGetValue(k, out int v)
+                       ? v.ToString()
+                       : string.Empty
+               );
+           })
+           .Prepend((nameof(user.Name), user.Name ?? string.Empty))
+           .Where(f => !string.IsNullOrEmpty(f.Item2))
+           .ToArray();
+
+        int labelWidth = fields.Max(f => f.Item1.Length);
+        int valueWidth = fields.Max(f => f.Item2.Length);
+
+        StringBuilder sb = new();
+        
+        foreach (var field in fields)
+            sb.AppendLine(_space + field.Item1.PadRight(labelWidth + 2) + field.Item2.PadLeft(valueWidth));
+        
+        return sb.ToString();
+    }
     public static string Unit(Unit unit, string _space = "  ")
     {
         if (unit == null)

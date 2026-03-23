@@ -55,6 +55,7 @@ partial class Display
         _simpleClear = new Button();
         _simpleHistory = new ListBox();
         _raceLayout = new TableLayoutPanel();
+        _user = new Label();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
         _unitProductionLayout.SuspendLayout();
@@ -219,6 +220,7 @@ partial class Display
         _upperLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         _upperLayout.Controls.Add(_getGotSelectedItems, 0, 1);
         _upperLayout.Controls.Add(_getGotItemPurposes, 1, 0);
+        _upperLayout.Controls.Add(_user, 0, 0);
         _upperLayout.Controls.Add(_getGotItemTypes, 1, 1);
         _upperLayout.Location = new Point(12, 6);
         _upperLayout.Margin = new Padding(0);
@@ -360,7 +362,7 @@ partial class Display
         _tab.Controls.Add(_tabPageGetGot);
         _tab.Controls.Add(_tabPageUp);
         _tab.Controls.Add(_tabPageSimple);
-        _tab.Location = new Point(7, 65);
+        _tab.Location = new Point(7, 55);
         _tab.Name = "_tab";
         _tab.SelectedIndex = 0;
         _tab.Size = new Size(536, 257);
@@ -459,15 +461,26 @@ partial class Display
         _raceLayout.Size = new Size(536, 46);
         _raceLayout.TabIndex = 39;
         // 
+        // _user
+        // 
+        _user.AutoSize = true;
+        _user.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        _user.Location = new Point(8, 10);
+        _user.Name = "_user";
+        _user.Size = new Size(50, 25);
+        _user.TabIndex = 11;
+        _user.Text = "User";
+        // 
         // Display
         // 
-        ClientSize = new Size(551, 329);
+        ClientSize = new Size(551, 320);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
         Name = "Display";
         _commandsLayout.ResumeLayout(false);
         _commandsLayout.PerformLayout();
         _upperLayout.ResumeLayout(false);
+        _upperLayout.PerformLayout();
         _unitProductionLayout.ResumeLayout(false);
         _unitProductionLayout.PerformLayout();
         _tab.ResumeLayout(false);
@@ -520,4 +533,5 @@ partial class Display
     internal ComboBox _getGotItemTypes;
     internal ComboBox _getGotSelectedItems;
     internal ComboBox _getGotItemPurposes;
+    internal Label _user;
 }
