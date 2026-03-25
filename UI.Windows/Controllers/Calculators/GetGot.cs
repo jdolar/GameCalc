@@ -13,9 +13,10 @@ internal sealed class GetGot
     private readonly Label _ableToBuy, _costToBuy, _costToReassign, _user;
     private readonly ToolTip _hint;
     private Race _selectedRace = new();
+    private Game _selectedGame = new();
 
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
-                   Label ableToBuy, Label costToReassign, Label costToBuy, Label user, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
+                   Label ableToBuy, Label costToReassign, Label costToBuy, Label user, ToolTip hint, TabPage tabPage, Game selectedGame, bool? imageRecognition = null)
     {
         _itemTypes = itemTypes;
         _itemPurposes = itemPurposes;
@@ -27,6 +28,7 @@ internal sealed class GetGot
         _user = user;
         _hint = hint;
         _races = races;
+        _selectedGame = selectedGame;
 
         UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.GetGot);
 
@@ -66,10 +68,6 @@ internal sealed class GetGot
                 }
             }
         };
- 
-        var localUser = Users.Get();
-        UIController.UpdateLabel(_user, localUser.Name);
-        _hint.SetToolTip(_user, Hints.User(localUser));
 
         UIController.UpdateLabel(_ableToBuy, string.Empty);
         UIController.UpdateLabel(_costToBuy, string.Empty);
@@ -77,6 +75,7 @@ internal sealed class GetGot
         UIController.UpdateTextBox(_userInput, string.Empty);
 
         UpdateSelectedRace();
+        SetUser();
     }
 
     private void DisplayResults()
@@ -119,5 +118,12 @@ internal sealed class GetGot
             _selectedRace = (Race)_races.SelectedItem;
             UpdateSelectedItem();
         }
+    }
+    private void SetUser()
+    {
+        User loggedInUser = UIController.GetUser(_selectedRace);
+        
+        UIController.UpdateLabel(_user, loggedInUser.Name);
+        _hint.SetToolTip(_user, Hints.User(loggedInUser, _selectedGame.Races));
     }
 }

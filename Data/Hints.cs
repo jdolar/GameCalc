@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using System.Security.AccessControl;
 using System.Text;
 namespace Data;
 
@@ -8,59 +9,75 @@ public static class Hints
     private const string _bulletin = "        * ";
     private const string _line = "-----";
     private const string _space = "           ";
-    public static string User(User user, string _space = "  ")
+    public static string User(User user, List<Race> races, string _space = "  ")
     {
         if (user == null)
             return "";
 
         var keys = new[]
         {
+            Constants.Users.Race,
             Constants.Users.Id,
             Constants.Users.RecruitmentId,
-            Constants.Users.GameId,
-            Constants.Users.RaceId,
             Constants.Users.Ascension,
             Constants.Users.UnitProduction,
             Constants.Users.Covert,
             Constants.Users.AntiCovert,
             Constants.Users.MsWeapons,
             Constants.Users.MsShields,
-            Constants.Users.MsFleets,
-            Constants.Users.AccountCreated
+            Constants.Users.MsFleets,       
         };
 
-        var fields = keys
-           .Select(k =>
-           {
-               if (k == Constants.Users.AccountCreated &&
-                   user.Properties.TryGetValue(Constants.Users.RecruitmentId, out int ts))
-               {
-                   var date = DateTimeOffset
-                       .FromUnixTimeSeconds(ts)
-                       .LocalDateTime;
+        List<(string, string)> fields = [];
+        fields.Add((nameof(user.Name), user.Name ?? string.Empty));
 
-                   return (Label: k, Value: date.ToString("yyyy-MM-dd HH:mm"));
-               }
+        foreach (var account in user.Accounts)
+        {
+            List<(string, string)> accountFields = keys
+                .Select(property =>
+                {
+                    if (property == Constants.Users.RecruitmentId &&
+                        account.Properties.TryGetValue(Constants.Users.RecruitmentId, out int ts))
+                    {
+                        DateTime date = DateTimeOffset
+                            .FromUnixTimeSeconds(ts)
+                            .LocalDateTime;
 
-               return (
-                   Label: k,
-                   Value: user.Properties.TryGetValue(k, out int v)
-                       ? v.ToString()
-                       : string.Empty
-               );
-           })
-           .Prepend((nameof(user.Name), user.Name ?? string.Empty))
-           .Where(f => !string.IsNullOrEmpty(f.Item2))
-           .ToArray();
+                        return (Label: Constants.Users.AccountCreated, Value: date.ToString("yyyy-MM-dd HH:mm"));
+                    }
+
+                    else if (property == Constants.Users.Race &&
+                        account.Properties.TryGetValue(Constants.Users.Race, out int raceId))
+                    {
+                        Race? race = races.Find(x => x.Id == raceId);
+                        return (Label: property, Value: race != null ? race.Name : string.Empty);
+                    }
+
+                    return (
+                        Label: property,
+                        Value: account.Properties.TryGetValue(property, out int v)
+                            ? v.ToString()
+                            : string.Empty
+                    );
+                })         
+                .Where(f => !string.IsNullOrEmpty(f.Item2) && f.Item2 != "0")
+                 .Prepend((nameof(Enums.Game.Type), Enum.IsDefined(typeof(Enums.Game.Type), account.GameType) ? account.GameType.ToString() : string.Empty))
+                .Prepend((_line, _line))            
+                .ToList();
+            fields.AddRange(accountFields);
+        }
+
+        if (fields.Count == 0)
+            return string.Empty;
 
         int labelWidth = fields.Max(f => f.Item1.Length);
         int valueWidth = fields.Max(f => f.Item2.Length);
 
         StringBuilder sb = new();
-        
+
         foreach (var field in fields)
             sb.AppendLine(_space + field.Item1.PadRight(labelWidth + 2) + field.Item2.PadLeft(valueWidth));
-        
+
         return sb.ToString();
     }
     public static string Unit(Unit unit, string _space = "  ")
@@ -86,10 +103,8 @@ public static class Hints
         int valueWidth = fields.Max(f => f.Value.Length);
 
         StringBuilder sb = new();
-        foreach (var field in fields)
-        {
-            sb.AppendLine(_space + field.Label.PadRight(labelWidth + 2) + field.Value.PadLeft(valueWidth));
-        }
+        foreach (var (Label, Value) in fields)
+            sb.AppendLine(_space + Label.PadRight(labelWidth + 2) + Value.PadLeft(valueWidth));
 
         return sb.ToString();
     }
@@ -107,6 +122,7 @@ public static class Hints
 
         return builder.ToString();
     }
+
     public static string Units(List<Unit> units)
     {
         if (units == null || units.Count == 0)
@@ -182,7 +198,7 @@ public static class Hints
     public static string CostToBuyOrSell(string inputAmount, string currency, string resultAmount, string operation, Unit unit)
         => string.Format(Constants.GUI.Hints.ItWouldCost, resultAmount, currency, operation, inputAmount, unit.Name);
     #endregion
-    
+
     #region Private Helpers
     private static string UnitNameAndCost(List<Unit> units, int maxNameLength, int maxPriceLength)
     {

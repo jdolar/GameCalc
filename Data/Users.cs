@@ -1,42 +1,54 @@
 ﻿using Data.Models;
-using System.Security.Principal;
 using System.Text.Json;
 namespace Data;
 public static class Users
 {
-    private static void Create(string? name, string path)
+    public static User Create(string? name, string path, int raceId, int gameType)
     {
         User user = new User();
         user.Name = name ?? string.Empty;
 
-        user.Properties.Add(Constants.Users.GameId, default);
-        user.Properties.Add(Constants.Users.RaceId, default);
-        user.Properties.Add(Constants.Users.Id, default);
-        user.Properties.Add(Constants.Users.Covert, default);
-        user.Properties.Add(Constants.Users.AntiCovert, default);
-        user.Properties.Add(Constants.Users.Ascension, default);
-        user.Properties.Add(Constants.Users.UnitProduction, default);
-        user.Properties.Add(Constants.Users.MsWeapons, default);
-        user.Properties.Add(Constants.Users.MsShields, default);
-        user.Properties.Add(Constants.Users.MsFleets, default);
-        user.Properties.Add(Constants.Users.RecruitmentId, default);
+        user.Accounts.Add(CreateAccount(Enums.Game.Type.Main, raceId));
+        user.Accounts.Add(CreateAccount(Enums.Game.Type.Ascended));
+        user.Accounts.Add(CreateAccount(Enums.Game.Type.NewGrounds));
 
         if (Directory.Exists(path))
             File.Delete(path);
 
-        string json = JsonSerializer.Serialize(user);
+        string json = JsonSerializer.Serialize(user, Constants.Json.SerializerOptions);
         File.WriteAllText(path, json);
+
+        return user;
     }
-    public static User Get()
+    public static User Get(string path)
     {
-        string name = WindowsIdentity.GetCurrent().Name;
-        string username = name.Substring(name.LastIndexOf('\\') + 1);
-
-        string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
-        if (!File.Exists(path))
-            Create(username, path);
-
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<User>(json) ?? new User();
+        return JsonSerializer.Deserialize<User>(json, Constants.Json.SerializerOptions) ?? new User();
+    }
+    private static Account CreateAccount(Enums.Game.Type gameType, int? raceId = null)
+     {
+        Account account = new Account();
+        account.GameType = gameType;
+
+        account.Properties.Add(Constants.Users.Id, default);
+        account.Properties.Add(Constants.Users.Covert, default);
+        account.Properties.Add(Constants.Users.AntiCovert, default);       
+        account.Properties.Add(Constants.Users.UnitProduction, default);
+        account.Properties.Add(Constants.Users.RecruitmentId, default);
+
+        if(gameType == Enums.Game.Type.Main)
+        {
+            account.Properties.Add(Constants.Users.Ascension, default);
+            account.Properties.Add(Constants.Users.MsFleets, default);
+            account.Properties.Add(Constants.Users.MsWeapons, default);
+            account.Properties.Add(Constants.Users.MsShields, default);
+
+            if (raceId != null)
+                account.Properties.Add(Constants.Users.Race, (int)raceId);
+            else
+                account.Properties.Add(Constants.Users.Race, default);
+        }
+
+        return account;
     }
 }

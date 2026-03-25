@@ -23,6 +23,7 @@ internal static class Extensions
     {
         return new Race
         {
+            Id= race.Id,
             Name = race.Name,
             Type = race.Type,
             Evolution = race.Evolution,

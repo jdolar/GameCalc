@@ -8,14 +8,15 @@ internal sealed class Frame
 
     private readonly ComboBox _games, _races;
     private readonly ToolTip _hints;
-    public Frame(ComboBox races, ComboBox games, ToolTip hints)
+    public Frame(ComboBox races, ComboBox games, ToolTip hints, ref Game selectedGame)
     {
         List<Game> enabledGames = UIController.GetGames();
         _hints = hints;
 
         _games = games;
         UIController.SetGamesComboBox(_games, enabledGames);
-        SelectedGame = (Game)_games.SelectedItem!;
+        selectedGame = (Game)_games.SelectedItem!;
+        SelectedGame = selectedGame;
         _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
 
         _races = races;

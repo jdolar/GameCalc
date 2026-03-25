@@ -2,5 +2,5 @@
 public sealed class User
 {
     public string Name { get; set; } = string.Empty;
-    public Dictionary<string, int> Properties { get; set; } = [];
+    public List<Account> Accounts { get; set; } = [];
 }

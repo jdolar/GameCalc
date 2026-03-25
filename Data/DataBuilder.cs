@@ -3,6 +3,7 @@ using Data.Models;
 using Data.Enums.Race;
 using Data.Enums.Unit;
 namespace Data;
+
 public static class DataBuilder
 {
     public static List<Game> GetGames(string fileName)
@@ -14,6 +15,11 @@ public static class DataBuilder
     }
     public static List<Unit> GetDataSource(List<Unit> units, Enums.Unit.Type type, Purpose purpose)
     {
+        if (!Enum.IsDefined(type))
+        {
+            throw new System.ComponentModel.InvalidEnumArgumentException(nameof(type), (int)type, typeof(Enums.Unit.Type));
+        }
+
         return [.. units.Where(u => u.Type == type && u.Purpose == purpose)];
     }
     public static List<Game> GetGamesData(List<Game> gamesFromJson, string[] gamesPathFolders)
@@ -117,7 +123,12 @@ public static class DataBuilder
             Race race = JsonSerializer.Deserialize<Race>(json, Constants.Json.SerializerOptions) ?? new Race();
 
             if (race.Enabled)
+            {
+                if (race.Id == default(int))
+                    race.Id = races.Count + 1;
+
                 races.Add(race);
+            }         
         }
 
         return races;

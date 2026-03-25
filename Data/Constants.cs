@@ -7,8 +7,8 @@ public static class Constants
     public static class Users
     {
         public const string AccountCreated = nameof(AccountCreated);
-        public const string GameId = nameof(GameId);
-        public const string RaceId = nameof(RaceId);
+        public const string GameType = nameof(GameType);
+        public const string Race = nameof(Race);
         public const string Id = nameof(Id);
         public const string Ascension = nameof(Ascension);
         public const string Covert = nameof(Covert);

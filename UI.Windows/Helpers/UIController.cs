@@ -2,6 +2,7 @@
 using Data.Commands;
 using Data.Enums.Unit;
 using Data.Models;
+using System.Security.Principal;
 namespace UI.Windows.Helpers;
 internal static class UIController
 {
@@ -65,7 +66,7 @@ internal static class UIController
     internal static bool UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
     {
         List<Unit> filteredUnits = DataBuilder.GetDataSource(units, type, purpose);
-        
+
         if (filteredUnits.Count == 0)
         {
             input.DataSource = null;
@@ -76,7 +77,7 @@ internal static class UIController
         else if (filteredUnits.Count > 0)
         {
             input.DataSource = filteredUnits;
-            input.DisplayMember = Constants.GUI.ComboBox.DisplayName;         
+            input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
         }
 
         return false;// returns if it was emptied (for other controls to know)
@@ -135,5 +136,13 @@ internal static class UIController
         using var ms = new MemoryStream();
         image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
         return ms.ToArray();
+    }
+    internal static User GetUser(Race selectedRace)
+    {
+        string name = WindowsIdentity.GetCurrent().Name;
+        string username = name.Substring(name.LastIndexOf('\\') + 1);     
+        string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
+
+        return !File.Exists(path) ? Users.Create(username, path, selectedRace.Id, (int)selectedRace.Type) : Users.Get(path);
     }
 }
