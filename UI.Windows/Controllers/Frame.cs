@@ -1,4 +1,6 @@
-﻿using Data.Models;
+﻿using Calculator;
+using Data.Commands;
+using Data.Models;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers;
 internal sealed class Frame
@@ -6,12 +8,16 @@ internal sealed class Frame
     public Game SelectedGame { get; set; }
     public Race SelectedRace { get; set; }
 
-    private readonly ComboBox _games, _races;
+    private const long _billion = 1_000_000_000;
+    private const long _trillion = 1_000_000_000_000;
+    private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;
     private readonly ToolTip _hints;
-    public Frame(ComboBox races, ComboBox games, ToolTip hints, ref Game selectedGame)
+    public Frame(ComboBox races, ComboBox games,ComboBox amountToCopy, ComboBox valueToCopy, ToolTip hints, ref Game selectedGame)
     {
         List<Game> enabledGames = UIController.GetGames();
         _hints = hints;
+        _valueToCopy = valueToCopy;
+        _amountToCopy = amountToCopy;
 
         _games = games;
         UIController.SetGamesComboBox(_games, enabledGames);
@@ -55,9 +61,17 @@ internal sealed class Frame
                 Color.Black,
                 TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
         };
-
-        UpdateSelectedGame();
         
+        _amountToCopy.SelectedIndex= 0;
+        _amountToCopy.SelectedIndexChanged += (s, e) => CopyToClipBoard();
+        _amountToCopy.Click += (s, e) => CopyToClipBoard();
+
+        _valueToCopy.SelectedIndex = 0;
+        _valueToCopy.SelectedIndexChanged += (s, e) => CopyToClipBoard();
+        _valueToCopy.Click += (s, e) => CopyToClipBoard();
+        
+        UpdateSelectedGame();
+        CopyToClipBoard();
     }
     public void UpdateSelectedGame()
     {
@@ -77,5 +91,21 @@ internal sealed class Frame
             SelectedRace = (Race)_races.SelectedItem;
             _hints.SetToolTip(_races, Data.Hints.Race(SelectedRace));
         }
+    }
+    private void CopyToClipBoard()
+    {
+        long right= 0;
+        if(_valueToCopy.SelectedItem?.ToString() == "Billion")
+            right = _billion;
+        else if (_valueToCopy.SelectedItem?.ToString() == "Trillion")
+            right = _trillion;
+
+        long left = Data.Commands.Convert.ToNumber(Clean.Text(_amountToCopy.Text));
+        long result = Calc.Multiply(left, right);
+
+        UIController.CopyToClipboard(result.ToString());
+
+        _hints.SetToolTip(_amountToCopy, Data.Hints.CopyToClipBoard(Data.Commands.Convert.ToLabel(result)));
+        _hints.SetToolTip(_valueToCopy, Data.Commands.Convert.ToLabel(right));       
     }
 }

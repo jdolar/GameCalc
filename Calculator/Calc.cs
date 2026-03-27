@@ -7,8 +7,9 @@ public static class Calc
     public static string Sum(string left, string right, bool format = false) => Calculate(Operations.Sum, left, right, format);
     public static string Deduct(string left, string right, bool format = false) => Calculate(Operations.Deduct, left, right, format);
     public static string Multiply(string left, string right, bool format = false) => Calculate(Operations.Multiply, left, right, format);
+    public static long Multiply(long left, long right) => Operations.Multiply(left, right);
     #endregion
-    
+
     #region PUBLIC BL Operations
     public static (string, string, string, string) CalculatePossibleUpUpgrade(string fromInput, string totalCost) => CalculateTuple(CalculatePossibleUpUpgradeCost, fromInput, totalCost, true);
     public static (string, string, string, string) CalculateDesiredUp(string fromInput, string toInput) => CalculateTuple(CalculateDesiredUpCost, fromInput, toInput, true);

@@ -1,21 +1,28 @@
 ﻿using Data.Models;
-using System.Security.AccessControl;
 using System.Text;
 namespace Data;
 
 public static class Hints
 {
-    private const string _delimiter = ": ";
     private const string _bulletin = "        * ";
     private const string _line = "-----";
-    private const string _space = "           ";
-    public static string User(User user, List<Race> races, string _space = "  ")
+    private const string _preSpace = "  ";
+    private const string _tailingSpace = " ";
+    private const int _spaceBetween = 10;
+
+    #region Frame
+    public static string CopyToClipBoard(string value)=>string.Format(Constants.GUI.Hints.CopyAmountToClipBoard, value);
+
+    #endregion
+
+    #region GetGot ComboBox
+    public static string User(User user, List<Race> races)
     {
         if (user == null)
             return "";
 
-        var keys = new[]
-        {
+        string[] keys =
+        [
             Constants.Users.Race,
             Constants.Users.Id,
             Constants.Users.RecruitmentId,
@@ -25,22 +32,22 @@ public static class Hints
             Constants.Users.AntiCovert,
             Constants.Users.MsWeapons,
             Constants.Users.MsShields,
-            Constants.Users.MsFleets,       
-        };
+            Constants.Users.MsFleets,
+        ];
 
-        List<(string, string)> fields = [];
+        List<(string Label, string Value)> fields = [];
         fields.Add((nameof(user.Name), user.Name ?? string.Empty));
 
-        foreach (var account in user.Accounts)
+        foreach (Account account in user.Accounts)
         {
-            List<(string, string)> accountFields = keys
+            List<(string Label, string Value)> accountFields = keys
                 .Select(property =>
                 {
                     if (property == Constants.Users.RecruitmentId &&
-                        account.Properties.TryGetValue(Constants.Users.RecruitmentId, out int ts))
+                        account.Properties.TryGetValue(Constants.Users.RecruitmentId, out int timeTicks))
                     {
                         DateTime date = DateTimeOffset
-                            .FromUnixTimeSeconds(ts)
+                            .FromUnixTimeSeconds(timeTicks)
                             .LocalDateTime;
 
                         return (Label: Constants.Users.AccountCreated, Value: date.ToString("yyyy-MM-dd HH:mm"));
@@ -49,125 +56,88 @@ public static class Hints
                     else if (property == Constants.Users.Race &&
                         account.Properties.TryGetValue(Constants.Users.Race, out int raceId))
                     {
-                        Race? race = races.Find(x => x.Id == raceId);
-                        return (Label: property, Value: race != null ? race.Name : string.Empty);
+                        return (Label: property, Value: races.Find(x => x.Id == raceId)?.Name ?? string.Empty);
                     }
 
                     return (
                         Label: property,
-                        Value: account.Properties.TryGetValue(property, out int v)
-                            ? v.ToString()
+                        Value: account.Properties.TryGetValue(property, out int value)
+                            ? value.ToString()
                             : string.Empty
                     );
-                })         
-                .Where(f => !string.IsNullOrEmpty(f.Item2) && f.Item2 != "0")
-                 .Prepend((nameof(Enums.Game.Type), Enum.IsDefined(typeof(Enums.Game.Type), account.GameType) ? account.GameType.ToString() : string.Empty))
-                .Prepend((_line, _line))            
+                })
+                .Where(f => !string.IsNullOrEmpty(f.Value))
+                .Prepend((nameof(Enums.Game.Type), Enum.IsDefined(typeof(Enums.Game.Type), account.GameType) ? account.GameType.ToString() : string.Empty))
+                .Prepend((_line, _line))
                 .ToList();
+
             fields.AddRange(accountFields);
         }
 
-        if (fields.Count == 0)
-            return string.Empty;
-
-        int labelWidth = fields.Max(f => f.Item1.Length);
-        int valueWidth = fields.Max(f => f.Item2.Length);
-
-        StringBuilder sb = new();
-
-        foreach (var field in fields)
-            sb.AppendLine(_space + field.Item1.PadRight(labelWidth + 2) + field.Item2.PadLeft(valueWidth));
-
-        return sb.ToString();
+        return DrawFields(fields);
     }
-    public static string Unit(Unit unit, string _space = "  ")
+    public static string Unit(Unit unit)
     {
         if (unit == null)
-            return "";
+            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Unit));
 
-        var fields = new (string Label, string Value)[]
-        {
-            (nameof(unit.Name), unit.Name ?? string.Empty),
-            (nameof(unit.CostPerUnit), unit.CostPerUnit.ToString()),
-            (nameof(unit.CostPerUnitReassign), unit.CostPerUnitReassign?.ToString() ?? string.Empty),
-            (nameof(unit.Strength), unit.Strength?.ToString() ?? string.Empty),
-            (nameof(unit.Type), unit.Type.ToString()),
-            (nameof(unit.Purpose), unit.Purpose.ToString()),
-            (nameof(unit.Evolution), unit.Evolution.ToString()),
-            (nameof(unit.Slot), unit.Slot?.ToString() ?? string.Empty)
-        }
-        .Where(f => !string.IsNullOrEmpty(f.Value))
-        .ToArray();
+        List<(string Label, string Value)> fields = [];
 
-        int labelWidth = fields.Max(f => f.Label.Length);
-        int valueWidth = fields.Max(f => f.Value.Length);
+        AddField(fields, nameof(unit.Name), unit.Name);
+        AddField(fields, nameof(unit.CostPerUnit), unit.CostPerUnit.ToString());
+        AddField(fields, nameof(unit.CostPerUnitReassign), unit.Strength.ToString());
+        AddField(fields, nameof(unit.Type), unit.Type.ToString());
+        AddField(fields, nameof(unit.Purpose), unit.Purpose.ToString());
+        AddField(fields, nameof(unit.Evolution), unit.Evolution.ToString());
+        AddField(fields, nameof(unit.Slot), unit.Slot.ToString());
 
-        StringBuilder sb = new();
-        foreach (var (Label, Value) in fields)
-            sb.AppendLine(_space + Label.PadRight(labelWidth + 2) + Value.PadLeft(valueWidth));
-
-        return sb.ToString();
+        return DrawFields(fields);
     }
     public static string Race(Race? race)
     {
         if (race == null || race.Units.Count == 0)
-            return string.Format(Constants.GUI.Labels.NotAvailable, "Race");
+            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Race));
+        
+        List<(string Label, string Value)> fields = [];
 
-        StringBuilder builder = new();
-        builder.Append(race.Name).AppendLine();
-        builder.Append(nameof(race.Type)).Append(_delimiter).Append(race.Type).AppendLine();
-        builder.Append(nameof(race.Evolution)).Append(_delimiter).Append(race.Evolution).AppendLine();
-        builder.Append(nameof(race.Currency)).Append(_delimiter).Append(race.Currency.Name).AppendLine();
-        builder.AppendLine(Units(race.Units));
+        AddField(fields, nameof(race.Name), race.Name);
+        AddField(fields, nameof(race.Type), race.Type.ToString());
+        AddField(fields, nameof(race.Evolution), race.Evolution.ToString());
+        AddField(fields, nameof(race.Currency), race.Currency.Name);
 
-        return builder.ToString();
+        fields.AddRange(GroupUnits(race.Units));
+        
+        return DrawFields(fields);
     }
-
     public static string Units(List<Unit> units)
     {
         if (units == null || units.Count == 0)
-            return string.Format(Constants.GUI.Labels.NotAvailable, "Units");
+            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Units));
 
-        int maxNameLength = units.Max(u => u.Name?.Length ?? 0);
-        int maxPriceLength = units.Max(u => $"{u.CostPerUnit}/unit".Length);
-
-        var groups = units.GroupBy(u => u.Type)
-                          .OrderByDescending(g => g.Key);
-
-        StringBuilder builder = new();
-
-        foreach (var group in groups)
-        {
-            var sortedUnits = group.GroupBy(u => u.Purpose)
-                                   .OrderByDescending(g => g.Key);
-
-            builder.Append(_line).Append(' ').Append(group.Key).Append("(s)").AppendLine();
-
-            foreach (var purposeGroup in sortedUnits)
-            {
-                builder.Append(_space).Append(purposeGroup.Key).Append(' ').Append(group.Key).Append("(s)").AppendLine();
-                builder.Append(UnitNameAndCost(purposeGroup.ToList(), maxNameLength, maxPriceLength));
-            }
-        }
-
-        return builder.ToString();
+        return DrawFields(GroupUnits(units));
     }
     public static string Game(Game? game)
     {
         if (game is null)
-            return string.Format(Constants.GUI.Labels.NotAvailable, "Game");
+            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Game));
 
-        StringBuilder builder = new();
+        List<(string Label, string Value)> fields = [];
 
-        builder.Append(nameof(game.Name)).Append(_delimiter).Append(game.Name).AppendLine()
-               .Append(nameof(game.Type)).Append(_delimiter).Append(game.Type).AppendLine()
-               .Append(nameof(game.Url)).Append(_delimiter).Append(game.Url);
+        AddField(fields, nameof(game.Name), game.Name);
+        AddField(fields, nameof(game.Type), game.Type.ToString());
+        AddField(fields, nameof(game.Url), game.Url.ToString());
+        AddField(fields, nameof(game.Description), game.Description);
 
-        if (!string.IsNullOrEmpty(game.Description))
-            builder.AppendLine().Append(nameof(game.Description)).Append(_delimiter).Append(game.Description);
-
-        return builder.ToString();
+        return DrawFields(fields);
     }
+    #endregion
+
+    #region GetGot
+    public static string AbleToBuy(string inputAmount, string currency, string resultAmount, Unit unit)
+       => string.Format(Constants.GUI.Hints.YouCanBuy, resultAmount, unit.Name, inputAmount, currency);
+    public static string CostToBuyOrSell(string inputAmount, string currency, string resultAmount, string operation, Unit unit)
+        => string.Format(Constants.GUI.Hints.ItWouldCost, resultAmount, currency, operation, inputAmount, unit.Name);
+    #endregion
 
     #region UP Calc
     public static string DesiredUp(string fromInput, string toInput, string result, string multiplier, string currency)
@@ -192,32 +162,56 @@ public static class Hints
     }
     #endregion
 
-    #region The Calc
-    public static string AbleToBuy(string inputAmount, string currency, string resultAmount, Unit unit)
-       => string.Format(Constants.GUI.Hints.YouCanBuy, resultAmount, unit.Name, inputAmount, currency);
-    public static string CostToBuyOrSell(string inputAmount, string currency, string resultAmount, string operation, Unit unit)
-        => string.Format(Constants.GUI.Hints.ItWouldCost, resultAmount, currency, operation, inputAmount, unit.Name);
-    #endregion
-
     #region Private Helpers
-    private static string UnitNameAndCost(List<Unit> units, int maxNameLength, int maxPriceLength)
+    private static void AddUnits(List<(string Label, string Value)> fields, List<Unit> units)
     {
-        StringBuilder builder = new();
-
         foreach (Unit unit in units)
-        {
-            string name = unit.Name ?? "";
-            string price = $"{unit.CostPerUnit}/unit";
+            AddField(fields, $"{_preSpace}{unit.Name}", $"{unit.CostPerUnit}/unit");
+    }
+    private static string DrawFields(List<(string Label, string Value)> fields, string? preSpace = _preSpace, string? tailingSpace = _tailingSpace, int? spaceBetween = _spaceBetween)
+    {
+        if (fields.Count == 0)
+            return string.Empty;
 
-            builder.Append(_space)
-                   .Append(_space)
-                   .Append(name.PadRight(maxNameLength + 4))
-                   .Append(price.PadLeft(maxPriceLength))
-                   .AppendLine();
+        int labelWidth = fields.Max(f => f.Label.Length);
+        int valueWidth = fields.Max(f => f.Value.Length);
+
+        StringBuilder sb = new();
+
+        foreach (var field in fields)
+            sb.AppendLine(preSpace + field.Label.PadRight(labelWidth + _spaceBetween) + field.Value.PadLeft(valueWidth) + tailingSpace);
+
+        return sb.ToString();
+    }
+    private static void AddField(List<(string Label, string Value)> fields, string? label, string? value)
+    {
+        if (!string.IsNullOrEmpty(label) && !string.IsNullOrEmpty(value))
+            fields.Add((label, value));
+    }
+    private static void AddField(List<(string Label, string Value)> fields, string? label)
+    {
+        if (!string.IsNullOrEmpty(label))
+            fields.Add((label, string.Empty));
+    }
+    private static List<(string Label, string Value)> GroupUnits(List<Unit> units)
+    {
+        var groups = units.GroupBy(u => u.Type)
+                          .OrderBy(g => g.Key);
+
+        List<(string Label, string Value)> fields = [];
+        foreach (var group in groups)
+        {
+            var sortedUnits = group.GroupBy(u => u.Purpose)
+                                   .OrderBy(g => g.Key);
+            
+            foreach (var purposeGroup in sortedUnits)
+            {
+                AddField(fields, $"{purposeGroup.Key} {group.Key}(s)");
+                AddUnits(fields, purposeGroup.ToList());
+            }
         }
 
-        return builder.ToString();
+        return fields;
     }
-
     #endregion
 }

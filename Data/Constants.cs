@@ -53,6 +53,7 @@ public static class Constants
             public const string YouCanBuy = "You can buy {0} {1}(s) for {2} {3}.";
             public const string CostPerUnit = "Cost/Unit(buy)";
             public const string CostPerUnitReassign = "Cost/Unit(reassign)";
+            public const string CopyAmountToClipBoard = "Copy {0} to ClipBoard";
         }
         public static class Labels
         {

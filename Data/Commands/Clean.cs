@@ -8,8 +8,8 @@ public static class Clean
 
         int len = input.Length;
 
-        // stackalloc only for "reasonable" size
-        if (len <= 1_000_000) // 1 million chars safe on stack
+       
+        if (len <= 1_000_000) 
         {
             Span<char> buffer = stackalloc char[len];
             int idx = 0;
@@ -20,7 +20,7 @@ public static class Clean
             }
             return new string(buffer[..idx]);
         }
-        else // fallback to heap allocation for very large inputs
+        else 
         {
             char[] buffer = new char[len];
             int idx = 0;

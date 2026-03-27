@@ -35,6 +35,7 @@ partial class Display
         _games = new ComboBox();
         _upperLayout = new TableLayoutPanel();
         _getGotItemPurposes = new ComboBox();
+        _user = new Label();
         _game = new Label();
         _race = new Label();
         _unitProductionResult = new Label();
@@ -55,7 +56,9 @@ partial class Display
         _simpleClear = new Button();
         _simpleHistory = new ListBox();
         _raceLayout = new TableLayoutPanel();
-        _user = new Label();
+        _bottomLayout = new TableLayoutPanel();
+        _valueToCopy = new ComboBox();
+        _amountToCopy = new ComboBox();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
         _unitProductionLayout.SuspendLayout();
@@ -64,6 +67,7 @@ partial class Display
         _tabPageUp.SuspendLayout();
         _tabPageSimple.SuspendLayout();
         _raceLayout.SuspendLayout();
+        _bottomLayout.SuspendLayout();
         SuspendLayout();
         // 
         // _races
@@ -240,6 +244,16 @@ partial class Display
         _getGotItemPurposes.Name = "_getGotItemPurposes";
         _getGotItemPurposes.Size = new Size(220, 23);
         _getGotItemPurposes.TabIndex = 0;
+        // 
+        // _user
+        // 
+        _user.AutoSize = true;
+        _user.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        _user.Location = new Point(8, 10);
+        _user.Name = "_user";
+        _user.Size = new Size(50, 25);
+        _user.TabIndex = 11;
+        _user.Text = "User";
         // 
         // _game
         // 
@@ -461,19 +475,47 @@ partial class Display
         _raceLayout.Size = new Size(536, 46);
         _raceLayout.TabIndex = 39;
         // 
-        // _user
+        // _bottomLayout
         // 
-        _user.AutoSize = true;
-        _user.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        _user.Location = new Point(8, 10);
-        _user.Name = "_user";
-        _user.Size = new Size(50, 25);
-        _user.TabIndex = 11;
-        _user.Text = "User";
+        _bottomLayout.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+        _bottomLayout.ColumnCount = 2;
+        _bottomLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _bottomLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+        _bottomLayout.Controls.Add(_valueToCopy, 1, 0);
+        _bottomLayout.Controls.Add(_amountToCopy, 0, 0);
+        _bottomLayout.Location = new Point(9, 315);
+        _bottomLayout.Margin = new Padding(0);
+        _bottomLayout.Name = "_bottomLayout";
+        _bottomLayout.Padding = new Padding(5, 10, 5, 5);
+        _bottomLayout.RowCount = 1;
+        _bottomLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        _bottomLayout.Size = new Size(286, 47);
+        _bottomLayout.TabIndex = 40;
+        // 
+        // _valueToCopy
+        // 
+        _valueToCopy.DropDownStyle = ComboBoxStyle.DropDownList;
+        _valueToCopy.Items.AddRange(new object[] { "Billion", "Trillion" });
+        _valueToCopy.Location = new Point(163, 13);
+        _valueToCopy.Margin = new Padding(20, 3, 0, 0);
+        _valueToCopy.Name = "_valueToCopy";
+        _valueToCopy.Size = new Size(97, 23);
+        _valueToCopy.TabIndex = 0;
+        // 
+        // _amountToCopy
+        // 
+        _amountToCopy.DropDownStyle = ComboBoxStyle.DropDownList;
+        _amountToCopy.Items.AddRange(new object[] { "1", "5", "10", "20", "25", "50", "100", "200", "250", "500" });
+        _amountToCopy.Location = new Point(25, 13);
+        _amountToCopy.Margin = new Padding(20, 3, 0, 0);
+        _amountToCopy.Name = "_amountToCopy";
+        _amountToCopy.Size = new Size(98, 23);
+        _amountToCopy.TabIndex = 0;
         // 
         // Display
         // 
-        ClientSize = new Size(551, 320);
+        ClientSize = new Size(551, 373);
+        Controls.Add(_bottomLayout);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
         Name = "Display";
@@ -492,6 +534,7 @@ partial class Display
         _tabPageSimple.PerformLayout();
         _raceLayout.ResumeLayout(false);
         _raceLayout.PerformLayout();
+        _bottomLayout.ResumeLayout(false);
         ResumeLayout(false);
     }
     internal TextBox _getGotUserInput;
@@ -534,4 +577,7 @@ partial class Display
     internal ComboBox _getGotSelectedItems;
     internal ComboBox _getGotItemPurposes;
     internal Label _user;
+    internal TableLayoutPanel _bottomLayout;
+    internal ComboBox _amountToCopy;
+    internal ComboBox _valueToCopy;
 }
