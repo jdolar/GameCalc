@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "Energy Gun",
+    "CostPerUnit": 1000,
+    "Strength": 100,
+    "Slot": 1
+  },
+  {
+    "Name": "Energy Tower",
+    "CostPerUnit": 50000,
+    "Strength": 1000,
+    "Slot": 2
+  },
+  {
+    "Name": "Energy Satelite**",
+    "CostPerUnit": 2500000,
+    "Strength": 10000,
+    "Slot": 3
+  }
+]

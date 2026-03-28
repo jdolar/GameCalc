@@ -12,10 +12,9 @@ public static class Hints
 
     #region Frame
     public static string CopyToClipBoard(string value)=>string.Format(Constants.GUI.Hints.CopyAmountToClipBoard, value);
-
     #endregion
 
-    #region GetGot ComboBox
+    #region Frame ComboBox
     public static string User(User user, List<Race> races)
     {
         if (user == null)
@@ -23,6 +22,7 @@ public static class Hints
 
         string[] keys =
         [
+            Constants.Users.Name,
             Constants.Users.Race,
             Constants.Users.Id,
             Constants.Users.RecruitmentId,
@@ -36,13 +36,13 @@ public static class Hints
         ];
 
         List<(string Label, string Value)> fields = [];
-        fields.Add((nameof(user.Name), user.Name ?? string.Empty));
-
         foreach (Account account in user.Accounts)
         {
-            List<(string Label, string Value)> accountFields = keys
+
+            List<(string Label, string Value)> accountFields = [.. keys
                 .Select(property =>
                 {
+
                     if (property == Constants.Users.RecruitmentId &&
                         account.Properties.TryGetValue(Constants.Users.RecruitmentId, out int timeTicks))
                     {
@@ -67,15 +67,60 @@ public static class Hints
                     );
                 })
                 .Where(f => !string.IsNullOrEmpty(f.Value))
-                .Prepend((nameof(Enums.Game.Type), Enum.IsDefined(typeof(Enums.Game.Type), account.GameType) ? account.GameType.ToString() : string.Empty))
-                .Prepend((_line, _line))
-                .ToList();
+
+                .Prepend((nameof(Enums.Game.Type), Enum.IsDefined(account.GameType) ? account.GameType.ToString() : string.Empty))
+                .Prepend((nameof(account.Name), account.Name))];
 
             fields.AddRange(accountFields);
         }
 
         return DrawFields(fields);
     }
+    public static string Game(Game? game)
+    {
+        if (game is null)
+            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Game));
+
+        List<(string Label, string Value)> fields = [];
+
+        AddField(fields, nameof(game.Name), game.Name);
+        AddField(fields, nameof(game.Type), game.Type.ToString());
+        AddField(fields, nameof(game.Url), game.Url.ToString());
+        AddField(fields, nameof(game.Description), game.Description);
+
+        StringBuilder builder = new();
+
+        int calculatorCount = game.Calculators.Count;
+        for(int i = 0; i < calculatorCount; i++)
+        {
+            builder.Append(game.Calculators[i].ToString());
+            if (i < calculatorCount - 1)
+                builder.Append(", ");
+        }
+        
+        AddField(fields, nameof(game.Calculators), builder.ToString());
+
+        return DrawFields(fields);
+    }
+    public static string Race(Race? race)
+    {
+        if (race == null || race.Units.Count == 0)
+            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Race));
+
+        List<(string Label, string Value)> fields = [];
+
+        AddField(fields, nameof(race.Name), race.Name);
+        AddField(fields, nameof(race.Type), race.Type.ToString());
+        AddField(fields, nameof(race.Evolution), race.Evolution.ToString());
+        AddField(fields, nameof(race.Currency), race.Currency.Name);
+
+        fields.AddRange(GroupUnits(race.Units));
+
+        return DrawFields(fields);
+    }
+    #endregion
+
+    #region GetGot ComboBox
     public static string Unit(Unit unit)
     {
         if (unit == null)
@@ -92,44 +137,14 @@ public static class Hints
         AddField(fields, nameof(unit.Slot), unit.Slot.ToString());
 
         return DrawFields(fields);
-    }
-    public static string Race(Race? race)
-    {
-        if (race == null || race.Units.Count == 0)
-            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Race));
-        
-        List<(string Label, string Value)> fields = [];
-
-        AddField(fields, nameof(race.Name), race.Name);
-        AddField(fields, nameof(race.Type), race.Type.ToString());
-        AddField(fields, nameof(race.Evolution), race.Evolution.ToString());
-        AddField(fields, nameof(race.Currency), race.Currency.Name);
-
-        fields.AddRange(GroupUnits(race.Units));
-        
-        return DrawFields(fields);
-    }
+    } 
     public static string Units(List<Unit> units)
     {
         if (units == null || units.Count == 0)
             return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Units));
 
         return DrawFields(GroupUnits(units));
-    }
-    public static string Game(Game? game)
-    {
-        if (game is null)
-            return string.Format(Constants.GUI.Labels.NotAvailable, nameof(Game));
-
-        List<(string Label, string Value)> fields = [];
-
-        AddField(fields, nameof(game.Name), game.Name);
-        AddField(fields, nameof(game.Type), game.Type.ToString());
-        AddField(fields, nameof(game.Url), game.Url.ToString());
-        AddField(fields, nameof(game.Description), game.Description);
-
-        return DrawFields(fields);
-    }
+    }  
     #endregion
 
     #region GetGot
@@ -168,18 +183,19 @@ public static class Hints
         foreach (Unit unit in units)
             AddField(fields, $"{_preSpace}{unit.Name}", $"{unit.CostPerUnit}/unit");
     }
-    private static string DrawFields(List<(string Label, string Value)> fields, string? preSpace = _preSpace, string? tailingSpace = _tailingSpace, int? spaceBetween = _spaceBetween)
+    private static string DrawFields(List<(string Label, string Value)> fields, string? preSpace = _preSpace, string? tailingSpace = _tailingSpace, int? spaceBetween = null)
     {
         if (fields.Count == 0)
             return string.Empty;
 
         int labelWidth = fields.Max(f => f.Label.Length);
         int valueWidth = fields.Max(f => f.Value.Length);
+        ;
 
         StringBuilder sb = new();
-
-        foreach (var field in fields)
-            sb.AppendLine(preSpace + field.Label.PadRight(labelWidth + _spaceBetween) + field.Value.PadLeft(valueWidth) + tailingSpace);
+        sb.AppendLine();
+        foreach (var (Label, Value) in fields)
+            sb.AppendLine(preSpace + Label.PadRight(labelWidth + (spaceBetween ??= _spaceBetween)) + Value.PadLeft(valueWidth) + tailingSpace);
 
         return sb.ToString();
     }
@@ -207,7 +223,7 @@ public static class Hints
             foreach (var purposeGroup in sortedUnits)
             {
                 AddField(fields, $"{purposeGroup.Key} {group.Key}(s)");
-                AddUnits(fields, purposeGroup.ToList());
+                AddUnits(fields, [.. purposeGroup]);
             }
         }
 

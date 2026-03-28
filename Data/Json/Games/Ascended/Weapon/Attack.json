@@ -1,0 +1,44 @@
+[
+  {
+    "Name": "Conventional Rockets",
+    "CostPerUnit": 1000,
+    "Strength": 15,
+    "Slot": 1
+  },
+  {
+    "Name": "Nuclear Rockets",
+    "CostPerUnit": 1800,
+    "Strength": 30,
+    "Slot": 2
+  },
+  {
+    "Name": "Space Vessels",
+    "CostPerUnit": 20000,
+    "Strength": 60,
+    "Slot": 3
+  },
+  {
+    "Name": "Fusion Powered Ships",
+    "CostPerUnit": 130000,
+    "Strength": 120,
+    "Slot": 4
+  },
+  {
+    "Name": "Cold Fusion Powered Vessels",
+    "CostPerUnit": 380400,
+    "Strength": 450,
+    "Slot": 5
+  },
+  {
+    "Name": "Dark Matter Enhanced Destroyers",
+    "CostPerUnit": 1200400,
+    "Strength": 1080,
+    "Slot": 6
+  },
+  {
+    "Name": "Macro Quantum Multiverse WorldShips",
+    "CostPerUnit": 3500800,
+    "Strength": 2560,
+    "Slot": 7
+  }
+]

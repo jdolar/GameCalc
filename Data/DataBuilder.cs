@@ -44,7 +44,7 @@ public static class DataBuilder
                 {
                     Race race = raceTemplate.Clone();
                     List<Unit> filteredBase = FilterByEvolution(baseUnitsFromFiles, race);
-
+                    filteredBase.DumpToFile(raceTemplate.Name);
                     if (race.Units == null || race.Units.Count == 0)
                         race.Units = filteredBase;
                     else
@@ -124,7 +124,10 @@ public static class DataBuilder
 
             if (race.Enabled)
             {
-                if (race.Id == default(int))
+                if(string.IsNullOrEmpty(race.Name))
+                    race.Name = race.Type.ToString();
+
+                if (race.Id == default)
                     race.Id = races.Count + 1;
 
                 races.Add(race);

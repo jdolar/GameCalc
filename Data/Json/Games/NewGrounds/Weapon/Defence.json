@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "Vortex Emitter",
+    "CostPerUnit": 2000,
+    "Strength": 200,
+    "Slot": 1
+  },
+  {
+    "Name": "Vortex Projector",
+    "CostPerUnit": 100000,
+    "Strength": 2000,
+    "Slot": 2
+  },
+  {
+    "Name": "Vortex Field Generator",
+    "CostPerUnit": 5000000,
+    "Strength": 20000,
+    "Slot": 3
+  }
+]

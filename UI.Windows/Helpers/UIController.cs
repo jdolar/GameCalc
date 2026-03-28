@@ -30,10 +30,13 @@ internal static class UIController
 
         return input;
     }
-    internal static List<Game> GetGames()
+    internal static List<Game> Games
     {
-        string[] jsonFiles = Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", "Games"));
-        return DataBuilder.GetGamesData(DataBuilder.GetGames("Games.json"), jsonFiles);
+        get
+        {
+            string[] jsonFiles = Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", "Games"));
+            return DataBuilder.GetGamesData(DataBuilder.GetGames("Games.json"), jsonFiles);
+        }
     }
     internal static void UpdateLabel(Label input, string upgradeText)
     {
@@ -137,12 +140,12 @@ internal static class UIController
         image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
         return ms.ToArray();
     }
-    internal static User GetUser(Race selectedRace)
+    internal static User GetUser()
     {
         string name = WindowsIdentity.GetCurrent().Name;
-        string username = name.Substring(name.LastIndexOf('\\') + 1);     
+        string username = name[(name.LastIndexOf('\\') + 1)..];     
         string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
 
-        return !File.Exists(path) ? Users.Create(username, path, selectedRace.Id, (int)selectedRace.Type) : Users.Get(path);
+        return !File.Exists(path) ? Users.Create(username, path) : Users.Get(path);
     }
 }

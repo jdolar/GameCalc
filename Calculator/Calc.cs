@@ -18,7 +18,7 @@ public static class Calc
         long input = Data.Commands.Convert.ToNumber(Clean.Text(userInput));
         string costToBuy = CalculateAndReturn(Operations.Multiply, input, costPerUnit, format);
         string ableToBuy = CalculateAndReturn(Operations.Divide, input, costPerUnit, format);
-        string costToReassign = costPerUnitReassign.HasValue ? CalculateAndReturn(Operations.Divide, input, costPerUnit, format) : string.Empty;
+        string costToReassign = costPerUnitReassign.HasValue ? CalculateAndReturn(Operations.Divide, input, costPerUnitReassign, format) : string.Empty;
 
         return (costToBuy, ableToBuy, costToReassign, Data.Commands.Convert.ToLabel(input));
     }

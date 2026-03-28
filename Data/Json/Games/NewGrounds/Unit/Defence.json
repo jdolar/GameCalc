@@ -1,0 +1,8 @@
+[
+  {
+    "Name": "Defence Slave",
+    "CostPerUnit": 2000,
+    "CostPerUnitReassign": 400,
+    "Slot": 1
+  }
+]

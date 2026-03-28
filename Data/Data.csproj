@@ -11,6 +11,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Json\Games\Ascended\Civil\Other.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\Espionage\Other.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\MotherShip\Attack.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\MotherShip\Defence.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\Unit\Attack.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\Unit\Defence.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\Weapon\Attack.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\Ascended\Weapon\Defence.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Json\Games\Main\MotherShip\Other.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -50,7 +74,31 @@
     <None Update="Json\Games\Main\Weapon\Defence.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Json\Games\NewGrounds\Civil\Other.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\NewGrounds\Espionage\Other.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\NewGrounds\Unit\Attack.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\NewGrounds\Unit\Defence.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\NewGrounds\Weapon\Attack.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Games\NewGrounds\Weapon\Defence.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Races2\NewGrounds.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Json\Races2\GoaUld.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Json\Races2\Ascended.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Json\Races2\Test2.json">
@@ -107,11 +155,6 @@
     <None Update="Json\Races\GoaUld.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Json\Games\Ascended\" />
-    <Folder Include="Json\Games\NewGrounds\" />
   </ItemGroup>
 
 </Project>

@@ -3,18 +3,21 @@
     "Name": "Main",
     "Url": "https://main.gatewa.rs/",
     "Description": "GateWa.rs: Main",
-    "Type": "Main"
+    "Type": "Main",
+    "Calculators": [ "GetGot","UnitProduction","Simple" ]
   },
   {
     "Name": "Ascended",
     "Url": "https://asc.gatewa.rs/",
     "Description": "GateWa.rs: Ascended",
-    "Type": "Ascended"
+    "Type": "Ascended",
+    "Calculators": [ "GetGot", "Simple" ]
   },
   {
     "Name": "New Grounds",
     "Url": "https://ng.gatewa.rs",
     "Description": "GateWars: New Grounds",
-    "Type": "NewGrounds"
+    "Type": "NewGrounds",
+    "Calculators": [ "GetGot", "Simple" ]
   }
 ]

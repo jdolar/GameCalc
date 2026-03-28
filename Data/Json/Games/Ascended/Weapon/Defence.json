@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "Satellites",
+    "CostPerUnit": 1800,
+    "Strength": 20,
+    "Slot": 1
+  },
+  {
+    "Name": "Networked Satellites",
+    "CostPerUnit": 20000,
+    "Strength": 40,
+    "Slot": 2
+  },
+  {
+    "Name": "Nuclear Armed Satellites",
+    "CostPerUnit": 130000,
+    "Strength": 80,
+    "Slot": 3
+  },
+  {
+    "Name": "Fission Powered Networked Satellites",
+    "CostPerUnit": 370400,
+    "Strength": 320,
+    "Slot": 4
+  },
+  {
+    "Name": "Miniture Black Hole Mines",
+    "CostPerUnit": 1300400,
+    "Strength": 1280,
+    "Slot": 5
+  },
+  {
+    "Name": "Multiversic Phase Networks",
+    "CostPerUnit": 3500800,
+    "Strength": 2560,
+    "Slot": 6
+  }
+]

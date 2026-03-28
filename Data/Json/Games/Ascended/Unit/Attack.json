@@ -1,0 +1,13 @@
+[
+  {
+    "Name": "Subjugator",
+    "CostPerUnit": 4300,
+    "CostPerUnitReassign": 0,
+    "Slot": 1
+  },
+  {
+    "Name": "Supra Subjugator",
+    "CostPerUnit": 81500,
+    "Slot": 2
+  }
+]

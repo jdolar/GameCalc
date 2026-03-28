@@ -1,0 +1,13 @@
+[
+  {
+    "Name": "Custodian",
+    "CostPerUnit": 4600,
+    "CostPerUnitReassign": 0,
+    "Slot": 1
+  },
+  {
+    "Name": "Supra Custodian",
+    "CostPerUnit": 89100,
+    "Slot": 2
+  }
+]

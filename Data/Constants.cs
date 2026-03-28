@@ -10,6 +10,7 @@ public static class Constants
         public const string GameType = nameof(GameType);
         public const string Race = nameof(Race);
         public const string Id = nameof(Id);
+        public const string Name = nameof(Name);
         public const string Ascension = nameof(Ascension);
         public const string Covert = nameof(Covert);
         public const string AntiCovert = nameof(AntiCovert);

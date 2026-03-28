@@ -3,12 +3,12 @@ using System.Text.Json;
 namespace Data;
 public static class Users
 {
-    public static User Create(string? name, string path, int raceId, int gameType)
+    public static User Create(string? name, string path)
     {
         User user = new User();
         user.Name = name ?? string.Empty;
 
-        user.Accounts.Add(CreateAccount(Enums.Game.Type.Main, raceId));
+        user.Accounts.Add(CreateAccount(Enums.Game.Type.Main));
         user.Accounts.Add(CreateAccount(Enums.Game.Type.Ascended));
         user.Accounts.Add(CreateAccount(Enums.Game.Type.NewGrounds));
 
