@@ -19,6 +19,7 @@ public static class Constants
         public const string MsShields = nameof(MsShields);
         public const string MsFleets = nameof(MsFleets);
         public const string RecruitmentId = nameof(RecruitmentId);
+        public const string GameId = nameof(GameId);
     }
     public static class Files
     {

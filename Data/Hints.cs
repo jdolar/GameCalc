@@ -5,7 +5,6 @@ namespace Data;
 public static class Hints
 {
     private const string _bulletin = "        * ";
-    private const string _line = "-----";
     private const string _preSpace = "  ";
     private const string _tailingSpace = " ";
     private const int _spaceBetween = 10;
@@ -15,7 +14,7 @@ public static class Hints
     #endregion
 
     #region Frame ComboBox
-    public static string User(User user, List<Race> races)
+    public static string User(User user, List<Race> races, Enums.Game.Type selectedGameType)
     {
         if (user == null)
             return "";
@@ -36,9 +35,9 @@ public static class Hints
         ];
 
         List<(string Label, string Value)> fields = [];
-        foreach (Account account in user.Accounts)
+        var accounts = user.Accounts.Where(x => x.GameType == selectedGameType).ToList();
+        foreach (Account account in accounts)
         {
-
             List<(string Label, string Value)> accountFields = [.. keys
                 .Select(property =>
                 {

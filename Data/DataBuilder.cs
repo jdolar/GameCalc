@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using Data.Models;
-using Data.Enums.Race;
+﻿using Data.Enums.Race;
 using Data.Enums.Unit;
+using Data.Models;
+using System.Text.Json;
 namespace Data;
 
 public static class DataBuilder
@@ -36,6 +36,9 @@ public static class DataBuilder
                 if (game == null)
                     continue;
 
+                if (game.Id == default)
+                    game.Id = results.Count + 1;
+
                 List<Unit> baseUnitsFromFiles = GetDataFromJsonFiles(gamesPathFolders[i]);
                 List<Race> availableRaces = [.. races.Where(r => r.Type == game.Type)];
 
@@ -44,13 +47,14 @@ public static class DataBuilder
                 {
                     Race race = raceTemplate.Clone();
                     List<Unit> filteredBase = FilterByEvolution(baseUnitsFromFiles, race);
-                    filteredBase.DumpToFile(raceTemplate.Name);
+
                     if (race.Units == null || race.Units.Count == 0)
                         race.Units = filteredBase;
                     else
                         race.Units = race.Units.MergeWith(filteredBase, race.Evolution);
 
                     game.Races.Add(race);
+                  //  race.Units.DumpToFile(race.Name);
                 }
 
                 results.Add(game);

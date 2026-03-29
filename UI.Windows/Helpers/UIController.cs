@@ -42,13 +42,13 @@ internal static class UIController
     {
         if (input == null || input.Text == upgradeText) return;
 
-        input.Text = upgradeText;
+        input.Text = !string.IsNullOrEmpty(upgradeText) ? upgradeText : string.Empty;
     }
     internal static void UpdateLayoutTabPage(TabPage input, string upgradeText)
     {
         if (input == null || input.Text == upgradeText) return;
 
-        input.Text = upgradeText;
+        input.Text = !string.IsNullOrEmpty(upgradeText) ? upgradeText : string.Empty;
     }
     internal static void UpdateTextBox(TextBox input, string upgradeText)
     {
@@ -61,10 +61,11 @@ internal static class UIController
         input.DataSource = races;
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
     }
-    internal static void SetGamesComboBox(ComboBox input, List<Game> games)
+    internal static void SetGamesComboBox(ComboBox input, List<Game> games, int gameId)
     {
         input.DataSource = games;
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
+        input.SelectedIndex = games.FindIndex(g => g.Id == gameId);
     }
     internal static bool UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
     {
@@ -140,12 +141,49 @@ internal static class UIController
         image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
         return ms.ToArray();
     }
-    internal static User GetUser()
+    internal static User User
     {
-        string name = WindowsIdentity.GetCurrent().Name;
-        string username = name[(name.LastIndexOf('\\') + 1)..];     
-        string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
+        get
+        {
+            string name = WindowsIdentity.GetCurrent().Name;
+            string username = name[(name.LastIndexOf('\\') + 1)..];
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
 
-        return !File.Exists(path) ? Users.Create(username, path) : Users.Get(path);
+            return !File.Exists(path) ? Users.Create(username, path) : Users.Get(path);
+        }
+    }
+    internal static void SetToolTip(ToolTip toolTIp)
+    {
+        toolTIp.InitialDelay = 0;
+        toolTIp.ReshowDelay = 0;
+        toolTIp.AutoPopDelay = 8000;
+        toolTIp.ShowAlways = true;
+        toolTIp.OwnerDraw = true;
+
+        toolTIp.Popup += (s, e) =>
+        {
+            using Font font = new("Consolas", 9);
+
+            Size size = TextRenderer.MeasureText(
+                toolTIp.GetToolTip(e.AssociatedControl),
+                font);
+
+            e.ToolTipSize = size;
+        };
+
+        toolTIp.Draw += (s, e) =>
+        {
+            using Font font = new("Consolas", 9);
+            e.DrawBackground();
+            e.DrawBorder();
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                e.ToolTipText,
+                font,
+                e.Bounds,
+                Color.Black,
+                TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
+        };
     }
 }

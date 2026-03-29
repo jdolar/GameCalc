@@ -5,8 +5,10 @@ public static class Users
 {
     public static User Create(string? name, string path)
     {
-        User user = new User();
-        user.Name = name ?? string.Empty;
+        User user = new()
+        {
+            Name = name ?? string.Empty
+        };
 
         user.Accounts.Add(CreateAccount(Enums.Game.Type.Main));
         user.Accounts.Add(CreateAccount(Enums.Game.Type.Ascended));
@@ -23,12 +25,19 @@ public static class Users
     public static User Get(string path)
     {
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<User>(json, Constants.Json.SerializerOptions) ?? new User();
+        User user =  JsonSerializer.Deserialize<User>(json, Constants.Json.SerializerOptions) ?? new User();
+
+        for (int i = 0; i < user.Accounts.Count; i++)
+            user.Accounts[i].Name = !string.IsNullOrEmpty(user.Accounts[i].Name) ? user.Accounts[i].Name : user.Accounts[i].GameType.ToString();
+
+        return user;
     }
-    private static Account CreateAccount(Enums.Game.Type gameType, int? raceId = null)
+    private static Account CreateAccount(Enums.Game.Type gameType)
      {
-        Account account = new Account();
-        account.GameType = gameType;
+        Account account = new()
+        {
+            GameType = gameType
+        };
 
         account.Properties.Add(Constants.Users.Id, default);
         account.Properties.Add(Constants.Users.Covert, default);
@@ -42,11 +51,7 @@ public static class Users
             account.Properties.Add(Constants.Users.MsFleets, default);
             account.Properties.Add(Constants.Users.MsWeapons, default);
             account.Properties.Add(Constants.Users.MsShields, default);
-
-            if (raceId != null)
-                account.Properties.Add(Constants.Users.Race, (int)raceId);
-            else
-                account.Properties.Add(Constants.Users.Race, default);
+            account.Properties.Add(Constants.Users.Race, default);   
         }
 
         return account;

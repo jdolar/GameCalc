@@ -13,10 +13,9 @@ internal sealed class GetGot
     private readonly Label _ableToBuy, _costToBuy, _costToReassign;
     private readonly ToolTip _hint;
     private Race _selectedRace = new();
-   // private Game _selectedGame = new();
 
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
-                   Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, TabPage tabPage, Game selectedGame, bool? imageRecognition = null)
+                   Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
     {
         _itemTypes = itemTypes;
         _itemPurposes = itemPurposes;
@@ -27,7 +26,6 @@ internal sealed class GetGot
         _costToReassign = costToReassign;
         _hint = hint;
         _races = races;
-   //     _selectedGame = selectedGame;
 
         UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.GetGot);
 

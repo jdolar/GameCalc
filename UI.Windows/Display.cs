@@ -13,7 +13,7 @@ public partial class Display : Form
         _ = new Frame(_races, _games, _amountToCopy, _valueToCopy, _user, _toolTips, ref _activeGame);
 
         _ = new GetGot(_getGotItemTypes, _getGotItemPurposes, _getGotSelectedItems, _races, _getGotUserInput, _getGotAbleToBuy,
-                       _getGotCostToReassign, _getGotCostToBuy,  _toolTips, _tabPageGetGot, _activeGame);
+                       _getGotCostToReassign, _getGotCostToBuy,  _toolTips, _tabPageGetGot);
 
         _ = new Simple(_simpleResult, _simpleLeftInput, _simpleRightInput, _simpleHistory, _simpleSum,
                        _simpleMultiply, _simpleDivide, _simpleDeduct, _simpleClear, _simpleClearHistory, _tabPageSimple);
