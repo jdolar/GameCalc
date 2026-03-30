@@ -59,6 +59,7 @@ partial class Display
         _bottomLayout = new TableLayoutPanel();
         _valueToCopy = new ComboBox();
         _amountToCopy = new ComboBox();
+        _generatePersonalLog = new Button();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
         _unitProductionLayout.SuspendLayout();
@@ -512,9 +513,21 @@ partial class Display
         _amountToCopy.Size = new Size(98, 23);
         _amountToCopy.TabIndex = 0;
         // 
+        // _generatePersonalLog
+        // 
+        _generatePersonalLog.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        _generatePersonalLog.Location = new Point(381, 315);
+        _generatePersonalLog.Name = "_generatePersonalLog";
+        _generatePersonalLog.Size = new Size(158, 47);
+        _generatePersonalLog.TabIndex = 41;
+        _generatePersonalLog.Text = "GeneratePersonalLog";
+        _generatePersonalLog.UseVisualStyleBackColor = true;
+        _generatePersonalLog.Click += _generatePersonalLog_Click;
+        // 
         // Display
         // 
         ClientSize = new Size(551, 373);
+        Controls.Add(_generatePersonalLog);
         Controls.Add(_bottomLayout);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
@@ -580,4 +593,5 @@ partial class Display
     internal TableLayoutPanel _bottomLayout;
     internal ComboBox _amountToCopy;
     internal ComboBox _valueToCopy;
+    internal Button _generatePersonalLog;
 }

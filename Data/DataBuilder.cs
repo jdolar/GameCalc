@@ -6,6 +6,16 @@ namespace Data;
 
 public static class DataBuilder
 {
+    public static PersonalLog GetLog(string? fileName = null)
+    {
+        fileName ??= "TheKoalition.json";
+        
+        string path = Path.Combine(Constants.Files.DataDirectory, fileName);
+        string fileContent = File.ReadAllText(path);
+        PersonalLog log = JsonSerializer.Deserialize<PersonalLog>(fileContent, Constants.Json.SerializerOptions) ?? new PersonalLog();
+
+        return log;
+    }
     public static List<Game> GetGames(string fileName)
     {
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", fileName);
@@ -54,7 +64,7 @@ public static class DataBuilder
                         race.Units = race.Units.MergeWith(filteredBase, race.Evolution);
 
                     game.Races.Add(race);
-                  //  race.Units.DumpToFile(race.Name);
+                    //  race.Units.DumpToFile(race.Name);
                 }
 
                 results.Add(game);
@@ -128,16 +138,17 @@ public static class DataBuilder
 
             if (race.Enabled)
             {
-                if(string.IsNullOrEmpty(race.Name))
+                if (string.IsNullOrEmpty(race.Name))
                     race.Name = race.Type.ToString();
 
                 if (race.Id == default)
                     race.Id = races.Count + 1;
 
                 races.Add(race);
-            }         
+            }
         }
 
         return races;
     }
+
 }

@@ -4,6 +4,12 @@ namespace Data;
 
 public static class Constants
 {
+    public static class  PersonalLog
+    {
+        public const string PlayerStats = "<a href=stats.php?id=";
+        public const string AllianceStats = "<a href=allianceMembers.php?id=";
+        public const string LogEnd = "</a><br />";
+    }
     public static class Users
     {
         public const string AccountCreated = nameof(AccountCreated);
