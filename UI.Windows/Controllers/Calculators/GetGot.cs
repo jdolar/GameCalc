@@ -12,6 +12,9 @@ internal sealed class GetGot
     private readonly TextBox _userInput;
     private readonly Label _ableToBuy, _costToBuy, _costToReassign;
     private readonly ToolTip _hint;
+    private string _costToBuyCache = string.Empty;
+    private string _ableToBuyCache = string.Empty;
+    private string _costToReassignCache= string.Empty;
     private Race _selectedRace = new();
 
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
@@ -32,9 +35,9 @@ internal sealed class GetGot
         UIController.SetItemTypesComboBox(_itemTypes);
         UIController.SetItemPurposeComboBox(_itemPurposes);
 
-        _ableToBuy.Click += (s, e) => UIController.CopyToClipboard(_ableToBuy.Text);
-        _costToReassign.Click += (s, e) => UIController.CopyToClipboard(_costToReassign.Text);
-        _costToBuy.Click += (s, e) => UIController.CopyToClipboard(_costToBuy.Text);
+        _ableToBuy.Click += (s, e) => UIController.CopyToClipboard(_ableToBuyCache);
+        _costToReassign.Click += (s, e) => UIController.CopyToClipboard(_costToReassignCache);
+        _costToBuy.Click += (s, e) => UIController.CopyToClipboard(_costToBuyCache);
 
         _itemTypes.SelectedIndexChanged += (s, e) => UpdateSelectedItem();
         _itemPurposes.SelectedIndexChanged += (s, e) => UpdateSelectedItem();
@@ -81,6 +84,10 @@ internal sealed class GetGot
 
         (string costToBuy, string ableToBuy, string costToReassign, string input)
         = Calc.CalculateAbleToBuyAndCostToBuy(_userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
+
+        _ableToBuyCache = ableToBuy;
+        _costToBuyCache = costToBuy;
+        _costToReassignCache = costToReassign;
 
         string costToBuyLabel = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Data.Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToBuy, "buy", unit);
         UIController.UpdateLabel(_costToBuy, costToBuyLabel);
