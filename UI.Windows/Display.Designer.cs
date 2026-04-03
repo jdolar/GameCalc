@@ -57,9 +57,10 @@ partial class Display
         _simpleHistory = new ListBox();
         _raceLayout = new TableLayoutPanel();
         _bottomLayout = new TableLayoutPanel();
-        _valueToCopy = new ComboBox();
         _amountToCopy = new ComboBox();
+        _valueToCopy = new ComboBox();
         _generatePersonalLog = new Button();
+        _copyToClipBoard = new Button();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
         _unitProductionLayout.SuspendLayout();
@@ -482,26 +483,17 @@ partial class Display
         _bottomLayout.ColumnCount = 2;
         _bottomLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         _bottomLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-        _bottomLayout.Controls.Add(_valueToCopy, 1, 0);
         _bottomLayout.Controls.Add(_amountToCopy, 0, 0);
+        _bottomLayout.Controls.Add(_valueToCopy, 1, 0);
         _bottomLayout.Location = new Point(9, 315);
         _bottomLayout.Margin = new Padding(0);
         _bottomLayout.Name = "_bottomLayout";
         _bottomLayout.Padding = new Padding(5, 10, 5, 5);
-        _bottomLayout.RowCount = 1;
+        _bottomLayout.RowCount = 2;
         _bottomLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-        _bottomLayout.Size = new Size(286, 47);
+        _bottomLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+        _bottomLayout.Size = new Size(261, 47);
         _bottomLayout.TabIndex = 40;
-        // 
-        // _valueToCopy
-        // 
-        _valueToCopy.DropDownStyle = ComboBoxStyle.DropDownList;
-        _valueToCopy.Items.AddRange(new object[] { "Billion", "Trillion" });
-        _valueToCopy.Location = new Point(163, 13);
-        _valueToCopy.Margin = new Padding(20, 3, 0, 0);
-        _valueToCopy.Name = "_valueToCopy";
-        _valueToCopy.Size = new Size(97, 23);
-        _valueToCopy.TabIndex = 0;
         // 
         // _amountToCopy
         // 
@@ -512,6 +504,16 @@ partial class Display
         _amountToCopy.Name = "_amountToCopy";
         _amountToCopy.Size = new Size(98, 23);
         _amountToCopy.TabIndex = 0;
+        // 
+        // _valueToCopy
+        // 
+        _valueToCopy.DropDownStyle = ComboBoxStyle.DropDownList;
+        _valueToCopy.Items.AddRange(new object[] { "Billion", "Trillion" });
+        _valueToCopy.Location = new Point(150, 13);
+        _valueToCopy.Margin = new Padding(20, 3, 0, 0);
+        _valueToCopy.Name = "_valueToCopy";
+        _valueToCopy.Size = new Size(97, 23);
+        _valueToCopy.TabIndex = 0;
         // 
         // _generatePersonalLog
         // 
@@ -524,14 +526,29 @@ partial class Display
         _generatePersonalLog.UseVisualStyleBackColor = true;
         _generatePersonalLog.Click += _generatePersonalLog_Click;
         // 
+        // _copyToClipBoard
+        // 
+        _copyToClipBoard.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        _copyToClipBoard.Location = new Point(34, 365);
+        _copyToClipBoard.Name = "_copyToClipBoard";
+        _copyToClipBoard.Size = new Size(222, 28);
+        _copyToClipBoard.TabIndex = 15;
+        _copyToClipBoard.Text = "Copy";
+        _copyToClipBoard.UseVisualStyleBackColor = true;
+        // 
         // Display
         // 
-        ClientSize = new Size(551, 373);
+        ClientSize = new Size(551, 402);
         Controls.Add(_generatePersonalLog);
         Controls.Add(_bottomLayout);
+        Controls.Add(_copyToClipBoard);
         Controls.Add(_raceLayout);
         Controls.Add(_tab);
+        FormBorderStyle = FormBorderStyle.Fixed3D;
+        MaximizeBox = false;
+        MinimizeBox = false;
         Name = "Display";
+        ShowIcon = false;
         _commandsLayout.ResumeLayout(false);
         _commandsLayout.PerformLayout();
         _upperLayout.ResumeLayout(false);
@@ -594,4 +611,5 @@ partial class Display
     internal ComboBox _amountToCopy;
     internal ComboBox _valueToCopy;
     internal Button _generatePersonalLog;
+    internal Button _copyToClipBoard;
 }

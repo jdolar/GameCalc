@@ -83,7 +83,7 @@ internal sealed class GetGot
         if (unit == null) return;
 
         (string costToBuy, string ableToBuy, string costToReassign, string input)
-        = Calc.CalculateAbleToBuyAndCostToBuy(_userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
+        = Operation.CalculateAbleToBuyAndCostToBuy(_userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
 
         _ableToBuyCache = ableToBuy;
         _costToBuyCache = costToBuy;

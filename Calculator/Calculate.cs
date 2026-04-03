@@ -1,5 +1,5 @@
 ﻿namespace Calculator;
-internal static class Operations
+internal static class Calculate
 {
     internal static long Multiply(long left, long right) => left * right;
     internal static long Divide(long left, long right) => right != 0 ? left / right : 0;

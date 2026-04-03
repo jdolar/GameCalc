@@ -29,7 +29,7 @@ internal sealed class UnitProduction
         calculateDesiredUp.Click += (s, e) =>
         {
             (string results, string multiplier, string formattedLeftInput, string formattedRightInput)
-                = Calc.CalculateDesiredUp(fromInput.Text, toInput.Text);
+                = Operation.CalculateDesiredUp(fromInput.Text, toInput.Text);
 
             if (results != upResult.Text)
             {
@@ -42,7 +42,7 @@ internal sealed class UnitProduction
         calculateNaqToSpend.Click += (s, e) =>
         {
             (string results, string multiplier, string formattedLeftInput, string formattedRightInput)
-                = Calc.CalculatePossibleUpUpgrade(fromInput.Text, resToSpend.Text);
+                = Operation.CalculatePossibleUpUpgrade(fromInput.Text, resToSpend.Text);
 
             if (results != upResult.Text)
             {

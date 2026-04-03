@@ -14,6 +14,9 @@ public static class Users
         user.Accounts.Add(CreateAccount(Enums.Game.Type.Ascended));
         user.Accounts.Add(CreateAccount(Enums.Game.Type.NewGrounds));
 
+        for (int i = 0; i < user.Accounts.Count; i++)
+            user.Accounts[i].Name = !string.IsNullOrEmpty(user.Accounts[i].Name) ? user.Accounts[i].Name : user.Accounts[i].GameType.ToString();
+
         if (Directory.Exists(path))
             File.Delete(path);
 
@@ -25,18 +28,14 @@ public static class Users
     public static User Get(string path)
     {
         string json = File.ReadAllText(path);
-        User user =  JsonSerializer.Deserialize<User>(json, Constants.Json.SerializerOptions) ?? new User();
-
-        for (int i = 0; i < user.Accounts.Count; i++)
-            user.Accounts[i].Name = !string.IsNullOrEmpty(user.Accounts[i].Name) ? user.Accounts[i].Name : user.Accounts[i].GameType.ToString();
-
-        return user;
+        return JsonSerializer.Deserialize<User>(json, Constants.Json.SerializerOptions) ?? new User();
     }
-    private static Account CreateAccount(Enums.Game.Type gameType)
+    private static Account CreateAccount(Enums.Game.Type gameType, string? name = null)
      {
         Account account = new()
         {
-            GameType = gameType
+            GameType = gameType,
+            Name = !string.IsNullOrEmpty(name) ? name : gameType.ToString()
         };
 
         account.Properties.Add(Constants.Users.Id, default);

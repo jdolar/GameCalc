@@ -16,42 +16,26 @@ internal sealed class Simple
 
         sum.Click += (s, e) =>
         {
-            string calculation = Calc.Sum(inputLeft.Text, inputRight.Text, true);
-            if (!string.IsNullOrEmpty(calculation))
-            {
-                UIController.UpdateLabel(result, calculation);
-                history.Items.Add($"{Clean.Text(inputLeft.Text)}+{Clean.Text(inputRight.Text)}={calculation}");
-            }
+            string calculation = Operation.Sum(inputLeft.Text, inputRight.Text, true);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, "+", calculation);
         };
         
         deduct.Click += (s, e) =>
         {
-            string calculation = Calc.Deduct(inputLeft.Text, inputRight.Text);
-            if (!string.IsNullOrEmpty(calculation))
-            {
-                UIController.UpdateLabel(result, calculation);
-                history.Items.Add($"{Clean.Text(inputLeft.Text)}-{Clean.Text(inputRight.Text)}={result}");
-            }
+            string calculation = Operation.Deduct(inputLeft.Text, inputRight.Text, true);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, "-", calculation);
         };
         
         divide.Click += (s, e) =>
         {
-            string calculation = Calc.Divide(inputLeft.Text, inputRight.Text);
-            if (!string.IsNullOrEmpty(calculation))
-            {
-                UIController.UpdateLabel(result, calculation);
-                history.Items.Add($"{Clean.Text(inputLeft.Text)}/{Clean.Text(inputRight.Text)}={result}");
-            }
+            string calculation = Operation.Divide(inputLeft.Text, inputRight.Text, true);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, "/", calculation);
         };
         
         multiply.Click += (s, e) =>
         {
-            string calculation = Calc.Multiply(inputLeft.Text, inputRight.Text);
-            if (!string.IsNullOrEmpty(calculation))
-            {
-                UIController.UpdateLabel(result, calculation);
-                history.Items.Add($"{Clean.Text(inputLeft.Text)}x{Clean.Text(inputRight.Text)}={result}");
-            }
+            string calculation = Operation.Multiply(inputLeft.Text, inputRight.Text, true);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, "x", calculation);
         };
 
         clear.Click += (s, e) =>
@@ -61,7 +45,15 @@ internal sealed class Simple
             UIController.UpdateTextBox(inputRight, string.Empty);
         };
 
+        history.Click += (s, e) =>
+        {
+            string? item = history.SelectedItem?.ToString()?.Split('=')[1];
+            if (!string.IsNullOrEmpty(item))
+                UIController.CopyToClipboard(item);
+        };
+
         clearHistory.Click += (s, e) => history.Items.Clear();
         result.Click += (s, e) => UIController.CopyToClipboard(result.Text);
     }
+    private void AddToHistory(ListBox history, string left, string right, string operation, string result) => history.Items.Add($"{Clean.Text(left)}{operation}{Clean.Text(right)}={result}");
 }

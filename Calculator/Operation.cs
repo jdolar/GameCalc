@@ -1,13 +1,13 @@
 ﻿using Data.Commands;
 namespace Calculator;
-public static class Calc
+public static class Operation
 {
     #region PUBLIC Basic Operations
-    public static string Divide(string left, string right, bool format = false) => Calculate(Operations.Divide, left, right, format);
-    public static string Sum(string left, string right, bool format = false) => Calculate(Operations.Sum, left, right, format);
-    public static string Deduct(string left, string right, bool format = false) => Calculate(Operations.Deduct, left, right, format);
-    public static string Multiply(string left, string right, bool format = false) => Calculate(Operations.Multiply, left, right, format);
-    public static long Multiply(long left, long right) => Operations.Multiply(left, right);
+    public static string Divide(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Divide, left, right, format);
+    public static string Sum(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Sum, left, right, format);
+    public static string Deduct(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Deduct, left, right, format);
+    public static string Multiply(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Multiply, left, right, format);
+    public static long Multiply(long left, long right) => Calculator.Calculate.Multiply(left, right);
     #endregion
 
     #region PUBLIC BL Operations
@@ -16,9 +16,9 @@ public static class Calc
     public static (string, string, string, string) CalculateAbleToBuyAndCostToBuy(string userInput, long costPerUnit, long? costPerUnitReassign, bool? format = null)
     {
         long input = Data.Commands.Convert.ToNumber(Clean.Text(userInput));
-        string costToBuy = CalculateAndReturn(Operations.Multiply, input, costPerUnit, format);
-        string ableToBuy = CalculateAndReturn(Operations.Divide, input, costPerUnit, format);
-        string costToReassign = costPerUnitReassign.HasValue ? CalculateAndReturn(Operations.Divide, input, costPerUnitReassign, format) : string.Empty;
+        string costToBuy = CalculateAndReturn(Calculator.Calculate.Multiply, input, costPerUnit, format);
+        string ableToBuy = CalculateAndReturn(Calculator.Calculate.Divide, input, costPerUnit, format);
+        string costToReassign = costPerUnitReassign.HasValue ? CalculateAndReturn(Calculator.Calculate.Divide, input, costPerUnitReassign, format) : string.Empty;
 
         return (costToBuy, ableToBuy, costToReassign, Data.Commands.Convert.ToLabel(input));
     }

@@ -12,11 +12,11 @@ internal sealed class Frame
     private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;
     private readonly Label _user;
     private readonly ToolTip _hints;
-    private User _activeUser = UIController.User;
+    private readonly User _activeUser = UIController.User;
     private Account _selectedAccount;
     private Game _selectedGame;
     private Race _selectedRace;
-    public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, ToolTip hints, ref Game selectedGame)
+    public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, ToolTip hints, Button copyToClipBoard, ref Game selectedGame)
     {
         _hints = hints;
         _valueToCopy = valueToCopy;
@@ -42,13 +42,9 @@ internal sealed class Frame
 
         UIController.SetToolTip(hints);
 
-        _amountToCopy.SelectedIndex = 0;
-        _amountToCopy.SelectedIndexChanged += (s, e) => CopyToClipBoard();
-        _amountToCopy.Click += (s, e) => CopyToClipBoard();
-
         _valueToCopy.SelectedIndex = 0;
-        _valueToCopy.SelectedIndexChanged += (s, e) => CopyToClipBoard();
-        _valueToCopy.Click += (s, e) => CopyToClipBoard();
+        _amountToCopy.SelectedIndex = 0;
+        copyToClipBoard.Click += (s, e) => CopyToClipBoard();
 
         UpdateSelectedGame();
         UpdateUser();
@@ -90,7 +86,7 @@ internal sealed class Frame
             right = _trillion;
 
         long left = Data.Commands.Convert.ToNumber(Clean.Text(_amountToCopy.Text));
-        long result = Calc.Multiply(left, right);
+        long result = Operation.Multiply(left, right);
 
         UIController.CopyToClipboard(result.ToString());
 
