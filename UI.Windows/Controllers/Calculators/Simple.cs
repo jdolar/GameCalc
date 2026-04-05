@@ -17,25 +17,25 @@ internal sealed class Simple
         sum.Click += (s, e) =>
         {
             string calculation = Operation.Sum(inputLeft.Text, inputRight.Text, true);
-            AddToHistory(history, inputLeft.Text, inputRight.Text, "+", calculation);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, '+', calculation);
         };
         
         deduct.Click += (s, e) =>
         {
             string calculation = Operation.Deduct(inputLeft.Text, inputRight.Text, true);
-            AddToHistory(history, inputLeft.Text, inputRight.Text, "-", calculation);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, '-', calculation);
         };
         
         divide.Click += (s, e) =>
         {
             string calculation = Operation.Divide(inputLeft.Text, inputRight.Text, true);
-            AddToHistory(history, inputLeft.Text, inputRight.Text, "/", calculation);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, '/', calculation);
         };
         
         multiply.Click += (s, e) =>
         {
             string calculation = Operation.Multiply(inputLeft.Text, inputRight.Text, true);
-            AddToHistory(history, inputLeft.Text, inputRight.Text, "x", calculation);
+            AddToHistory(history, inputLeft.Text, inputRight.Text, 'x', calculation);
         };
 
         clear.Click += (s, e) =>
@@ -55,5 +55,5 @@ internal sealed class Simple
         clearHistory.Click += (s, e) => history.Items.Clear();
         result.Click += (s, e) => UIController.CopyToClipboard(result.Text);
     }
-    private void AddToHistory(ListBox history, string left, string right, string operation, string result) => history.Items.Add($"{Clean.Text(left)}{operation}{Clean.Text(right)}={result}");
+    private static void AddToHistory(ListBox history, string left, string right, char operation, string result) => history.Items.Add($"{Clean.Text(left)}{operation}{Clean.Text(right)}={result}");
 }

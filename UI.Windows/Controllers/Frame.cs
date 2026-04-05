@@ -12,8 +12,7 @@ internal sealed class Frame
     private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;
     private readonly Label _user;
     private readonly ToolTip _hints;
-    private readonly User _activeUser = UIController.User;
-    private Account _selectedAccount;
+    private readonly ActiveUser _activeUser = UIController.GetUser();
     private Game _selectedGame;
     private Race _selectedRace;
     public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, ToolTip hints, Button copyToClipBoard, ref Game selectedGame)
@@ -25,13 +24,8 @@ internal sealed class Frame
         _games = games;
         _races = races;
 
-        List<Game> enabledGames = UIController.Games;
-        var userGames = GetUserGames(enabledGames);
-        
-        _selectedAccount = _activeUser.Accounts[0];
-        _selectedAccount.Properties.TryGetValue(Constants.Users.GameId, out int gameId);
-
-        UIController.SetGamesComboBox(_games, userGames, gameId);
+        int gameId = _activeUser.ActiveAccount.Properties.TryGetValue(Constants.Users.GameId, out gameId) ? gameId : 0;
+        UIController.SetGamesComboBox(_games, _activeUser.Games, gameId);
         selectedGame = (Game)_games.SelectedItem!;
         _selectedGame = selectedGame;
         _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
@@ -66,7 +60,7 @@ internal sealed class Frame
     }
     public void UpdateSelectedAccount()
     {
-        _selectedAccount = _activeUser.Accounts.Find(x => x.Properties.ContainsKey(Constants.Users.GameId) && x.Properties[Constants.Users.GameId].ToString() == _selectedGame.Id.ToString()) ?? _activeUser.Accounts[0];
+        _activeUser.ActiveAccount = _activeUser.User.Accounts.Find(x => x.Properties.ContainsKey(Constants.Users.GameId) && x.Properties[Constants.Users.GameId].ToString() == _selectedGame.Id.ToString()) ?? _activeUser.User.Accounts[0];
         UpdateUser();
     }
     private void UpdateSelectedRace()
@@ -93,24 +87,9 @@ internal sealed class Frame
         _hints.SetToolTip(_amountToCopy, Data.Hints.CopyToClipBoard(Data.Commands.Convert.ToLabel(result)));
         _hints.SetToolTip(_valueToCopy, Data.Commands.Convert.ToLabel(right));
     }
-    private List<Game> GetUserGames(List<Game> enabledGames)
-    {
-        List<Game> userGames = [];
-        foreach (Account account in _activeUser.Accounts)
-        {
-            Game? existingGame = enabledGames.Find(x => x.Type == account.GameType);
-            if (existingGame != null)
-            {
-                account.Properties.Add(Constants.Users.GameId, existingGame.Id);
-                userGames.Add(existingGame);
-            }
-        }
-
-        return userGames;
-    }
     private void UpdateUser()
     {
-        UIController.UpdateLabel(_user, _selectedAccount.Name);
-        _hints.SetToolTip(_user, Data.Hints.User(_activeUser, _selectedGame.Races, _selectedAccount.GameType));
+        UIController.UpdateLabel(_user, _activeUser.ActiveAccount.Name);
+        _hints.SetToolTip(_user, Data.Hints.User(_activeUser.User, _selectedGame.Races, _activeUser.ActiveAccount.GameType));
     }
 }

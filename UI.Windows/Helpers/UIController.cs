@@ -4,8 +4,28 @@ using Data.Enums.Unit;
 using Data.Models;
 using System.Security.Principal;
 namespace UI.Windows.Helpers;
+
 internal static class UIController
 {
+    internal static User User
+    {
+        get
+        {
+            string name = WindowsIdentity.GetCurrent().Name;
+            string username = name[(name.LastIndexOf('\\') + 1)..];
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
+
+            return !File.Exists(path) ? Users.Create(username, path) : Users.Get(path);
+        }
+    }
+    internal static List<Game> Games
+    {
+        get
+        {
+            string[] jsonFiles = Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", "Games"));
+            return DataBuilder.GetGamesData(DataBuilder.GetGames("Games.json"), jsonFiles);
+        }
+    }
     internal static readonly Data.Enums.Unit.Type[] _itemTypes = Enum.GetValues<Data.Enums.Unit.Type>();
     internal static readonly Purpose[] _itemPurposes = Enum.GetValues<Purpose>();
     internal static ComboBox SetItemTypesComboBox(ComboBox input)
@@ -29,14 +49,6 @@ internal static class UIController
         input.SelectedIndex = 0;
 
         return input;
-    }
-    internal static List<Game> Games
-    {
-        get
-        {
-            string[] jsonFiles = Directory.GetDirectories(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json", "Games"));
-            return DataBuilder.GetGamesData(DataBuilder.GetGames("Games.json"), jsonFiles);
-        }
     }
     internal static void UpdateLabel(Label input, string upgradeText)
     {
@@ -141,16 +153,30 @@ internal static class UIController
         image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
         return ms.ToArray();
     }
-    internal static User User
+    internal static ActiveUser GetUser()
     {
-        get
+        User user = UIController.User;
+        return new()
         {
-            string name = WindowsIdentity.GetCurrent().Name;
-            string username = name[(name.LastIndexOf('\\') + 1)..];
-            string path = Path.Combine(Directory.GetCurrentDirectory(), $"{username}.json");
-
-            return !File.Exists(path) ? Users.Create(username, path) : Users.Get(path);
+            User = user,
+            Games = GetUserGames(Games, user.Accounts),
+            ActiveAccount = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account()
+        };      
+    }
+    internal static  List<Game> GetUserGames(List<Game> enabledGames, List<Account> accounts)
+    {
+        List<Game> userGames = [];
+        foreach (Account account in accounts)
+        {
+            Game? existingGame = enabledGames.Find(x => x.Type == account.GameType);
+            if (existingGame != null)
+            {
+                account.Properties.Add(Constants.Users.GameId, existingGame.Id);
+                userGames.Add(existingGame);
+            }
         }
+
+        return userGames;
     }
     internal static void SetToolTip(ToolTip toolTIp)
     {
