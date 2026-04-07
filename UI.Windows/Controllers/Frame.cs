@@ -15,7 +15,7 @@ internal sealed class Frame
     private readonly ActiveUser _activeUser = UIController.GetUser();
     private Game _selectedGame;
     private Race _selectedRace;
-    public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, ToolTip hints, Button copyToClipBoard, ref Game selectedGame)
+    public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, Button generatePersonalLog, Button copyToClipBoard, ToolTip hints, ref Game selectedGame)
     {
         _hints = hints;
         _valueToCopy = valueToCopy;
@@ -40,10 +40,12 @@ internal sealed class Frame
         _amountToCopy.SelectedIndex = 0;
         copyToClipBoard.Click += (s, e) => CopyToClipBoard();
 
+        string log = Hints.PersonalLog(DataBuilder.GetLog(_activeUser.User.Name));
+        generatePersonalLog.Click += (s, e) => UIController.CopyToClipboard(log, false);
+        _hints.SetToolTip(generatePersonalLog, log);
+
         UpdateSelectedGame();
         UpdateUser();
-
-        CopyToClipBoard();
     }
     public void UpdateSelectedGame()
     {

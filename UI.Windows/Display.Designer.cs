@@ -59,7 +59,7 @@ partial class Display
         _bottomLayout = new TableLayoutPanel();
         _amountToCopy = new ComboBox();
         _valueToCopy = new ComboBox();
-        _generatePersonalLog = new Button();
+        _copyToClipBoardPersonalLog = new Button();
         _copyToClipBoard = new Button();
         _commandsLayout.SuspendLayout();
         _upperLayout.SuspendLayout();
@@ -515,16 +515,15 @@ partial class Display
         _valueToCopy.Size = new Size(97, 23);
         _valueToCopy.TabIndex = 0;
         // 
-        // _generatePersonalLog
+        // _copyToClipBoardPersonalLog
         // 
-        _generatePersonalLog.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
-        _generatePersonalLog.Location = new Point(381, 315);
-        _generatePersonalLog.Name = "_generatePersonalLog";
-        _generatePersonalLog.Size = new Size(158, 47);
-        _generatePersonalLog.TabIndex = 41;
-        _generatePersonalLog.Text = "GeneratePersonalLog";
-        _generatePersonalLog.UseVisualStyleBackColor = true;
-        _generatePersonalLog.Click += _generatePersonalLog_Click;
+        _copyToClipBoardPersonalLog.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        _copyToClipBoardPersonalLog.Location = new Point(454, 315);
+        _copyToClipBoardPersonalLog.Name = "_copyToClipBoardPersonalLog";
+        _copyToClipBoardPersonalLog.Size = new Size(89, 28);
+        _copyToClipBoardPersonalLog.TabIndex = 41;
+        _copyToClipBoardPersonalLog.Text = "CopyLog";
+        _copyToClipBoardPersonalLog.UseVisualStyleBackColor = true;
         // 
         // _copyToClipBoard
         // 
@@ -539,7 +538,7 @@ partial class Display
         // Display
         // 
         ClientSize = new Size(551, 402);
-        Controls.Add(_generatePersonalLog);
+        Controls.Add(_copyToClipBoardPersonalLog);
         Controls.Add(_bottomLayout);
         Controls.Add(_copyToClipBoard);
         Controls.Add(_raceLayout);
@@ -610,6 +609,6 @@ partial class Display
     internal TableLayoutPanel _bottomLayout;
     internal ComboBox _amountToCopy;
     internal ComboBox _valueToCopy;
-    internal Button _generatePersonalLog;
+    internal Button _copyToClipBoardPersonalLog;
     internal Button _copyToClipBoard;
 }

@@ -3,16 +3,27 @@ using Data.Enums.Unit;
 using Data.Models;
 using System.Text.Json;
 namespace Data;
-
 public static class DataBuilder
 {
-    public static PersonalLog GetLog(string? fileName = null)
+    public static PersonalLog GetLog(string fileName)
     {
-        fileName ??= "TheKoalition.json";
-        
-        string path = Path.Combine(Constants.Files.DataDirectory, fileName);
-        string fileContent = File.ReadAllText(path);
-        PersonalLog log = JsonSerializer.Deserialize<PersonalLog>(fileContent, Constants.Json.SerializerOptions) ?? new PersonalLog();
+        PersonalLog log;
+
+        string path = Path.Combine(Directory.GetCurrentDirectory(), $"{fileName}Log.json");
+        if (!File.Exists(path))
+        {
+            log = new PersonalLog();
+            log.Created = DateTime.Now;
+            log.Owner = fileName;
+
+            string fileContent = JsonSerializer.Serialize(log, Constants.Json.SerializerOptions);
+            File.WriteAllText(path, fileContent);
+        }
+        else
+        {
+            string fileContent = File.ReadAllText(path);
+            log = JsonSerializer.Deserialize<PersonalLog>(fileContent, Constants.Json.SerializerOptions) ?? new PersonalLog();
+        }
 
         return log;
     }
@@ -64,7 +75,6 @@ public static class DataBuilder
                         race.Units = race.Units.MergeWith(filteredBase, race.Evolution);
 
                     game.Races.Add(race);
-                    //  race.Units.DumpToFile(race.Name);
                 }
 
                 results.Add(game);
@@ -150,5 +160,4 @@ public static class DataBuilder
 
         return races;
     }
-
 }

@@ -140,12 +140,15 @@ internal static class UIController
         if (txtBox.Text != text)
             txtBox.Text = text;
     }
-    internal static void CopyToClipboard(string text)
+    internal static void CopyToClipboard(string text, bool? clean = null)
     {
         if (string.IsNullOrEmpty(text))
             return;
-
-        Clipboard.SetText(Clean.Text(text));
+        
+        if(clean.HasValue && clean == false)
+            Clipboard.SetText(text);       
+        else 
+            Clipboard.SetText(Clean.Text(text));
     }
     internal static byte[] ImageToBytes(Image image)
     {

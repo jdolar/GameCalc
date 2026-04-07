@@ -1,8 +1,7 @@
-using Data;
 using Data.Models;
-using System.Text;
 using UI.Windows.Controllers;
 using UI.Windows.Controllers.Calculators;
+using UI.Windows.Properties;
 namespace UI.Windows;
 
 public partial class Display : Form
@@ -11,8 +10,9 @@ public partial class Display : Form
     public Display()
     {
         InitializeComponent();
+        SetTitle();
 
-        _ = new Frame(_races, _games, _amountToCopy, _valueToCopy, _user, _toolTips, _copyToClipBoard, ref _activeGame);
+        _ = new Frame(_races, _games, _amountToCopy, _valueToCopy, _user, _copyToClipBoardPersonalLog, _copyToClipBoard, _toolTips, ref _activeGame);
 
         _ = new GetGot(_getGotItemTypes, _getGotItemPurposes, _getGotSelectedItems, _races, _getGotUserInput, _getGotAbleToBuy,
                        _getGotCostToReassign, _getGotCostToBuy, _toolTips, _tabPageGetGot);
@@ -26,35 +26,5 @@ public partial class Display : Form
 
     }
 
-    private void _generatePersonalLog_Click(object sender, EventArgs e)
-    {
-        var personalLog = DataBuilder.GetLog();
-
-        StringBuilder sb = new();
-        int entryCount = personalLog.Entries.Count;
-        for(int i=0; i< entryCount; i++)
-        {
-            if (personalLog.Entries[i].Type == Data.Enums.PersonalLog.EntryType.Player)
-                sb.Append(Constants.PersonalLog.PlayerStats);
-            else if (personalLog.Entries[i].Type == Data.Enums.PersonalLog.EntryType.Alliance)
-                sb.Append(Constants.PersonalLog.AllianceStats);
-
-            sb.Append(personalLog.Entries[i].Id);
-            sb.Append('>');
-            
-            if (personalLog.Entries[i].Type == Data.Enums.PersonalLog.EntryType.Alliance)
-                sb.Append(" [ ");
-            
-            sb.Append(personalLog.Entries[i].Name);
-            
-            if (personalLog.Entries[i].Type == Data.Enums.PersonalLog.EntryType.Alliance)
-                sb.Append(" ] ");
-            
-            sb.Append(Constants.PersonalLog.LogEnd);
-
-            if(i != entryCount - 1)
-                sb.AppendLine();
-        }
-        string a = sb.ToString();   
-    }
+    private void SetTitle() => this.Text = $"{AppInfo.Name} {AppInfo.Version} [{AppInfo.InfoVersion}]";
 }

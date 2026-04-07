@@ -1,7 +1,6 @@
 ﻿using Data.Models;
 using System.Text;
 namespace Data;
-
 public static class Hints
 {
     private const string _bulletin = "        * ";
@@ -11,6 +10,37 @@ public static class Hints
 
     #region Frame
     public static string CopyToClipBoard(string value)=>string.Format(Constants.GUI.Hints.CopyAmountToClipBoard, value);
+    public static string PersonalLog(PersonalLog log)
+    {
+        StringBuilder sb = new();
+        
+        int entryCount = log.Entries.Count;
+        for (int i = 0; i < entryCount; i++)
+        {
+            if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Player)
+                sb.Append(Constants.PersonalLog.PlayerStats);
+            else if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Alliance)
+                sb.Append(Constants.PersonalLog.AllianceStats);
+
+            sb.Append(log.Entries[i].Id);
+            sb.Append('>');
+
+            if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Alliance)
+                sb.Append(" [ ");
+
+            sb.Append(log.Entries[i].Name);
+
+            if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Alliance)
+                sb.Append(" ] ");
+
+            sb.Append(Constants.PersonalLog.LogEnd);
+
+            if (i != entryCount - 1)
+                sb.AppendLine();
+        }
+
+        return  sb.ToString();
+    }
     #endregion
 
     #region Frame ComboBox
