@@ -9,7 +9,7 @@ internal sealed class OcrImageInfo
     public bool SaveCopy { get; set; } = false;
     public string Text { get; set; } = "5,234,643,322";
     public Font TextFont { get; set; } = new Font("Arial", 10, FontStyle.Bold);
-    public Color TextColor { get; set; } = Color.White;
+    public Color TextColour { get; set; } = Color.White;
     public Color Background { get; set; } = Color.Black;
     public int Width { get; set; } = 200;
     public int Height { get; set; } = 50;
@@ -28,7 +28,7 @@ internal static class OcrMock
 
         g.Clear(imageInfo.Background);
         using var font = imageInfo.TextFont;
-        using var brush = new SolidBrush(imageInfo.TextColor);
+        using var brush = new SolidBrush(imageInfo.TextColour);
 
         var size = g.MeasureString(imageInfo.Text, font);
 
@@ -54,7 +54,7 @@ internal static class OcrMock
             Path = Path.Combine(Constants.Files.DataDirectory, string.Format("testImage_{0}.png", DateTime.Now.Ticks.ToString())),
             Text = "1234567890",
             TextFont = new Font("Arial", 10),
-            TextColor = Color.White,
+            TextColour = Color.White,
             Background = Color.Black,
             Width = 180,
             Height = 11,

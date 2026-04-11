@@ -52,7 +52,7 @@ public static class Hints
         string[] keys =
         [
             Constants.Users.Name,
-            Constants.Users.Race,
+            Constants.Users.RaceId,
             Constants.Users.Id,
             Constants.Users.RecruitmentId,
             Constants.Users.Ascension,
@@ -82,8 +82,8 @@ public static class Hints
                         return (Label: Constants.Users.AccountCreated, Value: date.ToString("yyyy-MM-dd HH:mm"));
                     }
 
-                    else if (property == Constants.Users.Race &&
-                        account.Properties.TryGetValue(Constants.Users.Race, out int raceId))
+                    else if (property == Constants.Users.RaceId &&
+                        account.Properties.TryGetValue(Constants.Users.RaceId, out int raceId))
                     {
                         return (Label: property, Value: races.Find(x => x.Id == raceId)?.Name ?? string.Empty);
                     }

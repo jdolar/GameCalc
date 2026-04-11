@@ -1,7 +1,7 @@
 using Data.Models;
 using UI.Windows.Controllers;
 using UI.Windows.Controllers.Calculators;
-using UI.Windows.Properties;
+using UI.Windows.Helpers;
 namespace UI.Windows;
 
 public partial class Display : Form
@@ -10,7 +10,7 @@ public partial class Display : Form
     public Display()
     {
         InitializeComponent();
-        SetTitle();
+        this.UpdateTitle();
 
         _ = new Frame(_races, _games, _amountToCopy, _valueToCopy, _user, _copyToClipBoardPersonalLog, _copyToClipBoard, _toolTips, ref _activeGame);
 
@@ -25,6 +25,4 @@ public partial class Display : Form
                                _unitProductionCalculateDesiredUp, _unitProductionCalculateNaqToSpend, _toolTips, _races, _tabPageUp);
 
     }
-
-    private void SetTitle() => this.Text = $"{AppInfo.Name} {AppInfo.Version} [{AppInfo.InfoVersion}]";
 }

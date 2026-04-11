@@ -7,14 +7,10 @@ namespace UI.Windows.Controllers;
 
 internal sealed class Frame
 {
-    private const long _billion = 1_000_000_000;
-    private const long _trillion = 1_000_000_000_000;
     private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;
     private readonly Label _user;
     private readonly ToolTip _hints;
     private readonly ActiveUser _activeUser = UIController.GetUser();
-    private Game _selectedGame;
-    private Race _selectedRace;
     public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, Button generatePersonalLog, Button copyToClipBoard, ToolTip hints, ref Game selectedGame)
     {
         _hints = hints;
@@ -27,11 +23,12 @@ internal sealed class Frame
         int gameId = _activeUser.ActiveAccount.Properties.TryGetValue(Constants.Users.GameId, out gameId) ? gameId : 0;
         UIController.SetGamesComboBox(_games, _activeUser.Games, gameId);
         selectedGame = (Game)_games.SelectedItem!;
-        _selectedGame = selectedGame;
+        _activeUser.ActiveGame = selectedGame;
         _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
-       
-        UIController.SetRacesComboBox(_races, selectedGame.Races);
-        _selectedRace = (Race)_races.SelectedItem!;
+
+        int raceId = _activeUser.ActiveAccount.Properties.TryGetValue(Constants.Users.RaceId, out raceId) ? raceId : 0;
+        UIController.SetRacesComboBox(_races, _activeUser.ActiveGame.Races, raceId);
+        _activeUser.ActiveRace = (Race)_races.SelectedItem!;
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
 
         UIController.SetToolTip(hints);
@@ -51,35 +48,42 @@ internal sealed class Frame
     {
         if (_games.SelectedItem != null)
         {
-            _selectedGame = (Game)_games.SelectedItem;
-            _hints.SetToolTip(_games, Data.Hints.Game(_selectedGame));
+            _activeUser.ActiveGame = (Game)_games.SelectedItem;
+            _hints.SetToolTip(_games, Hints.Game(_activeUser.ActiveGame));
 
             UpdateSelectedAccount();
 
-            UIController.SetRacesComboBox(_races, _selectedGame.Races);           
+            UIController.SetRacesComboBox(_races, _activeUser.ActiveGame.Races, _activeUser.ActiveRace.Id);           
             UpdateSelectedRace();
         }
     }
     public void UpdateSelectedAccount()
     {
-        _activeUser.ActiveAccount = _activeUser.User.Accounts.Find(x => x.Properties.ContainsKey(Constants.Users.GameId) && x.Properties[Constants.Users.GameId].ToString() == _selectedGame.Id.ToString()) ?? _activeUser.User.Accounts[0];
+        _activeUser.ActiveAccount = _activeUser.User.Accounts.Find(x => x.Properties.ContainsKey(Constants.Users.GameId)
+                                                                     && x.Properties[Constants.Users.GameId].ToString() == _activeUser.ActiveGame.Id.ToString())
+                                                                     ?? _activeUser.User.Accounts[0];
         UpdateUser();
     }
     private void UpdateSelectedRace()
     {
-        if (_races.SelectedItem != null && _selectedRace != null)
+        if (_races.SelectedItem != null && _activeUser.ActiveRace != null)
         {
-            _selectedRace = (Race)_races.SelectedItem;
-            _hints.SetToolTip(_races, Data.Hints.Race(_selectedRace));
+            _activeUser.ActiveRace = (Race)_races.SelectedItem;
+            _hints.SetToolTip(_races, Hints.Race(_activeUser.ActiveRace));
         }
     }
     private void CopyToClipBoard()
     {
         long right = 0;
-        if (_valueToCopy.SelectedItem?.ToString() == "Billion")
-            right = _billion;
-        else if (_valueToCopy.SelectedItem?.ToString() == "Trillion")
-            right = _trillion;
+        string? value = _valueToCopy.SelectedItem?.ToString();
+        if (value != null) return;
+
+        if (value == "Million")
+            right = 1_000_000;
+        else if (value == "Billion")
+            right = 1_000_000_000;
+        else if (value == "Trillion")
+            right = 1_000_000_000_000;
 
         long left = Data.Commands.Convert.ToNumber(Clean.Text(_amountToCopy.Text));
         long result = Operation.Multiply(left, right);
@@ -92,6 +96,6 @@ internal sealed class Frame
     private void UpdateUser()
     {
         UIController.UpdateLabel(_user, _activeUser.ActiveAccount.Name);
-        _hints.SetToolTip(_user, Data.Hints.User(_activeUser.User, _selectedGame.Races, _activeUser.ActiveAccount.GameType));
+        _hints.SetToolTip(_user, Hints.User(_activeUser.User, _activeUser.ActiveGame.Races, _activeUser.ActiveAccount.GameType));
     }
 }

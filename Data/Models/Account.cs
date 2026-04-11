@@ -2,6 +2,6 @@
 public sealed class Account
 {
     public Enums.Game.Type GameType { get; set; }
-    public string Name { get; set; } = string.Empty;
+    public string? Name { get; set; }
     public Dictionary<string, int> Properties { get; set; } = [];
 }

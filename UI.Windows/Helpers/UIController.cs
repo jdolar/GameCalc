@@ -3,6 +3,7 @@ using Data.Commands;
 using Data.Enums.Unit;
 using Data.Models;
 using System.Security.Principal;
+using UI.Windows.Properties;
 namespace UI.Windows.Helpers;
 
 internal static class UIController
@@ -50,6 +51,7 @@ internal static class UIController
 
         return input;
     }
+    internal static void UpdateTitle(this Form form) => form.Text = $"{AppInfo.Name} {AppInfo.Version} [{AppInfo.InfoVersion}]";
     internal static void UpdateLabel(Label input, string upgradeText)
     {
         if (input == null || input.Text == upgradeText) return;
@@ -68,16 +70,21 @@ internal static class UIController
 
         input.Text = upgradeText;
     }
-    internal static void SetRacesComboBox(ComboBox input, List<Race> races)
+    internal static void SetRacesComboBox(ComboBox input, List<Race> races, int raceId)
     {
         input.DataSource = races;
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
+        
+        int index = races.FindIndex(g => g.Id == raceId);
+        input.SelectedIndex = index == -1 ? 0 : races.FindIndex(g => g.Id == raceId);
     }
     internal static void SetGamesComboBox(ComboBox input, List<Game> games, int gameId)
     {
         input.DataSource = games;
         input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
-        input.SelectedIndex = games.FindIndex(g => g.Id == gameId);
+
+        int index = games.FindIndex(g => g.Id == gameId);
+        input.SelectedIndex = index == -1 ? 0 : games.FindIndex(g => g.Id == gameId);
     }
     internal static bool UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
     {
@@ -144,10 +151,10 @@ internal static class UIController
     {
         if (string.IsNullOrEmpty(text))
             return;
-        
-        if(clean.HasValue && clean == false)
-            Clipboard.SetText(text);       
-        else 
+
+        if (clean.HasValue && clean == false)
+            Clipboard.SetText(text);
+        else
             Clipboard.SetText(Clean.Text(text));
     }
     internal static byte[] ImageToBytes(Image image)
@@ -159,14 +166,21 @@ internal static class UIController
     internal static ActiveUser GetUser()
     {
         User user = UIController.User;
+        List<Game> games = GetUserGames(Games, user.Accounts);
+        
+        Account account = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account();
+        Game game = games.FirstOrDefault(g => g.Id == user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId))?.Properties[Constants.Users.GameId]) ?? new Game();
+        
         return new()
         {
             User = user,
-            Games = GetUserGames(Games, user.Accounts),
-            ActiveAccount = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account()
-        };      
+            Games = games,
+            ActiveAccount = account,
+            ActiveGame = game,
+            ActiveRace = GetDefaultRace(account, game.Races)
+        };
     }
-    internal static  List<Game> GetUserGames(List<Game> enabledGames, List<Account> accounts)
+    internal static List<Game> GetUserGames(List<Game> enabledGames, List<Account> accounts)
     {
         List<Game> userGames = [];
         foreach (Account account in accounts)
@@ -180,6 +194,15 @@ internal static class UIController
         }
 
         return userGames;
+    }
+    internal static Race GetDefaultRace(Account account, List<Race> races)
+    {
+        if (account.Properties.ContainsKey(Constants.Users.RaceId))
+        {
+            int raceId = account.Properties[Constants.Users.RaceId];
+            return races.FirstOrDefault(g => g.Id == raceId) ?? new Race();
+        }
+        return  new Race();    
     }
     internal static void SetToolTip(ToolTip toolTIp)
     {

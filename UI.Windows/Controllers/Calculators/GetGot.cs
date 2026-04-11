@@ -16,7 +16,6 @@ internal sealed class GetGot
     private string _ableToBuyCache = string.Empty;
     private string _costToReassignCache= string.Empty;
     private Race _selectedRace = new();
-
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
                    Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
     {
@@ -76,7 +75,6 @@ internal sealed class GetGot
 
         UpdateSelectedRace();
     }
-
     private void DisplayResults()
     {
         Unit? unit = _selectedItems.SelectedItem != null ? _selectedItems.SelectedItem as Unit : null;
@@ -102,7 +100,6 @@ internal sealed class GetGot
         _hint.SetToolTip(_itemTypes, Hints.Units([.. _selectedRace.Units.Where(x => x.Type == (Data.Enums.Unit.Type)_itemTypes.SelectedItem!)]));
         _hint.SetToolTip(_itemPurposes, Hints.Units([.. _selectedRace.Units.Where(x => (x.Type == (Data.Enums.Unit.Type)_itemTypes.SelectedItem!) && (x.Purpose == (Data.Enums.Unit.Purpose)_itemPurposes.SelectedItem!))]));
     }
-
     private void UpdateSelectedItem()
     {
         if (_itemTypes.SelectedItem == null || _itemPurposes.SelectedItem == null || _selectedRace == null)

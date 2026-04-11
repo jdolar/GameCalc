@@ -14,7 +14,7 @@ public static class Constants
     {
         public const string AccountCreated = nameof(AccountCreated);
         public const string GameType = nameof(GameType);
-        public const string Race = nameof(Race);
+        public const string RaceId = nameof(RaceId);
         public const string Id = nameof(Id);
         public const string Name = nameof(Name);
         public const string Ascension = nameof(Ascension);
@@ -37,6 +37,7 @@ public static class Constants
         public static readonly JsonSerializerOptions SerializerOptions = new()
         {
             PropertyNameCaseInsensitive = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             Converters = { new JsonStringEnumConverter() }
         };
     }
@@ -54,7 +55,7 @@ public static class Constants
             public const string Purpose = nameof(Purpose);
             public const string Type = nameof(Type);
             public const string Slot = nameof(Slot);
-            public const string DesiredUpPreText = "From {0}" + Labels.Up + " to reach {1} you will need...";
+            public const string DesiredUpPreText = "From {0} " + Labels.Up + " to reach {1} you will need...";
             public const string ResourcesToSpendPreText = "From {0} " + Labels.Up + " with {1} {2} you can upgrade to...";
             public const string MultiplierToEnter = "Multiplier to enter is {0}.";
             public const string ItWouldCost = "It would cost {0} {1} to {2} {3} {4}(s).";
