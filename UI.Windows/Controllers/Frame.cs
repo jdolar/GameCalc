@@ -4,7 +4,6 @@ using Data.Commands;
 using Data.Models;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers;
-
 internal sealed class Frame
 {
     private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;

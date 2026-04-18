@@ -42,9 +42,7 @@ public static class Constants
         };
     }
     public static class GUI
-    {/*
-
-      */
+    {
         public static class ComboBox
         {
             public const string DisplayName = "Name";
@@ -74,7 +72,7 @@ public static class Constants
             public const string UP = "Unit Production";
             public const string Up = "unit production";
 
-            //UP Calc
+            //UP Calculator
             public const string CurrentUp = "Current " + UP;
             public const string DesiredUp = "Desired " + UP;
             public const string ResourcesToSpend = " to spend on " + UP;

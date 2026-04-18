@@ -1,7 +1,6 @@
 ﻿using Data.Models;
 using System.Text.Json;
 namespace Data;
-
 public static class Users
 {
     public static User Create(string? name, string path)
