@@ -1,5 +1,4 @@
-﻿using Calculator;
-using Data;
+﻿using Data;
 using Data.Models;
 using UI.Windows.Helpers;
 using Label = System.Windows.Forms.Label;
@@ -26,14 +25,15 @@ internal sealed class UnitProduction
         _races = races;
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace(resToSpendText);
 
+        var calculate = new Calculator.Calculators.UnitProduction();
         calculateDesiredUp.Click += (s, e) =>
         {
             (string results, string multiplier, string formattedLeftInput, string formattedRightInput)
-                = Operation.CalculateDesiredUp(fromInput.Text, toInput.Text);
+                = calculate.DesiredUpCosts(fromInput.Text, toInput.Text);
 
             if (results != upResult.Text)
             {
-                string hint = Data.Hints.DesiredUp(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
+                string hint = Hints.DesiredUpCosts(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
                 UIController.UpdateLabel(upResult, hint);
                 hints.SetToolTip(upResult, hint);
             }
@@ -42,11 +42,11 @@ internal sealed class UnitProduction
         calculateNaqToSpend.Click += (s, e) =>
         {
             (string results, string multiplier, string formattedLeftInput, string formattedRightInput)
-                = Operation.CalculatePossibleUpUpgrade(fromInput.Text, resToSpend.Text);
+                = calculate.UpdateUpCosts(fromInput.Text, resToSpend.Text);
 
             if (results != upResult.Text)
             {
-                string hint = Data.Hints.ResourcesToSpend(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
+                string hint = Hints.UpdateUpCosts(formattedLeftInput, formattedRightInput, results, multiplier, _selectedRace.Currency.Name);
                 UIController.UpdateLabel(upResult, hint);
                 hints.SetToolTip(upResult, hint);
             }

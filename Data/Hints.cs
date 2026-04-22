@@ -184,7 +184,7 @@ public static class Hints
     #endregion
 
     #region UP Calc
-    public static string DesiredUp(string fromInput, string toInput, string result, string multiplier, string currency)
+    public static string DesiredUpCosts(string fromInput, string toInput, string result, string multiplier, string currency)
     {
         StringBuilder builder = new();
 
@@ -194,7 +194,7 @@ public static class Hints
 
         return builder.ToString();
     }
-    public static string ResourcesToSpend(string fromInput, string totalCostInput, string result, string multiplier, string currency)
+    public static string UpdateUpCosts(string fromInput, string totalCostInput, string result, string multiplier, string currency)
     {
         StringBuilder builder = new();
 

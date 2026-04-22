@@ -163,21 +163,21 @@ internal static class UIController
         image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
         return ms.ToArray();
     }
-    internal static ActiveUser GetUser()
+    internal static Session CreateSession()
     {
         User user = UIController.User;
         List<Game> games = GetUserGames(Games, user.Accounts);
         
-        Account account = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account();
-        Game game = games.FirstOrDefault(g => g.Id == user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId))?.Properties[Constants.Users.GameId]) ?? new Game();
+        Account activeAccount = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account();
+        Game activeGame = games.FirstOrDefault(g => g.Id == user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId))?.Properties[Constants.Users.GameId]) ?? new Game();
         
         return new()
         {
             User = user,
             Games = games,
-            ActiveAccount = account,
-            ActiveGame = game,
-            ActiveRace = GetDefaultRace(account, game.Races)
+            ActiveAccount = activeAccount,
+            ActiveGame = activeGame,
+            ActiveRace = GetDefaultRace(activeAccount, activeGame.Races)
         };
     }
     internal static List<Game> GetUserGames(List<Game> enabledGames, List<Account> accounts)

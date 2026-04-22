@@ -9,7 +9,7 @@ internal sealed class Frame
     private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;
     private readonly Label _user;
     private readonly ToolTip _hints;
-    private readonly ActiveUser _activeUser = UIController.GetUser();
+    private readonly Session _session = UIController.CreateSession();
     public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, Button generatePersonalLog, Button copyToClipBoard, ToolTip hints, ref Game selectedGame)
     {
         _hints = hints;
@@ -19,15 +19,15 @@ internal sealed class Frame
         _games = games;
         _races = races;
 
-        int gameId = _activeUser.ActiveAccount.Properties.TryGetValue(Constants.Users.GameId, out gameId) ? gameId : 0;
-        UIController.SetGamesComboBox(_games, _activeUser.Games, gameId);
+        int gameId = _session.ActiveAccount.Properties.TryGetValue(Constants.Users.GameId, out gameId) ? gameId : 0;
+        UIController.SetGamesComboBox(_games, _session.Games, gameId);
         selectedGame = (Game)_games.SelectedItem!;
-        _activeUser.ActiveGame = selectedGame;
+        _session.ActiveGame = selectedGame;
         _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
 
-        int raceId = _activeUser.ActiveAccount.Properties.TryGetValue(Constants.Users.RaceId, out raceId) ? raceId : 0;
-        UIController.SetRacesComboBox(_races, _activeUser.ActiveGame.Races, raceId);
-        _activeUser.ActiveRace = (Race)_races.SelectedItem!;
+        int raceId = _session.ActiveAccount.Properties.TryGetValue(Constants.Users.RaceId, out raceId) ? raceId : 0;
+        UIController.SetRacesComboBox(_races, _session.ActiveGame.Races, raceId);
+        _session.ActiveRace = (Race)_races.SelectedItem!;
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
 
         UIController.SetToolTip(hints);
@@ -36,7 +36,7 @@ internal sealed class Frame
         _amountToCopy.SelectedIndex = 0;
         copyToClipBoard.Click += (s, e) => CopyToClipBoard();
 
-        string log = Hints.PersonalLog(DataBuilder.GetLog(_activeUser.User.Name));
+        string log = Hints.PersonalLog(DataBuilder.GetLog(_session.User.Name));
         generatePersonalLog.Click += (s, e) => UIController.CopyToClipboard(log, false);
         _hints.SetToolTip(generatePersonalLog, log);
 
@@ -47,28 +47,28 @@ internal sealed class Frame
     {
         if (_games.SelectedItem != null)
         {
-            _activeUser.ActiveGame = (Game)_games.SelectedItem;
-            _hints.SetToolTip(_games, Hints.Game(_activeUser.ActiveGame));
+            _session.ActiveGame = (Game)_games.SelectedItem;
+            _hints.SetToolTip(_games, Hints.Game(_session.ActiveGame));
 
             UpdateSelectedAccount();
 
-            UIController.SetRacesComboBox(_races, _activeUser.ActiveGame.Races, _activeUser.ActiveRace.Id);           
+            UIController.SetRacesComboBox(_races, _session.ActiveGame.Races, _session.ActiveRace.Id);           
             UpdateSelectedRace();
         }
     }
     public void UpdateSelectedAccount()
     {
-        _activeUser.ActiveAccount = _activeUser.User.Accounts.Find(x => x.Properties.ContainsKey(Constants.Users.GameId)
-                                                                     && x.Properties[Constants.Users.GameId].ToString() == _activeUser.ActiveGame.Id.ToString())
-                                                                     ?? _activeUser.User.Accounts[0];
+        _session.ActiveAccount = _session.User.Accounts.Find(x => x.Properties.ContainsKey(Constants.Users.GameId)
+                                                                     && x.Properties[Constants.Users.GameId].ToString() == _session.ActiveGame.Id.ToString())
+                                                                     ?? _session.User.Accounts[0];
         UpdateUser();
     }
     private void UpdateSelectedRace()
     {
-        if (_races.SelectedItem != null && _activeUser.ActiveRace != null)
+        if (_races.SelectedItem != null && _session.ActiveRace != null)
         {
-            _activeUser.ActiveRace = (Race)_races.SelectedItem;
-            _hints.SetToolTip(_races, Hints.Race(_activeUser.ActiveRace));
+            _session.ActiveRace = (Race)_races.SelectedItem;
+            _hints.SetToolTip(_races, Hints.Race(_session.ActiveRace));
         }
     }
     private void CopyToClipBoard()
@@ -94,7 +94,7 @@ internal sealed class Frame
     }
     private void UpdateUser()
     {
-        UIController.UpdateLabel(_user, _activeUser.ActiveAccount.Name);
-        _hints.SetToolTip(_user, Hints.User(_activeUser.User, _activeUser.ActiveGame.Races, _activeUser.ActiveAccount.GameType));
+        UIController.UpdateLabel(_user, _session.ActiveAccount.Name ?? "Unknown");
+        _hints.SetToolTip(_user, Hints.User(_session.User, _session.ActiveGame.Races, _session.ActiveAccount.GameType));
     }
 }

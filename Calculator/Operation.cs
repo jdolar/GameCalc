@@ -2,49 +2,27 @@
 namespace Calculator;
 public static class Operation
 {
-    #region PUBLIC Basic Operations
-    public static string Divide(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Divide, left, right, format);
-    public static string Sum(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Sum, left, right, format);
-    public static string Deduct(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Deduct, left, right, format);
-    public static string Multiply(string left, string right, bool format = false) => Calculate(Calculator.Calculate.Multiply, left, right, format);
     public static long Multiply(long left, long right) => Calculator.Calculate.Multiply(left, right);
-    #endregion
-
-    #region PUBLIC BL Operations
-    public static (string, string, string, string) CalculatePossibleUpUpgrade(string fromInput, string totalCost) => CalculateTuple(CalculatePossibleUpUpgradeCost, fromInput, totalCost, true);
-    public static (string, string, string, string) CalculateDesiredUp(string fromInput, string toInput) => CalculateTuple(CalculateDesiredUpCost, fromInput, toInput, true);
-    public static (string, string, string, string) CalculateAbleToBuyAndCostToBuy(string userInput, long costPerUnit, long? costPerUnitReassign, bool? format = null)
-    {
-        long input = Data.Commands.Convert.ToNumber(Clean.Text(userInput));
-        string costToBuy = CalculateAndReturn(Calculator.Calculate.Multiply, input, costPerUnit, format);
-        string ableToBuy = CalculateAndReturn(Calculator.Calculate.Divide, input, costPerUnit, format);
-        string costToReassign = costPerUnitReassign.HasValue ? CalculateAndReturn(Calculator.Calculate.Divide, input, costPerUnitReassign, format) : string.Empty;
-
-        return (costToBuy, ableToBuy, costToReassign, Data.Commands.Convert.ToLabel(input));
-    }
-    #endregion
-
-    #region PRIVATE Methods
-    private static string Calculate(Func<long, long, long> action, string? left, string? right, bool? format = null)
+    public static string Calculate(Func<long, long, long> action, string? left, string? right, bool? format = null)
     {
         if (string.IsNullOrEmpty(left) || string.IsNullOrEmpty(right))
             return string.Empty;
-        
+
         long rightValue = Data.Commands.Convert.ToNumber(Clean.Text(right));
         long leftValue = Data.Commands.Convert.ToNumber(Clean.Text(left));
-        
-        return CalculateAndReturn(action, leftValue, rightValue, format);
+
+        return CalculateAndFormatOutput(action, leftValue, rightValue, format);
     }
-    private static string CalculateAndReturn(Func<long, long, long> action, long? left, long? right, bool? format = null)
+    public static string CalculateAndFormatOutput(Func<long, long, long> action, long? left, long? right, bool? format = null)
     {
         if (left is null || right is null)
-            return string.Empty;       
- 
+            return string.Empty;
+
         long result = action((long)left, (long)right);
 
         return FormatResult(result, format);
     }
-    private static (string, string, string, string) CalculateTuple(Func<long, long, (long, long)> action, string? left, string? right, bool? format = null)
+    public static (string, string, string, string) CalculateAndFormatOutputAndInput(Func<long, long, (long, long)> action, string? left, string? right, bool? format = null)
     {
         if (string.IsNullOrEmpty(left) || string.IsNullOrEmpty(right))
             return (string.Empty, string.Empty, string.Empty, string.Empty);
@@ -59,54 +37,4 @@ public static class Operation
     {
         return (format.HasValue && format.Value) ? Data.Commands.Convert.ToLabel(result) : result.ToString();
     }
-    private static (long, long) CalculateDesiredUpCost(long fromInput, long toInput)
-    {
-        if (toInput <= fromInput)
-            return (0, 0);
-
-        long multiplier = (toInput - fromInput) / 3;
-
-        const long k = 5_000L;
-        const long baseStepCost = 10_000L;
-
-        long arithmeticSum =
-            multiplier * fromInput +
-            3 * multiplier * (multiplier - 1) / 2;
-
-        long totalCost =
-            k * arithmeticSum +
-            baseStepCost * multiplier;
-
-        return (totalCost, multiplier);
-    }
-    private static (long, long) CalculatePossibleUpUpgradeCost(long fromInput, long totalCost)
-    {
-        if (totalCost <= 0)
-            return (fromInput, 0);
-
-        const long k = 5_000L;
-        const long baseStepCost = 10_000L;
-
-        // A m² + B m - totalCost = 0
-        double A = 3.0 * k / 2.0;
-        double B = k * fromInput - (3.0 * k / 2.0) + baseStepCost;
-
-        double discriminant = B * B + 4.0 * A * totalCost;
-
-        if (discriminant < 0)
-            return (fromInput, 0);
-
-        double sqrt = Math.Sqrt(discriminant);
-
-        // positive root
-        long m = (long)((-B + sqrt) / (2.0 * A));
-
-        if (m < 0)
-            m = 0;
-
-        long toInput = fromInput + 3 * m;
-
-        return (toInput, m);
-    }
-    #endregion
 }

@@ -1,5 +1,4 @@
-﻿using Calculator;
-using Data;
+﻿using Data;
 using Data.Commands;
 using Data.Enums.Unit;
 using Data.Models;
@@ -16,6 +15,7 @@ internal sealed class GetGot
     private string _ableToBuyCache = string.Empty;
     private string _costToReassignCache= string.Empty;
     private Race _selectedRace = new();
+    private readonly Calculator.Calculators.GetGot _calculate = new();
     public GetGot(ComboBox itemTypes, ComboBox itemPurposes, ComboBox selectedItems, ComboBox races, TextBox userInput,
                    Label ableToBuy, Label costToReassign, Label costToBuy, ToolTip hint, TabPage tabPage, bool? imageRecognition = null)
     {
@@ -80,20 +80,25 @@ internal sealed class GetGot
         Unit? unit = _selectedItems.SelectedItem != null ? _selectedItems.SelectedItem as Unit : null;
         if (unit == null) return;
 
-        (string costToBuy, string ableToBuy, string costToReassign, string input)
-        = Operation.CalculateAbleToBuyAndCostToBuy(_userInput.Text, unit.CostPerUnit, unit.CostPerUnitReassign, true);
+        string userInputCleaned = Clean.Text(_userInput.Text);      
+        long userInput = Data.Commands.Convert.ToNumber(userInputCleaned);
+        string userInputFormatted = Data.Commands.Convert.ToLabel(userInput);
+
+        string costToBuy = _calculate.CostToBuy(userInput, unit.CostPerUnit, true);
+        string costToReassign = _calculate.CostToReassign(userInput, unit.CostPerUnitReassign, true);
+        string ableToBuy = _calculate.AbleToBuy(userInput, unit.CostPerUnit, true);
 
         _ableToBuyCache = ableToBuy;
         _costToBuyCache = costToBuy;
         _costToReassignCache = costToReassign;
 
-        string costToBuyLabel = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Data.Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToBuy, "buy", unit);
+        string costToBuyLabel = string.IsNullOrEmpty(costToBuy) || costToBuy == "0" ? string.Empty : Hints.CostToBuyOrSell(userInputFormatted, _selectedRace.Currency.Name, costToBuy, "buy", unit);
         UIController.UpdateLabel(_costToBuy, costToBuyLabel);
 
-        string ableToBuyLabel = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Data.Hints.AbleToBuy(input, _selectedRace.Currency.Name, ableToBuy, unit);
+        string ableToBuyLabel = string.IsNullOrEmpty(ableToBuy) || (ableToBuy == "0") ? string.Empty : Hints.AbleToBuy(userInputFormatted, _selectedRace.Currency.Name, ableToBuy, unit);
         UIController.UpdateLabel(_ableToBuy, ableToBuyLabel);
 
-        string costToReassignLabel = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Data.Hints.CostToBuyOrSell(input, _selectedRace.Currency.Name, costToReassign, "reassign", unit); ;
+        string costToReassignLabel = string.IsNullOrEmpty(costToReassign) || costToReassign == "0" ? string.Empty : Hints.CostToBuyOrSell(userInputFormatted, _selectedRace.Currency.Name, costToReassign, "reassign", unit); ;
         UIController.UpdateLabel(_costToReassign, costToReassignLabel);
 
         _hint.SetToolTip(_selectedItems, Hints.Unit(unit));

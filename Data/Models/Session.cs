@@ -1,5 +1,5 @@
 ﻿namespace Data.Models;
-public sealed class ActiveUser
+public sealed class Session
 {
     public required List<Game> Games { get; set; }
     public required User User { get; set; }

@@ -1,5 +1,4 @@
-﻿using Calculator;
-using Data;
+﻿using Data;
 using Data.Commands;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers.Calculators;
@@ -16,25 +15,25 @@ internal sealed class Simple
 
         sum.Click += (s, e) =>
         {
-            string calculation = Operation.Sum(inputLeft.Text, inputRight.Text, true);
+            string calculation = Calculator.Calculators.Simple.Sum(inputLeft.Text, inputRight.Text, true);
             AddToHistory(history, inputLeft.Text, inputRight.Text, '+', calculation);
         };
         
         deduct.Click += (s, e) =>
         {
-            string calculation = Operation.Deduct(inputLeft.Text, inputRight.Text, true);
+            string calculation = Calculator.Calculators.Simple.Deduct(inputLeft.Text, inputRight.Text, true);
             AddToHistory(history, inputLeft.Text, inputRight.Text, '-', calculation);
         };
         
         divide.Click += (s, e) =>
         {
-            string calculation = Operation.Divide(inputLeft.Text, inputRight.Text, true);
+            string calculation = Calculator.Calculators.Simple.Divide(inputLeft.Text, inputRight.Text, true);
             AddToHistory(history, inputLeft.Text, inputRight.Text, '/', calculation);
         };
         
         multiply.Click += (s, e) =>
         {
-            string calculation = Operation.Multiply(inputLeft.Text, inputRight.Text, true);
+            string calculation = Calculator.Calculators.Simple.Multiply(inputLeft.Text, inputRight.Text, true);
             AddToHistory(history, inputLeft.Text, inputRight.Text, 'x', calculation);
         };
 
