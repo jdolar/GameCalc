@@ -12,7 +12,7 @@ public partial class Display : Form
         InitializeComponent();
         this.UpdateTitle();
 
-        _ = new Frame(_races, _games, _amountToCopy, _valueToCopy, _user, _copyToClipBoardPersonalLog, _copyToClipBoard, _toolTips, ref _activeGame);
+        _ = new Frame(_races, _games, _amountToCopy, _valueToCopy, _user, _copyToClipBoardPersonalLog, _copyToClipBoard, _toolTips, _tab, ref _activeGame);
 
         _ = new GetGot(_getGotItemTypes, _getGotItemPurposes, _getGotSelectedItems, _races, _getGotUserInput, _getGotAbleToBuy,
                        _getGotCostToReassign, _getGotCostToBuy, _toolTips, _tabPageGetGot);

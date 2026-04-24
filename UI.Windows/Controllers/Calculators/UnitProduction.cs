@@ -11,7 +11,7 @@ internal sealed class UnitProduction
                   TextBox fromInput, TextBox toInput, TextBox resToSpend, Button calculateDesiredUp,
                   Button calculateNaqToSpend, ToolTip hints, ComboBox races, TabPage tabPage)
     {
-        UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.UnitProduction);
+        UIController.UpdateLayoutTabPage(tabPage, Data.Enums.Calculator.Type.UnitProduction.ToString());
 
         UIController.UpdateLabel(currentUp, Constants.GUI.Labels.CurrentUp);
         UIController.UpdateLabel(desiredUp, Constants.GUI.Labels.DesiredUp);

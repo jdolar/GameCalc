@@ -17,20 +17,20 @@ public static class Hints
         int entryCount = log.Entries.Count;
         for (int i = 0; i < entryCount; i++)
         {
-            if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Player)
+            if (log.Entries[i].Type == Enums.PersonalLog.Type.Player)
                 sb.Append(Constants.PersonalLog.PlayerStats);
-            else if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Alliance)
+            else if (log.Entries[i].Type == Enums.PersonalLog.Type.Alliance)
                 sb.Append(Constants.PersonalLog.AllianceStats);
 
             sb.Append(log.Entries[i].Id);
             sb.Append('>');
 
-            if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Alliance)
+            if (log.Entries[i].Type == Enums.PersonalLog.Type.Alliance)
                 sb.Append(" [ ");
 
             sb.Append(log.Entries[i].Name);
 
-            if (log.Entries[i].Type == Enums.PersonalLog.EntryType.Alliance)
+            if (log.Entries[i].Type == Enums.PersonalLog.Type.Alliance)
                 sb.Append(" ] ");
 
             sb.Append(Constants.PersonalLog.LogEnd);

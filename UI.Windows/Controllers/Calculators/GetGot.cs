@@ -29,10 +29,10 @@ internal sealed class GetGot
         _hint = hint;
         _races = races;
 
-        UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.GetGot);
+        UIController.UpdateLayoutTabPage(tabPage, Data.Enums.Calculator.Type.GetGot.ToString());
 
-        UIController.SetItemTypesComboBox(_itemTypes);
-        UIController.SetItemPurposeComboBox(_itemPurposes);
+        UIController.SetItemTypes(_itemTypes);
+        UIController.SetItemPurposes(_itemPurposes);
 
         _ableToBuy.Click += (s, e) => UIController.CopyToClipboard(_ableToBuyCache);
         _costToReassign.Click += (s, e) => UIController.CopyToClipboard(_costToReassignCache);
@@ -110,7 +110,7 @@ internal sealed class GetGot
         if (_itemTypes.SelectedItem == null || _itemPurposes.SelectedItem == null || _selectedRace == null)
             return;
 
-        bool wasEmptied = UIController.UpdateComboBox(_selectedItems, _selectedRace.Units, (Data.Enums.Unit.Type)_itemTypes.SelectedItem, (Purpose)_itemPurposes.SelectedItem);
+        bool wasEmptied = UIController.UpdateSelectedItem(_selectedItems, _selectedRace.Units, (Data.Enums.Unit.Type)_itemTypes.SelectedItem, (Purpose)_itemPurposes.SelectedItem);
         if (wasEmptied)     
             _hint.SetToolTip(_selectedItems, string.Empty);
         else

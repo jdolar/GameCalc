@@ -4,7 +4,14 @@ namespace Data;
 
 public static class Constants
 {
-    public static class  PersonalLog
+    public static readonly Dictionary<string, long> Multipliers = new(StringComparer.OrdinalIgnoreCase)
+    {
+        { "Million", 1_000_000 },
+        { "Billion", 1_000_000_000 },
+        { "Trillion", 1_000_000_000_000 }
+    };
+    public static List<int> Weights = new() { 1, 5, 10, 20, 25, 50, 100, 200, 250, 500 };
+    public static class PersonalLog
     {
         public const string PlayerStats = "<a href=stats.php?id=";
         public const string AllianceStats = "<a href=allianceMembers.php?id=";
@@ -20,7 +27,7 @@ public static class Constants
         public const string Ascension = nameof(Ascension);
         public const string Covert = nameof(Covert);
         public const string AntiCovert = nameof(AntiCovert);
-        public const string UnitProduction = nameof(UnitProduction);     
+        public const string UnitProduction = nameof(UnitProduction);
         public const string MsWeapons = nameof(MsWeapons);
         public const string MsShields = nameof(MsShields);
         public const string MsFleets = nameof(MsFleets);
@@ -64,11 +71,6 @@ public static class Constants
         }
         public static class Labels
         {
-            //Tabs
-            public const string GetGot = "GetGot";
-            public const string UnitProduction = UP;
-            public const string Simple = "Calculator";
-
             public const string UP = "Unit Production";
             public const string Up = "unit production";
 

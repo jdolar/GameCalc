@@ -5,9 +5,9 @@ using Data.Models;
 using System.Security.Principal;
 using UI.Windows.Properties;
 namespace UI.Windows.Helpers;
-
 internal static class UIController
 {
+    #region Get
     internal static User User
     {
         get
@@ -27,30 +27,33 @@ internal static class UIController
             return DataBuilder.GetGamesData(DataBuilder.GetGames("Games.json"), jsonFiles);
         }
     }
-    internal static readonly Data.Enums.Unit.Type[] _itemTypes = Enum.GetValues<Data.Enums.Unit.Type>();
-    internal static readonly Purpose[] _itemPurposes = Enum.GetValues<Purpose>();
-    internal static ComboBox SetItemTypesComboBox(ComboBox input)
+    internal static List<Game> GetUserGames(List<Game> enabledGames, List<Account> accounts)
     {
-        input.Items.Clear();
+        List<Game> userGames = [];
+        foreach (Account account in accounts)
+        {
+            Game? existingGame = enabledGames.Find(x => x.Type == account.GameType);
+            if (existingGame != null)
+            {
+                account.Properties.Add(Constants.Users.GameId, existingGame.Id);
+                userGames.Add(existingGame);
+            }
+        }
 
-        foreach (Data.Enums.Unit.Type item in _itemTypes)
-            input.Items.Add(item);
-
-        input.SelectedIndex = 0;
-
-        return input;
+        return userGames;
     }
-    internal static ComboBox SetItemPurposeComboBox(ComboBox input)
+    internal static Race GetDefaultRace(Account account, List<Race> races)
     {
-        input.Items.Clear();
-
-        foreach (Purpose item in _itemPurposes)
-            input.Items.Add(item);
-
-        input.SelectedIndex = 0;
-
-        return input;
+        if (account.Properties.ContainsKey(Constants.Users.RaceId))
+        {
+            int raceId = account.Properties[Constants.Users.RaceId];
+            return races.FirstOrDefault(g => g.Id == raceId) ?? new Race();
+        }
+        return new Race();
     }
+    #endregion
+    
+    #region Update
     internal static void UpdateTitle(this Form form) => form.Text = $"{AppInfo.Name} {AppInfo.Version} [{AppInfo.InfoVersion}]";
     internal static void UpdateLabel(Label input, string upgradeText)
     {
@@ -70,23 +73,7 @@ internal static class UIController
 
         input.Text = upgradeText;
     }
-    internal static void SetRacesComboBox(ComboBox input, List<Race> races, int raceId)
-    {
-        input.DataSource = races;
-        input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
-        
-        int index = races.FindIndex(g => g.Id == raceId);
-        input.SelectedIndex = index == -1 ? 0 : races.FindIndex(g => g.Id == raceId);
-    }
-    internal static void SetGamesComboBox(ComboBox input, List<Game> games, int gameId)
-    {
-        input.DataSource = games;
-        input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
-
-        int index = games.FindIndex(g => g.Id == gameId);
-        input.SelectedIndex = index == -1 ? 0 : games.FindIndex(g => g.Id == gameId);
-    }
-    internal static bool UpdateComboBox(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
+    internal static bool UpdateSelectedItem(ComboBox input, List<Unit> units, Data.Enums.Unit.Type type, Purpose purpose)
     {
         List<Unit> filteredUnits = DataBuilder.GetDataSource(units, type, purpose);
 
@@ -104,6 +91,85 @@ internal static class UIController
         }
 
         return false;// returns if it was emptied (for other controls to know)
+    }
+    #endregion
+
+    #region ComboBox Setters
+    internal static void SetWeights(ComboBox input)
+    {
+        var weights = Constants.Weights;
+
+        foreach (int weight in weights)
+            input.Items.Add(weight);
+
+        input.SelectedIndex = 0;
+    }
+    internal static void SetMultipliers(ComboBox input)
+    {
+        var multipliers = Constants.Multipliers;
+
+        foreach (var multiplier in multipliers)
+            input.Items.Add(multiplier.Key);
+
+        input.SelectedIndex = 0;
+    }
+    internal static void SetRaces(ComboBox input, List<Race> races, int raceId)
+    {
+        input.DataSource = races;
+        input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
+
+        int index = races.FindIndex(g => g.Id == raceId);
+        input.SelectedIndex = index == -1 ? 0 : races.FindIndex(g => g.Id == raceId);
+    }
+    internal static void SetGames(ComboBox input, List<Game> games, int gameId)
+    {
+        input.DataSource = games;
+        input.DisplayMember = Constants.GUI.ComboBox.DisplayName;
+
+        int index = games.FindIndex(g => g.Id == gameId);
+        input.SelectedIndex = index == -1 ? 0 : games.FindIndex(g => g.Id == gameId);
+    }
+    internal static void SetItemTypes(ComboBox input)
+    {
+        var itemTypes = Enum.GetValues<Data.Enums.Unit.Type>();
+
+        input.Items.Clear();
+
+        foreach (Data.Enums.Unit.Type item in itemTypes)
+            input.Items.Add(item);
+
+        input.SelectedIndex = 0;
+    }
+    internal static void SetItemPurposes(ComboBox input)
+    {
+        var itemPurposes = Enum.GetValues<Data.Enums.Unit.Purpose>();
+
+        input.Items.Clear();
+
+        foreach (Purpose item in itemPurposes)
+            input.Items.Add(item);
+
+        input.SelectedIndex = 0;
+    }
+    #endregion
+
+    #region Helper Methods
+    internal static Session CreateSession()
+    {
+        User user = UIController.User;
+        List<Game> games = GetUserGames(Games, user.Accounts);
+
+        Account activeAccount = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account();
+        Game activeGame = games.FirstOrDefault(g => g.Id == user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId))?.Properties[Constants.Users.GameId]) ?? new Game();
+
+        return new()
+        {
+            User = user,
+            Games = games,
+            ActiveAccount = activeAccount,
+            ActiveGame = activeGame,
+            ActiveRace = GetDefaultRace(activeAccount, activeGame.Races)
+        };
     }
     internal static void CleanTextBoxText(TextBox txtBox, IEnumerable<Func<string, string>> cleaners, Action? onChanged = null)
     {
@@ -163,47 +229,6 @@ internal static class UIController
         image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
         return ms.ToArray();
     }
-    internal static Session CreateSession()
-    {
-        User user = UIController.User;
-        List<Game> games = GetUserGames(Games, user.Accounts);
-        
-        Account activeAccount = user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId)) ?? new Account();
-        Game activeGame = games.FirstOrDefault(g => g.Id == user.Accounts.FirstOrDefault(a => a.Properties.ContainsKey(Constants.Users.GameId))?.Properties[Constants.Users.GameId]) ?? new Game();
-        
-        return new()
-        {
-            User = user,
-            Games = games,
-            ActiveAccount = activeAccount,
-            ActiveGame = activeGame,
-            ActiveRace = GetDefaultRace(activeAccount, activeGame.Races)
-        };
-    }
-    internal static List<Game> GetUserGames(List<Game> enabledGames, List<Account> accounts)
-    {
-        List<Game> userGames = [];
-        foreach (Account account in accounts)
-        {
-            Game? existingGame = enabledGames.Find(x => x.Type == account.GameType);
-            if (existingGame != null)
-            {
-                account.Properties.Add(Constants.Users.GameId, existingGame.Id);
-                userGames.Add(existingGame);
-            }
-        }
-
-        return userGames;
-    }
-    internal static Race GetDefaultRace(Account account, List<Race> races)
-    {
-        if (account.Properties.ContainsKey(Constants.Users.RaceId))
-        {
-            int raceId = account.Properties[Constants.Users.RaceId];
-            return races.FirstOrDefault(g => g.Id == raceId) ?? new Race();
-        }
-        return  new Race();    
-    }
     internal static void SetToolTip(ToolTip toolTIp)
     {
         toolTIp.InitialDelay = 0;
@@ -238,4 +263,18 @@ internal static class UIController
                 TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix);
         };
     }
+    internal static void AddTabs(TabControl tab, List<TabPage> tabPages, List<Data.Enums.Calculator.Type> gameCalculators)
+    {
+        var calculatorTypes = Enum.GetValues(typeof(Data.Enums.Calculator.Type));
+        
+        tab.TabPages.Clear();
+
+        foreach (var calculatorType in calculatorTypes)
+        {
+            int index = gameCalculators.FindIndex(x => x == (Data.Enums.Calculator.Type)calculatorType);
+            if (index > -1)
+                tab.TabPages.Add(tabPages[index]);
+        }
+    }
+    #endregion
 }

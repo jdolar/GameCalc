@@ -1,5 +1,5 @@
 ﻿namespace Data.Enums.PersonalLog;
-public enum EntryType
+public enum Type
 {
     Alliance,
     Player

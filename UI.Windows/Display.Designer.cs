@@ -50,11 +50,11 @@ partial class Display
         _unitProductionResToSpend = new Label();
         _tab = new TabControl();
         _tabPageGetGot = new TabPage();
-        _tabPageUp = new TabPage();
         _tabPageSimple = new TabPage();
         _simpleClearHistory = new Button();
         _simpleClear = new Button();
         _simpleHistory = new ListBox();
+        _tabPageUp = new TabPage();
         _raceLayout = new TableLayoutPanel();
         _bottomLayout = new TableLayoutPanel();
         _amountToCopy = new ComboBox();
@@ -66,8 +66,8 @@ partial class Display
         _unitProductionLayout.SuspendLayout();
         _tab.SuspendLayout();
         _tabPageGetGot.SuspendLayout();
-        _tabPageUp.SuspendLayout();
         _tabPageSimple.SuspendLayout();
+        _tabPageUp.SuspendLayout();
         _raceLayout.SuspendLayout();
         _bottomLayout.SuspendLayout();
         SuspendLayout();
@@ -376,8 +376,8 @@ partial class Display
         // _tab
         // 
         _tab.Controls.Add(_tabPageGetGot);
-        _tab.Controls.Add(_tabPageUp);
         _tab.Controls.Add(_tabPageSimple);
+        _tab.Controls.Add(_tabPageUp);
         _tab.Location = new Point(7, 55);
         _tab.Name = "_tab";
         _tab.SelectedIndex = 0;
@@ -396,18 +396,6 @@ partial class Display
         _tabPageGetGot.TabIndex = 0;
         _tabPageGetGot.Text = "getGot";
         _tabPageGetGot.UseVisualStyleBackColor = true;
-        // 
-        // _tabPageUp
-        // 
-        _tabPageUp.Controls.Add(_unitProductionLayout);
-        _tabPageUp.Controls.Add(_unitProductionResult);
-        _tabPageUp.Location = new Point(4, 24);
-        _tabPageUp.Name = "_tabPageUp";
-        _tabPageUp.Padding = new Padding(3);
-        _tabPageUp.Size = new Size(528, 229);
-        _tabPageUp.TabIndex = 1;
-        _tabPageUp.Text = "UnitProduction";
-        _tabPageUp.UseVisualStyleBackColor = true;
         // 
         // _tabPageSimple
         // 
@@ -456,6 +444,18 @@ partial class Display
         _simpleHistory.Size = new Size(254, 199);
         _simpleHistory.TabIndex = 13;
         // 
+        // _tabPageUp
+        // 
+        _tabPageUp.Controls.Add(_unitProductionLayout);
+        _tabPageUp.Controls.Add(_unitProductionResult);
+        _tabPageUp.Location = new Point(4, 24);
+        _tabPageUp.Name = "_tabPageUp";
+        _tabPageUp.Padding = new Padding(3);
+        _tabPageUp.Size = new Size(528, 229);
+        _tabPageUp.TabIndex = 1;
+        _tabPageUp.Text = "UnitProduction";
+        _tabPageUp.UseVisualStyleBackColor = true;
+        // 
         // _raceLayout
         // 
         _raceLayout.ColumnCount = 5;
@@ -498,7 +498,6 @@ partial class Display
         // _amountToCopy
         // 
         _amountToCopy.DropDownStyle = ComboBoxStyle.DropDownList;
-        _amountToCopy.Items.AddRange(new object[] { "1", "5", "10", "20", "25", "50", "100", "200", "250", "500" });
         _amountToCopy.Location = new Point(25, 13);
         _amountToCopy.Margin = new Padding(20, 3, 0, 0);
         _amountToCopy.Name = "_amountToCopy";
@@ -508,7 +507,6 @@ partial class Display
         // _valueToCopy
         // 
         _valueToCopy.DropDownStyle = ComboBoxStyle.DropDownList;
-        _valueToCopy.Items.AddRange(new object[] { "Billion", "Trillion" });
         _valueToCopy.Location = new Point(150, 13);
         _valueToCopy.Margin = new Padding(20, 3, 0, 0);
         _valueToCopy.Name = "_valueToCopy";
@@ -557,10 +555,10 @@ partial class Display
         _tab.ResumeLayout(false);
         _tabPageGetGot.ResumeLayout(false);
         _tabPageGetGot.PerformLayout();
-        _tabPageUp.ResumeLayout(false);
-        _tabPageUp.PerformLayout();
         _tabPageSimple.ResumeLayout(false);
         _tabPageSimple.PerformLayout();
+        _tabPageUp.ResumeLayout(false);
+        _tabPageUp.PerformLayout();
         _raceLayout.ResumeLayout(false);
         _raceLayout.PerformLayout();
         _bottomLayout.ResumeLayout(false);

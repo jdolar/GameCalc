@@ -6,53 +6,60 @@ using UI.Windows.Helpers;
 namespace UI.Windows.Controllers;
 internal sealed class Frame
 {
-    private readonly ComboBox _games, _races, _valueToCopy, _amountToCopy;
+    private readonly ComboBox _games, _races, _multipliers, _weights;
     private readonly Label _user;
     private readonly ToolTip _hints;
+    private readonly TabControl _tab;
     private readonly Session _session = UIController.CreateSession();
-    public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, Button generatePersonalLog, Button copyToClipBoard, ToolTip hints, ref Game selectedGame)
+    private readonly List<TabPage> _pages;
+    public Frame(ComboBox races, ComboBox games, ComboBox amountToCopy, ComboBox valueToCopy, Label user, Button copyToClipBoardPersonalLog, Button copyToClipBoard, System.Windows.Forms.ToolTip hints, TabControl tab, ref Game selectedGame)
     {
         _hints = hints;
-        _valueToCopy = valueToCopy;
-        _amountToCopy = amountToCopy;
+        _multipliers = valueToCopy;
+        _weights = amountToCopy;
         _user = user;
         _games = games;
         _races = races;
+        _tab = tab;
+        _pages = _tab.TabPages.Cast<TabPage>().ToList();
 
         int gameId = _session.ActiveAccount.Properties.TryGetValue(Constants.Users.GameId, out gameId) ? gameId : 0;
-        UIController.SetGamesComboBox(_games, _session.Games, gameId);
+        UIController.SetGames(_games, _session.Games, gameId);
         selectedGame = (Game)_games.SelectedItem!;
         _session.ActiveGame = selectedGame;
         _games.SelectedIndexChanged += (s, e) => UpdateSelectedGame();
 
         int raceId = _session.ActiveAccount.Properties.TryGetValue(Constants.Users.RaceId, out raceId) ? raceId : 0;
-        UIController.SetRacesComboBox(_races, _session.ActiveGame.Races, raceId);
+        UIController.SetRaces(_races, _session.ActiveGame.Races, raceId);
         _session.ActiveRace = (Race)_races.SelectedItem!;
         _races.SelectedIndexChanged += (s, e) => UpdateSelectedRace();
 
         UIController.SetToolTip(hints);
 
-        _valueToCopy.SelectedIndex = 0;
-        _amountToCopy.SelectedIndex = 0;
         copyToClipBoard.Click += (s, e) => CopyToClipBoard();
 
         string log = Hints.PersonalLog(DataBuilder.GetLog(_session.User.Name));
-        generatePersonalLog.Click += (s, e) => UIController.CopyToClipboard(log, false);
-        _hints.SetToolTip(generatePersonalLog, log);
+        copyToClipBoardPersonalLog.Click += (s, e) => UIController.CopyToClipboard(log, false);
+        _hints.SetToolTip(copyToClipBoardPersonalLog, log);
 
         UpdateSelectedGame();
         UpdateUser();
+
+        UIController.SetWeights(_weights);
+        UIController.SetMultipliers(_multipliers);
     }
     public void UpdateSelectedGame()
     {
         if (_games.SelectedItem != null)
         {
             _session.ActiveGame = (Game)_games.SelectedItem;
+
+            UIController.AddTabs(_tab, _pages, _session.ActiveGame.Calculators);
+            
             _hints.SetToolTip(_games, Hints.Game(_session.ActiveGame));
 
             UpdateSelectedAccount();
-
-            UIController.SetRacesComboBox(_races, _session.ActiveGame.Races, _session.ActiveRace.Id);           
+            UIController.SetRaces(_races, _session.ActiveGame.Races, _session.ActiveRace.Id);               
             UpdateSelectedRace();
         }
     }
@@ -73,24 +80,18 @@ internal sealed class Frame
     }
     private void CopyToClipBoard()
     {
-        long right = 0;
-        string? value = _valueToCopy.SelectedItem?.ToString();
-        if (value != null) return;
+        string? value = _multipliers.SelectedItem?.ToString();
+        if (string.IsNullOrEmpty(value)) return;
 
-        if (value == "Million")
-            right = 1_000_000;
-        else if (value == "Billion")
-            right = 1_000_000_000;
-        else if (value == "Trillion")
-            right = 1_000_000_000_000;
+        Constants.Multipliers.TryGetValue(value!, out long right);
 
-        long left = Data.Commands.Convert.ToNumber(Clean.Text(_amountToCopy.Text));
+        long left = Data.Commands.Convert.ToNumber(Clean.Text(_weights.Text));
         long result = Operation.Multiply(left, right);
 
         UIController.CopyToClipboard(result.ToString());
 
-        _hints.SetToolTip(_amountToCopy, Data.Hints.CopyToClipBoard(Data.Commands.Convert.ToLabel(result)));
-        _hints.SetToolTip(_valueToCopy, Data.Commands.Convert.ToLabel(right));
+        _hints.SetToolTip(_weights, Hints.CopyToClipBoard(Data.Commands.Convert.ToLabel(result)));
+        _hints.SetToolTip(_multipliers, Data.Commands.Convert.ToLabel(right));
     }
     private void UpdateUser()
     {

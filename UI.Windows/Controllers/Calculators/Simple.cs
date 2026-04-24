@@ -1,5 +1,4 @@
-﻿using Data;
-using Data.Commands;
+﻿using Data.Commands;
 using UI.Windows.Helpers;
 namespace UI.Windows.Controllers.Calculators;
 internal sealed class Simple
@@ -7,7 +6,7 @@ internal sealed class Simple
     public Simple(Label result, TextBox inputLeft, TextBox inputRight, ListBox history,
                       Button sum, Button multiply, Button divide, Button deduct, Button clear, Button clearHistory, TabPage tabPage)
     {
-        UIController.UpdateLayoutTabPage(tabPage, Constants.GUI.Labels.Simple);
+        UIController.UpdateLayoutTabPage(tabPage, Data.Enums.Calculator.Type.Simple.ToString());
 
         UIController.UpdateLabel(result, string.Empty);
         UIController.UpdateTextBox(inputLeft, string.Empty);
